@@ -34,8 +34,10 @@ define([
 		};
 
 		self.addGenre = function () {
-			self.genres.push(self.newGenreInput());
-			self.newGenreInput('');
+			if (self.newGenreInput() !== '') {
+				self.genres.push(self.newGenreInput());
+				self.newGenreInput('');
+			}	
 		};
 
 		self.artists = ko.observableArray([]);
@@ -58,8 +60,10 @@ define([
 		};
 
 		self.addArtist = function () {
-			self.artists.push(self.newArtistInput());
-			self.newArtistInput('');
+			if (self.newArtistInput() !== '') {
+				self.artists.push(self.newArtistInput());
+				self.newArtistInput('');
+			}	
 		};
 	};
 
