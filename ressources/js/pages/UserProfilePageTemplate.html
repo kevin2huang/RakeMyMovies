@@ -1,0 +1,53 @@
+<script type="text/html" id="user-profile-template">
+	<div class="container-fluid" data-bind="with : page()">
+		<div class="row">
+			<div class="userInfo col-sm-3">
+				<div class="userContent">
+					<div class="userImage">
+						 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					</div>
+					<span data-bind="text : $parent.user().username"></span>
+					<br/>
+					<span data-bind="text : 'Gender : ' + $parent.user().gender"></span>
+					<br/>
+					<span data-bind="text : $parent.user().email"></span>
+					<br/>
+					<span data-bind="text : $parent.user().country + ','"></span> 
+					<span data-bind="text : $parent.user().province + ','"></span> 
+					<span data-bind="text : $parent.user().city"></span>
+					<br/>
+					<span data-bind="text : 'Occupation : ' + $parent.user().occupation"></span>
+					<br/>
+					<span><i data-bind="text : $parent.user().quote"></i></span>
+
+				</div>
+			</div>
+			<div class="userTabs col-sm-9">
+				<ul class="nav nav-tabs" data-bind="foreach : profiletabs">
+			        <li role="presentation" data-bind="css : {active : $parent.profiletabsActive() === $data}"><a href="#" data-bind="text : $data.text, click : $parent.setActiveTab.bind($data)"></a></li>
+			    </ul>
+
+			    <!-- ko if : profiletabsActive().text === 'Profile' -->
+			        <!-- ko template: {name: 'profile-template'} -->
+			        <!-- /ko -->
+			    <!-- /ko -->
+
+			    <!-- ko if : profiletabsActive().text === 'Recent' -->
+			        <!-- ko template: {name: 'recent-template'} -->
+			        <!-- /ko -->
+			    <!-- /ko -->
+
+			     <!-- ko if : profiletabsActive().text === 'Reviews' -->
+			        <!-- ko template: {name: 'review-list-template'} -->
+			        <!-- /ko -->
+			    <!-- /ko -->
+
+			     <!-- ko if : profiletabsActive().text === 'Subscriptions' -->
+			        <!-- ko template: {name: 'subscription-list-template'} -->
+			        <!-- /ko -->
+			    <!-- /ko -->
+			    
+			</div>
+		</div>  
+	</div>
+</script>

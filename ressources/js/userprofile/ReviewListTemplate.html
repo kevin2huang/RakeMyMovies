@@ -1,0 +1,11 @@
+<script type="text/html" id="review-list-template">
+	<div class="container-fluid" data-bind="foreach : user().reviewList.reviews()">
+		<span data-bind="text : name"></span>
+		<span data-bind="foreach : new Array(rating)">
+			<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+		</span>
+		<br/>
+		<p data-bind="text : description"></p>
+		<div class="separator"></div>
+	</div>
+</script>

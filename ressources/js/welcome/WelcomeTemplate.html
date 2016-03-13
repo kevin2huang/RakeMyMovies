@@ -1,0 +1,140 @@
+<div style="display: none" class="welcomeScreen" data-bind="visible : true">
+
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" data-bind="click : setHomePage">CSI2132 Project</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search"></input>
+                    </div>
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">Advanced</button>
+                </form>
+                <form class="navbar-form navbar-right" role="search">
+                    <!-- ko if : user() === null -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" data-bind="value : username"></input>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Password" data-bind="value : password"></input>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-bind="click : signup">Sign up</button>
+                    <button type="submit" class="btn btn-warning">New user</button>
+                    <!-- /ko -->
+                    <!-- ko if : user() !== null -->
+                    <button type="submit" class="btn btn-default" data-bind="click : setProfilePage">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </button>
+                    <span data-bind="text : user().username"></span>
+                    <button type="submit" class="btn btn-default" data-bind="click : logout">Log out</button>
+                    <!-- /ko -->
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- Profile pages -->
+    <!-- ko if : page() !== null && page().text === 'UserProfilePage' -->
+        <!-- ko template: {name: 'user-profile-template'} -->
+        <!-- /ko -->
+    <!-- /ko -->
+
+    <!-- Home Page -->
+    <!-- ko if : page() !== null && page().text === 'HomePage' -->
+        <!-- ko template: {name: 'home-page-template'} -->
+        <!-- /ko -->
+    <!-- /ko -->    
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Brian Lee, Kevin Huang & Abigael Tremblay 2016
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="movieInfoModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" data-bind="with : page().modalMovie()">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" data-bind="text : name"></h4>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="movieInfo col-sm-8">
+                        <div class="row">
+                            <div class="actorInfo col-sm-4">
+                                <span data-bind="foreach : new Array(rating)">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                </span>
+                                <br/>
+                                <span data-bind="text : year + ' ' + studio"></span>
+                                <br/><br/>
+                                <span><strong>Director</strong></span>
+                                <br/>
+                                <div data-bind="foreach : director">
+                                    <span data-bind="text : $data"></span>
+                                    <br/>    
+                                </div>
+                                <br/>
+                                <span><strong>Cast</strong></span>
+                                <br/>
+                                <div data-bind="foreach : cast">
+                                    <span data-bind="text : $data"></span>
+                                    <br/>    
+                                </div>
+                                <br/>
+                               
+                            </div>
+                            <div class="movieDescription">
+                                <p data-bind="text : description"></p>                                
+                            </div>
+                        </div>
+                        </div>
+                        <div class="moviePicture col-sm-4">
+                            <div class="movieImage">
+                                <div class="movieDefaultImage">
+                                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="watchLaterButton btn btn-success" data-bind="click : $parent.watchLater($data), visible : $parent.hasUser">Watch later</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

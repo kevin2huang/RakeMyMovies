@@ -1,0 +1,68 @@
+
+.userInfo {
+	height:auto;
+	text-align: center;
+}
+
+.userInfo .userImage .glyphicon.glyphicon-user {
+	font-size:1000%;
+}
+
+.userTabs {
+	border-left:2px solid grey;
+}
+
+.userTabs .editFields {
+	margin: 15px;
+}
+
+.userTabs .editFields .genderOptions {
+	margin:0;
+}
+
+.movieImage {
+	background-color: #d3d3d3;
+	text-align: center;
+}
+
+.movieDefaultImage {
+	padding-top: 66%;
+}
+
+.separator {
+	left: 10%;
+	width:80%;
+	position:relative;
+	border-top: 2px solid grey;
+	margin:10px;
+}
+
+.userTabs .singleMovie, .subcriptionList {
+	margin:10px;
+}
+
+.channelList .manyMovies {
+	margin:10px;
+	margin-bottom:30px; 
+}
+
+.movieImage .glyphicon.glyphicon-play-circle {
+	font-size:300%;
+	position: absolute;
+	-ms-transform: translate(-50%, 50%);
+    -webkit-transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%);
+}
+
+
+.singleMovie .movieImage .glyphicon.glyphicon-play-circle {
+	font-size: 100%;
+	position: relative;
+	-ms-transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+.modal-dialog {
+	width: 80%;
+}

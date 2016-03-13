@@ -1,0 +1,39 @@
+<script type="text/html" id="subscription-list-template">
+	<div class="subcriptionList" data-bind="with : user().subscription">
+		<div class="container-fluid">
+			<span><strong>Favorite genres</strong></span>
+			<br/>
+			<div class="row" data-bind="foreach : genres">
+				<div class="btn btn-default">
+					<span data-bind="text : $data"></span>
+					<a data-bind="click : $parent.removeFromGenres.bind($data)">X</a>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<input class="col-sm-6" data-bind="value : newGenreInput"></input>
+				<button class="col-sm-2 btn btn-primary" data-bind="click : addGenre">Add Genre</button>
+			</div>	
+			<br/>
+		</div>
+		<div class="separator"></div>
+		<div class="container-fluid">
+			<br/>
+			<span><strong>Favorite artists</strong></span>
+			<br/>
+			<div class="row" data-bind="foreach : artists">
+				<div class="btn btn-default">
+					<span data-bind="text : $data"></span>
+					<a data-bind="click : $parent.removeFromArtists.bind($data)">X</a>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<input class="col-sm-6" data-bind="value : newArtistInput"></input>
+				<button class="col-sm-2 btn btn-primary" data-bind="click : addArtist">Add Genre</button>
+			</div>
+			<br/>
+		</div>
+		<div class="separator"></div>
+	</div>
+</script>
