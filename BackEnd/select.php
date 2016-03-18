@@ -13,29 +13,33 @@
       pg_query('SET search_path = "Test"');
    }
 
-   $sql =<<<EOF
-      SELECT * from MOVIES;
-EOF;
-
-   $ret = pg_query($db, $sql);
+   $ret = pg_query($db, "SELECT * FROM MOVIES");
    if(!$ret){
       echo pg_last_error($db);
       exit;
    } 
-   /*
-   while($row = pg_fetch_row($ret)){
+
+   $result = array();
+
+   while($row = pg_fetch_row($ret))
+   {
+     /* 
       echo "MOVIE_ID = ". $row[0] . "\n";
       echo "MOVIE_TITLE = ". $row[1] ."\n";
       echo "RELEASE_DATE = ". $row[2] ."\n";
       echo "DESCRIPTION =  ".$row[3] ."\n";
       echo "TG_RATING = " .$row[4] ." \n\n";
+
+       */
+      array_push($result, array('id' => $row[0], 
+                                 'title' => $row[1], 
+                                 'release_date' => $row[2], 
+                                 'description' => $row[3], 
+                                 'tg_rating' => $row[4]));
+                                
    }
-   */
-   $row = array();
-   while($r = pg_fetch_row($ret)){
-      $row[] = $r;
-}
-print json_encode($row);
+   $movarr = array('movies' => $result);
+   echo json_encode($movarr);
    echo "Operation done successfully\n";
    pg_close($db);
 ?>
