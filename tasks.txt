@@ -1,5 +1,7 @@
 Tasks
 
+ETOC = Estimated Time of Completion
+
 Brian
 1.	Parse movies, genres, directors, actors. (ETOC: Sunday afternoon)
 2.	Create database once 1. is complete
