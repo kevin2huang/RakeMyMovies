@@ -1,0 +1,12 @@
+Tasks
+
+Brian
+1.	Parse movies, genres, directors, actors. (ETOC: Sunday afternoon)
+2.	Create database once 1. is complete
+
+Kevin
+1.	Create a test table for each entity (ETOC : tonight)
+2.	JSON format (ETOC : tonight)
+3.	Writting down Queries while Brian is setting up the database once 1.2. is completed.
+	
+Abigael
