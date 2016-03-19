@@ -12,3 +12,4 @@ Kevin
 3.	Writting down Queries while Brian is setting up the database once 1.2. is completed.
 	
 Abigael
+1.	Replace the video placeholder pictures for real and default pictures
