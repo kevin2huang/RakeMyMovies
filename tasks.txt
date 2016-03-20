@@ -7,7 +7,7 @@ Brian
 2.	Create database once 1. is complete
 
 Kevin
-1.	Create a test table for each entity (ETOC : saturday)
+1.	Create a test table for each entity (ETOC : sunday)
 3.	Writting down Queries while Brian is setting up the database once 1. is completed.
 	
 Abigael
