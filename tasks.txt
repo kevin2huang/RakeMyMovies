@@ -6,7 +6,9 @@ Brian
 1.	Create database.
 
 Kevin
-1.	Writting down all queries for project while Brian is setting up the database.
+1.	Writing down all queries for project while Brian is setting up the database.
 	
 Abigael
 1.	Replace the video placeholder pictures for real and default pictures
+2. 	Implement Advanced search
+3. 	Implement the Sign in modal dialog
