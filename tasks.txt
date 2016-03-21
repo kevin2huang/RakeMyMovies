@@ -12,3 +12,6 @@ Abigael
 1.	Replace the video placeholder pictures for real and default pictures
 2. 	Implement Advanced search
 3. 	Implement the Sign in modal dialog
+4.	In the Recent tab, make it so that clicking on the row of a movie 
+	pops up the movie dialog panel.
+5.	In the recent tab, add the timestamp to the movies watched
