@@ -7,6 +7,34 @@
 -- DESCRIPTION VARCHAR(300), 
 -- TG_RATING VARCHAR(7));
 -- 
+-- CREATE TABLE RAKEUSER
+-- (USER_ID SERIAL PRIMARY KEY,
+-- USER_NAME VARCHAR(35),
+-- EMAIL TEXT,
+-- PASSWORD TEXT, 
+-- GENDER CHAR(1),
+-- AGE INTEGER,
+-- COUNTRY TEXT,
+-- PICTURE BYTEA);
+
+-- CREATE TABLE GENRE
+-- (GENRE_ID SERIAL PRIMARY KEY,
+-- GENRE VARCHAR(20));
+
+CREATE TABLE DIRECTOR
+(DIR_ID SERIAL PRIMARY KEY,
+DIR_NAME TEXT,
+DIR_COUNTRY TEXT);
+
+
+-- ***************GENRE INSERTS**************
+-- INSERT INTO GENRE (GENRE)
+-- VALUES
+-- ('Action');
+-- ******************************************
+
+-- **************MOVIE INSERTS***************
+
 -- INSERT INTO MOVIES (MOVIE_TITLE, RELEASE_DATE, DESCRIPTION, TG_RATING)
 -- VALUES 
 -- ('Cloud Atlas', 'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
@@ -26,4 +54,6 @@
 
 -- ALTER TABLE MOVIES
 -- 	ALTER COLUMN DESCRIPTION TYPE TEXT;
+
+-- ********************************************
 
