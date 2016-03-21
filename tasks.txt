@@ -15,3 +15,4 @@ Abigael
 4.	In the Recent tab, make it so that clicking on the row of a movie 
 	pops up the movie dialog panel.
 5.	In the recent tab, add the timestamp to the movies watched
+6. 	In the Subscription tab, add a “Save” button
