@@ -3,10 +3,12 @@ Tasks
 ETOC = Estimated Time of Completion
 
 Brian
-1.	Create database.
+1.	Implementing the login/register in php. (ETOC: friday/sat/sunday)
+2.	Create database once Kevin is done with 1. 
 
 Kevin
-1.	Writing down all queries for project while Brian is setting up the database.
+1.	Writing down all queries for project. (ETOC: wednesday/thursday)
+2.	Create tables with 1 query for Brian. (ETOC: wednesday/thursday)
 	
 Abigael
 1.	Replace the video placeholder pictures for real and default pictures
