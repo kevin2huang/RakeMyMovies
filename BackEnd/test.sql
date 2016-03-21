@@ -21,11 +21,38 @@
 -- (GENRE_ID SERIAL PRIMARY KEY,
 -- GENRE VARCHAR(20));
 
-CREATE TABLE DIRECTOR
-(DIR_ID SERIAL PRIMARY KEY,
-DIR_NAME TEXT,
-DIR_COUNTRY TEXT);
+-- CREATE TABLE DIRECTOR
+-- (DIR_ID SERIAL PRIMARY KEY,
+-- DIR_NAME TEXT,
+-- DIR_COUNTRY TEXT);
 
+-- CREATE TABLE ACTOR
+-- (ACTOR_ID SERIAL PRIMARY KEY,
+-- ACTOR_NAME TEXT,
+-- ACTOR_DOB DATE);
+
+-- CREATE TABLE STUDIO
+-- (STUDIO_ID SERIAL PRIMARY KEY,
+-- STUDIO_NAME TEXT,
+-- STUDIO_COUNTRY TEXT);
+
+-- ***************STUDIO INSERT**************
+INSERT INTO STUDIO (STUDIO_NAME, STUDIO_COUNTRY)
+VALUES
+('Pixar', 'USA')
+
+-- ***************ACTOR INSERT***************
+-- INSERT INTO ACTOR (ACTOR_NAME, ACTOR_DOB)
+-- VALUES
+-- ('Brad Pitt', 'March 3 1970')
+-- *****************************************
+
+-- ***************DIRECTOR INSERT************
+-- INSERT INTO DIRECTOR (DIR_NAME, DIR_COUNTRY)
+-- VALUES
+-- ('Frank Darabont', 'USA')
+-- 
+-- *****************************************
 
 -- ***************GENRE INSERTS**************
 -- INSERT INTO GENRE (GENRE)
