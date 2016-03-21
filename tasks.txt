@@ -3,12 +3,10 @@ Tasks
 ETOC = Estimated Time of Completion
 
 Brian
-1.	Parse movies, genres, directors, actors. (ETOC: Sunday afternoon)
-2.	Create database once 1. is complete
+1.	Create database.
 
 Kevin
-1.	Create a test table for each entity (ETOC : sunday)
-3.	Writting down Queries while Brian is setting up the database once 1. is completed.
+1.	Writting down all queries for project while Brian is setting up the database.
 	
 Abigael
 1.	Replace the video placeholder pictures for real and default pictures
