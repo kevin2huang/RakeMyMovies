@@ -1,12 +1,13 @@
-﻿SET search_path = "Test2";
+﻿SET search_path = "Test3";
 -- 
 -- CREATE TABLE MOVIES
 -- (MOVIE_ID SERIAL PRIMARY KEY,
 -- MOVIE_TITLE VARCHAR(20),
 -- MOVIE_RELEASE_DATE VARCHAR(20),
 -- MOVIE_DESCRIPTION VARCHAR(300), 
+-- MOVIE_DURATION INTEGER,
 -- MOVIE_TG_RATING VARCHAR(7));
-
+-- 
 -- CREATE TABLE RAKEUSER
 -- (USER_ID SERIAL PRIMARY KEY,
 -- USER_NAME VARCHAR(35) NOT NULL,
@@ -15,7 +16,7 @@
 -- USER_GENDER CHAR(1),
 -- USER_AGE INTEGER,
 -- USER_PICTURE BYTEA);
-
+-- 
 -- CREATE TABLE GENRE
 -- (GENRE_ID SERIAL PRIMARY KEY,
 -- GENRE_NAME VARCHAR(20));
@@ -41,7 +42,7 @@
 -- PROFILE_CITY TEXT,
 -- PROFILE_OCCUPATION VARCHAR(30),
 -- PROFILE_COUNTRY TEXT);
-
+-- 
 -- CREATE TABLE REVIEW
 -- (REVIEW_ID SERIAL PRIMARY KEY,
 -- REVIEW_DESCRIPTION TEXT,
@@ -87,10 +88,10 @@
 -- ******************************************************************************************************
 
 -- **************MOVIE **********************************************************************************************************
--- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING)
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION)
 -- VALUES 
 -- ('Cloud Atlas', 'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
--- 'Rated R');
+-- 'Rated R', 120);
 -- ******************************************************************************************************************************
 
 -------------END INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------
