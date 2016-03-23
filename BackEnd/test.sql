@@ -1,80 +1,144 @@
-﻿SET search_path = "Test";
+﻿SET search_path = "Test2";
 -- 
 -- CREATE TABLE MOVIES
 -- (MOVIE_ID SERIAL PRIMARY KEY,
 -- MOVIE_TITLE VARCHAR(20),
--- RELEASE_DATE VARCHAR(20),
--- DESCRIPTION VARCHAR(300), 
--- TG_RATING VARCHAR(7));
--- 
+-- MOVIE_RELEASE_DATE VARCHAR(20),
+-- MOVIE_DESCRIPTION VARCHAR(300), 
+-- MOVIE_TG_RATING VARCHAR(7));
+
 -- CREATE TABLE RAKEUSER
 -- (USER_ID SERIAL PRIMARY KEY,
--- USER_NAME VARCHAR(35),
--- EMAIL TEXT,
--- PASSWORD TEXT, 
--- GENDER CHAR(1),
--- AGE INTEGER,
--- COUNTRY TEXT,
--- PICTURE BYTEA);
+-- USER_NAME VARCHAR(35) NOT NULL,
+-- USER_EMAIL TEXT NOT NULL,
+-- USER_PASSWORD TEXT NOT NULL, 
+-- USER_GENDER CHAR(1),
+-- USER_AGE INTEGER,
+-- USER_PICTURE BYTEA);
 
 -- CREATE TABLE GENRE
 -- (GENRE_ID SERIAL PRIMARY KEY,
--- GENRE VARCHAR(20));
-
+-- GENRE_NAME VARCHAR(20));
+-- 
 -- CREATE TABLE DIRECTOR
 -- (DIR_ID SERIAL PRIMARY KEY,
 -- DIR_NAME TEXT,
 -- DIR_COUNTRY TEXT);
-
+-- 
 -- CREATE TABLE ACTOR
 -- (ACTOR_ID SERIAL PRIMARY KEY,
--- ACTOR_NAME TEXT,
--- ACTOR_DOB DATE);
-
+-- ACTOR_NAME TEXT);
+-- 
 -- CREATE TABLE STUDIO
 -- (STUDIO_ID SERIAL PRIMARY KEY,
 -- STUDIO_NAME TEXT,
 -- STUDIO_COUNTRY TEXT);
+-- 
+-- CREATE TABLE PROFILE 
+-- (PROFILE_ID SERIAL PRIMARY KEY,
+-- USER_ID INTEGER,
+-- PROFILE_PROVINCE TEXT,
+-- PROFILE_CITY TEXT,
+-- PROFILE_OCCUPATION VARCHAR(30),
+-- PROFILE_COUNTRY TEXT);
 
--- ***************STUDIO INSERT****************************************************
+-- CREATE TABLE REVIEW
+-- (REVIEW_ID SERIAL PRIMARY KEY,
+-- REVIEW_DESCRIPTION TEXT,
+-- REVIEW_RATING INTEGER,
+-- REVIEW_DATE DATE);
+	
+--------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
+
+-- ***************USER***********************************************************************************
+-- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_AGE, USER_PICTURE)
+-- VALUES
+-- ('K.Huang', 'KH@gmail.com', '1234', 'M', '22', '')
+-- ******************************************************************************************************
+
+-- *****************PROFILE******************************************************************************
+-- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY)
+-- VALUES
+-- (1, 'ON', 'Ottawa', 'Student', 'Canada')
+-- ******************************************************************************************************
+
+-- ***************STUDIO*********************************************************************************
 -- INSERT INTO STUDIO (STUDIO_NAME, STUDIO_COUNTRY)
 -- VALUES
 -- ('Pixar', 'USA')
--- ********************************************************************************
+-- ******************************************************************************************************
 
--- ***************ACTOR INSERT****************************************************
--- INSERT INTO ACTOR (ACTOR_NAME, ACTOR_DOB)
+-- ***************ACTOR**********************************************************************************
+-- INSERT INTO ACTOR (ACTOR_NAME)
 -- VALUES
--- ('Brad Pitt', 'March 3 1970')
--- ******************************************************************************
+-- ('Brad Pitt')
+-- ******************************************************************************************************
 
--- ***************DIRECTOR INSERT*************************************************
+-- ***************DIRECTOR*******************************************************************************
 -- INSERT INTO DIRECTOR (DIR_NAME, DIR_COUNTRY)
 -- VALUES
 -- ('Frank Darabont', 'USA')
--- ******************************************************************************
+-- ******************************************************************************************************
 
--- ***************GENRE INSERTS***************************************************
--- INSERT INTO GENRE (GENRE)
+-- ***************GENRE**********************************************************************************
+-- INSERT INTO GENRE (GENRE_NAME)
 -- VALUES
 -- ('Action');
--- *******************************************************************************
+-- ******************************************************************************************************
 
--- **************MOVIE INSERTS****************************************************
-
--- INSERT INTO MOVIES (MOVIE_TITLE, RELEASE_DATE, DESCRIPTION, TG_RATING)
+-- **************MOVIE **********************************************************************************************************
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING)
 -- VALUES 
 -- ('Cloud Atlas', 'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
 -- 'Rated R');
--- 
--- INSERT INTO MOVIES (MOVIE_TITLE, RELEASE_DATE, DESCRIPTION, TG_RATING)
--- VALUES 
--- ('DeadPool', 'February 12, 2016', 'This is the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment that leaves him with accelerated healing powers, adopts the alter ego Deadpool. Armed with his new abilities and a dark, twisted sense of humor, Deadpool hunts down the man who nearly destroyed his life.',
--- 'Rated R');
+-- ******************************************************************************************************************************
 
--- INSERT INTO MOVIES (MOVIE_TITLE, RELEASE_DATE, DESCRIPTION, TG_RATING)
+-------------END INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------
+-- 
+
+
+--------------------QUERIES-------------------------------------------------------------------------------------------------------------
+
+-- *********************LOGIN************************************************************
+-- SELECT * 
+-- FROM RAKEUSER U
+-- WHERE U.EMAIL = '$email' AND 
+	  -- U.PASSWORD = '$password';
+-- ***************************************************************************************
+
+-- *******************PROFILE*************************************************************
+-- SELECT * 
+-- FROM PROFILE P, RAKEUSER U
+-- WHERE U.USER_ID = '$user_id' AND 
+	  -- U.USER_ID = P.USER_ID;
+-- ***************************************************************************************
+
+-- *******************SIGN UP***********************************************************************
+-- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_AGE, USER_PICTURE)
 -- VALUES 
--- ('Avengers', 'May 4, 2012', 'The Asgardian Loki encounters the Other, the leader of an extraterrestrial race known as the Chitauri. In exchange for retrieving the Tesseract,2 a powerful energy source of unknown potential, the Other promises Loki an army with which he can subjugate Earth. Nick Fury, director of the espionage agency S.H.I.E.L.D., and his lieutenant Agent Maria Hill arrive at a remote research facility during an evacuation, where physicist Dr. Erik Selvig is leading a research team experimenting on the Tesseract. Agent Phil Coulson explains that the object has begun radiating an unusual form of energy. The Tesseract suddenly activates and opens a wormhole, allowing Loki to reach Earth. Loki takes the Tesseract and uses his scepter to enslave Selvig and a couple of agents, including Clint Barton, to aid him in his getaway.',
--- 'PG-13');
--- *********************************************************************************
+-- ('$name', '$email', '$password', '$gender', '$age', '$picture')
+
+-- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY)
+-- VALUES 
+-- ($id, '$province', '$country', '$occupation', '$country')
+-- **************************************************************************************************
+
+-- ******************HOMEPAGE************************************************************************
+-- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION 
+-- FROM MOVIES M, REVIEWS R, 
+-- WHERE ;
+
+-- top rated movies
+-- 4x random genres/actors + highest rating movie. total 4.
+
+-- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION
+-- FROM MOVIES M, GENRE G, ACTOR A, DIRECTOR D,
+-- -- WHERE 
+-- **************************************************************************************************
+
+
+
+-------------------END OF QUERIES---------------------------------------------------------------------------------------------------------
+
+
 
