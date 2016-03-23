@@ -46,6 +46,11 @@
 			        <!-- ko template: {name: 'subscription-list-template'} -->
 			        <!-- /ko -->
 			    <!-- /ko -->
+
+			    <!-- ko if : profiletabsActive().text === 'WatchLater' -->
+			        <!-- ko template: {name: 'watch-later-template'} -->
+			        <!-- /ko -->
+			    <!-- /ko -->
 			    
 			</div>
 		</div>  

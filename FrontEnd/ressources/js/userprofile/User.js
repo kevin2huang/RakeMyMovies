@@ -20,16 +20,31 @@ define([
 		self.gender = '--';
 		self.quote = 'Today is such a nice day!';
 
+		var date = new Date().toDateString();
+
 		self.recent = ko.observableArray([]);
 		for (var i = 0; i < 10; i++) {
-			self.recent().push(new Movie());
+			self.recent().push({
+				movie: new Movie(),
+				timestamp: date
+			});
 		}
 
 		self.watchLater = ko.observableArray([]);
+		for (var i = 0; i < 8; i++) {
+			self.watchLater().push({
+				movie: new Movie(),
+				timestamp: date
+			});
+		}
 
 		self.reviewList = new ReviewList(self);
 
 		self.subscription = new Subscription(self);
+
+		self.removeWatchLater = function (m) {
+			self.watchLater.remove(m);
+		};
 	};
 
 	return User;

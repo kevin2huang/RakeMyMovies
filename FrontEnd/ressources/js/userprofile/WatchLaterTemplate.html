@@ -1,5 +1,5 @@
-<script type="text/html" id="recent-template">
-	<div class="recentWatchList container-fluid" data-bind="foreach : user().recent()">
+<script type="text/html" id="watch-later-template">
+	<div class="recentWatchList container-fluid" data-bind="foreach : user().watchLater()">
 		<div class="singleMovie row">
 			<span class="movieIndex col-sm-1"data-bind="text : 1 + $index()"></span>
 			<div class="movieImage col-sm-1">
@@ -10,7 +10,9 @@
 			<span class="movieName col-sm-4"data-bind="text : movie.name"></span>
 			<span class="movieName col-sm-2"data-bind="text : timestamp"></span>
 			<span class="movietime col-sm-2"data-bind="text : movie.time"></span>
-			<button class="btn btn-primary">Write review</span>
+			<button class="btn" data-bind="click : $component.user().removeWatchLater.bind($data)">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+			</span>
 		</div>
 		<div class="separator"></div>
 	</div>

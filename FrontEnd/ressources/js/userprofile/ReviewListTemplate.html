@@ -4,6 +4,9 @@
 		<span data-bind="foreach : new Array(rating)">
 			<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 		</span>
+		<button class="btn">Edit</button>
+
+		<button class="btn" data-bind="click: $component.user().reviewList.deleteReview.bind($data)">Delete</button>
 		<br/>
 		<p data-bind="text : description"></p>
 		<div class="separator"></div>

@@ -29,6 +29,10 @@ define([
 			self.reviews().push(new Review());
 		}
 
+		self.deleteReview = function(review) {
+			self.reviews.remove(review);
+		};
+
 	};
 
 	return ReviewList;
