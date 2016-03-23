@@ -1,4 +1,4 @@
-Tasks
+﻿Tasks
 
 ETOC = Estimated Time of Completion
 
@@ -9,6 +9,7 @@ Brian
 Kevin
 1.	Writing down all queries for project. (ETOC: wednesday/thursday)
 2.	Create tables with 1 query for Brian. (ETOC: wednesday/thursday)
+3.	Work on the logo.
 	
 Abigael
 1.	Replace the video placeholder pictures for real and default pictures
