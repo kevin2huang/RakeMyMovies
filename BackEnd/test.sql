@@ -1,15 +1,14 @@
 ﻿SET search_path = "Test";
 -- 
+-- DROP TABLE ACTOR;
 -- DROP TABLE DIRECTOR;
 -- DROP TABLE GENRE;
--- DROP TABLE MOVIES;
 -- DROP TABLE PROFILE;
 -- DROP TABLE RAKEUSER;
 -- DROP TABLE REVIEW;
 -- DROP TABLE STUDIO;
--- DROP TABLE ACTOR;
 -- DROP TABLE MOVREV;
-
+-- DROP TABLE MOVIES;
 
 -- CREATE TABLE MOVIES
 -- (MOVIE_ID SERIAL PRIMARY KEY,
@@ -17,6 +16,8 @@
 -- MOVIE_RELEASE_DATE VARCHAR(20),
 -- MOVIE_DESCRIPTION VARCHAR(300), 
 -- MOVIE_DURATION INTEGER,
+-- MOVIE_LANGUAGE VARCHAR(20),
+-- MOVIE_COUNTRY TEXT,
 -- MOVIE_TG_RATING VARCHAR(7));
 -- 
 -- CREATE TABLE RAKEUSER
@@ -35,8 +36,7 @@
 -- 
 -- CREATE TABLE DIRECTOR
 -- (DIR_ID SERIAL PRIMARY KEY,
--- DIR_NAME TEXT,
--- DIR_COUNTRY TEXT);
+-- DIR_NAME TEXT);
 -- 
 -- CREATE TABLE ACTOR
 -- (ACTOR_ID SERIAL PRIMARY KEY,
@@ -79,12 +79,6 @@
 -- ('blablabla', 5, 'March 23 2016')
 -- ******************************************************************************************************
 
--- ***************MOVREV*********************************************************************************
--- INSERT INTO MOVREV (MOVIE_ID, REVIEW_ID)
--- VALUES
--- (1, 1)
--- ******************************************************************************************************
-
 -- ***************USER***********************************************************************************
 -- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_AGE, USER_PICTURE)
 -- VALUES
@@ -98,21 +92,21 @@
 -- ******************************************************************************************************
 
 -- ***************STUDIO*********************************************************************************
--- INSERT INTO STUDIO (STUDIO_NAME, STUDIO_COUNTRY)
--- VALUES
--- ('Pixar', 'USA')
+INSERT INTO STUDIO (STUDIO_NAME)
+VALUES
+('Pixar')
 -- ******************************************************************************************************
 
 -- ***************ACTOR**********************************************************************************
--- INSERT INTO ACTOR (ACTOR_NAME)
--- VALUES
--- ('Brad Pitt')
+INSERT INTO ACTOR (ACTOR_NAME)
+VALUES
+('Brad Pitt')
 -- ******************************************************************************************************
 
 -- ***************DIRECTOR*******************************************************************************
--- INSERT INTO DIRECTOR (DIR_NAME, DIR_COUNTRY)
--- VALUES
--- ('Frank Darabont', 'USA')
+INSERT INTO DIRECTOR (DIR_NAME)
+VALUES
+('Frank Darabont')
 -- ******************************************************************************************************
 
 -- ***************GENRE**********************************************************************************
@@ -122,11 +116,17 @@
 -- ******************************************************************************************************
 
 -- **************MOVIE **********************************************************************************************************
--- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION)
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY)
 -- VALUES 
 -- ('Cloud Atlas', 'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
--- 'Rated R', 120);
+-- 'Rated R', 120, 'English', 'USA');
 -- ******************************************************************************************************************************
+
+-- ***************MOVREV*********************************************************************************
+-- INSERT INTO MOVREV (MOVIE_ID, REVIEW_ID)
+-- VALUES
+-- (1, 1)
+-- ******************************************************************************************************
 
 -------------END INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------
 
@@ -160,7 +160,10 @@
 -- ******************HOMEPAGE************************************************************************
 -- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION 
 -- FROM MOVIES M, REVIEWS R, MOVREV MR
--- WHERE M.MOVIE_ID = ;
+-- WHERE M.MOVIE_ID = $m_id AND 
+	     -- MR.MOVIE_ID = M.MOVIE_ID AND 
+	 -- MR.REVIEW_ID = R.REVIEW_ID AND 
+	 -- ;
 
 -- top rated movies
 -- 4x random genres/actors + highest rating movie. total 4.
