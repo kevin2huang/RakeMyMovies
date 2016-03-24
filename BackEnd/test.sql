@@ -1,12 +1,24 @@
-﻿SET search_path = "Test3";
+﻿SET search_path = "Test";
 -- 
+-- DROP TABLE DIRECTOR;
+-- DROP TABLE GENRE;
+-- DROP TABLE MOVIES;
+-- DROP TABLE PROFILE;
+-- DROP TABLE RAKEUSER;
+-- DROP TABLE REVIEW;
+-- DROP TABLE STUDIO;
+-- DROP TABLE ACTOR;
+-- DROP TABLE MOVREV;
+
+
 -- CREATE TABLE MOVIES
 -- (MOVIE_ID SERIAL PRIMARY KEY,
 -- MOVIE_TITLE VARCHAR(20),
 -- MOVIE_RELEASE_DATE VARCHAR(20),
 -- MOVIE_DESCRIPTION VARCHAR(300), 
 -- MOVIE_DURATION INTEGER,
--- MOVIE_TG_RATING VARCHAR(7));
+-- MOVIE_TG_RATING VARCHAR(7),
+-- CONSTRAINT C_MID UNIQUE (MOVIE_ID));
 -- 
 -- CREATE TABLE RAKEUSER
 -- (USER_ID SERIAL PRIMARY KEY,
@@ -15,7 +27,8 @@
 -- USER_PASSWORD TEXT NOT NULL, 
 -- USER_GENDER CHAR(1),
 -- USER_AGE INTEGER,
--- USER_PICTURE BYTEA);
+-- USER_PICTURE BYTEA
+-- CONSTRAINT C_ID_EMAIL UNIQUE (USER_ID, USER_EMAIL));
 -- 
 -- CREATE TABLE GENRE
 -- (GENRE_ID SERIAL PRIMARY KEY,
@@ -37,7 +50,7 @@
 -- 
 -- CREATE TABLE PROFILE 
 -- (PROFILE_ID SERIAL PRIMARY KEY,
--- USER_ID INTEGER,
+-- FOREIGN KEY (USER_ID) REFERENCES RAKEUSER(USER_ID),
 -- PROFILE_PROVINCE TEXT,
 -- PROFILE_CITY TEXT,
 -- PROFILE_OCCUPATION VARCHAR(30),
@@ -47,9 +60,28 @@
 -- (REVIEW_ID SERIAL PRIMARY KEY,
 -- REVIEW_DESCRIPTION TEXT,
 -- REVIEW_RATING INTEGER,
--- REVIEW_DATE DATE);
+-- REVIEW_DATE DATE,
+-- CONSTRAINT REVIEW_RATING_C CHECK (REVIEW_RATING >= 0 AND REVIEW_RATING <= 5 ));
+
+-- CREATE TABLE MOVREV
+-- (FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID),
+-- FOREIGN KEY (REVIEW_ID) REFERENCES REVIEW(REVIEW_ID));
+
+
 	
 --------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
+
+-- ***************REVIEW*********************************************************************************
+-- INSERT INTO REVIEW (REVIEW_DESCRIPTION, REVIEW_RATING, REVIEW_DATE)
+-- VALUES
+-- ('blablabla', 5, 'March 23 2016')
+-- ******************************************************************************************************
+
+-- ***************MOVREV*********************************************************************************
+-- INSERT INTO MOVREV (MOVIE_ID, REVIEW_ID)
+-- VALUES
+-- (1, 1)
+-- ******************************************************************************************************
 
 -- ***************USER***********************************************************************************
 -- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_AGE, USER_PICTURE)
@@ -95,7 +127,6 @@
 -- ******************************************************************************************************************************
 
 -------------END INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------
--- 
 
 
 --------------------QUERIES-------------------------------------------------------------------------------------------------------------
@@ -126,8 +157,8 @@
 
 -- ******************HOMEPAGE************************************************************************
 -- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION 
--- FROM MOVIES M, REVIEWS R, 
--- WHERE ;
+-- FROM MOVIES M, REVIEWS R, MOVREV MR
+-- WHERE M.MOVIE_ID = ;
 
 -- top rated movies
 -- 4x random genres/actors + highest rating movie. total 4.
