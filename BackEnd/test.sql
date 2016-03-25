@@ -13,6 +13,7 @@
 -- CREATE TABLE MOVIES
 -- (MOVIE_ID SERIAL PRIMARY KEY,
 -- MOVIE_TITLE VARCHAR(20),
+-- MOVIE_COVER BYTEA,
 -- MOVIE_RELEASE_DATE VARCHAR(20),
 -- MOVIE_DESCRIPTION VARCHAR(300), 
 -- MOVIE_DURATION INTEGER,
@@ -26,7 +27,7 @@
 -- USER_EMAIL TEXT NOT NULL,
 -- USER_PASSWORD TEXT NOT NULL, 
 -- USER_GENDER CHAR(1),
--- USER_AGE INTEGER,
+-- USER_DOB DATE,
 -- USER_PICTURE BYTEA,
 -- UNIQUE(USER_EMAIL));
 -- 
@@ -54,12 +55,13 @@
 -- PROFILE_PROVINCE TEXT,
 -- PROFILE_CITY TEXT,
 -- PROFILE_OCCUPATION VARCHAR(30),
--- PROFILE_COUNTRY TEXT);
+-- PROFILE_COUNTRY TEXT,
+-- PROFILE_QUOTE VARCHAR(100));
 -- 
 -- CREATE TABLE REVIEW
 -- (REVIEW_ID SERIAL PRIMARY KEY,
--- REVIEW_DESCRIPTION TEXT,
--- REVIEW_RATING INTEGER,
+-- REVIEW_DESCRIPTION VARCHAR(500),
+-- REVIEW_RATING INTEGER DEFAULT 0,
 -- REVIEW_DATE DATE,
 -- CONSTRAINT REVIEW_RATING_C CHECK (REVIEW_RATING >= 0 AND REVIEW_RATING <= 5 ));
 
@@ -68,6 +70,13 @@
 -- FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID),
 -- REVIEW_ID INTEGER,
 -- FOREIGN KEY (REVIEW_ID) REFERENCES REVIEW(REVIEW_ID));
+
+-- CREATE TABLE WISH 
+-- (USER_ID INTEGER,
+-- FOREIGN KEY (USER_ID) REFERENCES RAKEUSER(USER_ID),
+-- MOVIE_ID INTEGER,
+-- FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID),
+-- WISH_TIMESTAMP DATE);
 
 
 	
@@ -82,7 +91,7 @@
 -- ***************USER***********************************************************************************
 -- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_AGE, USER_PICTURE)
 -- VALUES
--- ('K.Huang', 'KH@gmail.com', '1234', 'M', '22', '')
+-- ('K.Huang', 'KH@gmail.com', '1234', 'M', '22 April 1990', '')
 -- ******************************************************************************************************
 
 -- *****************PROFILE******************************************************************************
@@ -92,21 +101,21 @@
 -- ******************************************************************************************************
 
 -- ***************STUDIO*********************************************************************************
-INSERT INTO STUDIO (STUDIO_NAME)
-VALUES
-('Pixar')
+-- INSERT INTO STUDIO (STUDIO_NAME)
+-- VALUES
+-- ('Pixar')
 -- ******************************************************************************************************
 
 -- ***************ACTOR**********************************************************************************
-INSERT INTO ACTOR (ACTOR_NAME)
-VALUES
-('Brad Pitt')
+-- INSERT INTO ACTOR (ACTOR_NAME)
+-- VALUES
+-- ('Brad Pitt')
 -- ******************************************************************************************************
 
 -- ***************DIRECTOR*******************************************************************************
-INSERT INTO DIRECTOR (DIR_NAME)
-VALUES
-('Frank Darabont')
+-- INSERT INTO DIRECTOR (DIR_NAME)
+-- VALUES
+-- ('Frank Darabont')
 -- ******************************************************************************************************
 
 -- ***************GENRE**********************************************************************************
@@ -154,16 +163,18 @@ VALUES
 
 -- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY)
 -- VALUES 
--- ($id, '$province', '$country', '$occupation', '$country')
+-- ($id, '$province', '$country', '$occupation', '$country', '$quote')
 -- **************************************************************************************************
 
 -- ******************HOMEPAGE************************************************************************
 -- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION 
 -- FROM MOVIES M, REVIEWS R, MOVREV MR
--- WHERE M.MOVIE_ID = $m_id AND 
-	     -- MR.MOVIE_ID = M.MOVIE_ID AND 
-	 -- MR.REVIEW_ID = R.REVIEW_ID AND 
-	 -- ;
+-- WHERE MR.MOVIE_ID = M.MOVIE_ID AND 
+	 -- 	MR.REVIEW_ID = R.REVIEW_ID AND 
+			-- R. (SELECT MAX(AVG_RATING)
+		-- 	FROM (SELECT MR.MOVIE_ID, AVG(R.RATING) AS AVG_RATING
+				-- FROM MOVREV MR, REVIEW R
+				-- GROUP BY MR.MOVIE_ID));
 
 -- top rated movies
 -- 4x random genres/actors + highest rating movie. total 4.
@@ -173,7 +184,28 @@ VALUES
 -- -- WHERE 
 -- **************************************************************************************************
 
+-- *****************ADD TO WISH LIST********************************************************************
+-- INSERT INTO WISH (USER_ID, MOVIE_ID, WISH_TIMESTAMP)
+-- VALUES 
+-- ('$user_id', '$movie_id', '$date')
+-- *****************************************************************************************************
 
+-- *****************OPEN PROFILE*************************************************************
+-- SELECT * 
+-- FROM RAKEUSER U, PROFILE P
+-- WHERE U.USER_ID = 1 AND 
+	-- P.USER_ID = U.USER_ID;
+-- ****************************************************************
+
+-- ********************SAVE PROFILE*************************************************************
+-- do this for each change
+-- ALTER TABLE RAKEUSER 
+	-- ALTER COLUMN USER_PASSWORD SET '$new_pass';
+	
+-- ************************************************************************************************
+
+-- *********************WISH LIST************************************************************************
+SELECT M.MOVIE_TITLE, M.MOVIE_
 
 -------------------END OF QUERIES---------------------------------------------------------------------------------------------------------
 
