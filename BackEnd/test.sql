@@ -205,7 +205,11 @@
 -- ************************************************************************************************
 
 -- *********************WISH LIST************************************************************************
-SELECT M.MOVIE_TITLE, M.MOVIE_
+-- SELECT M.MOVIE_TITLE, M.MOVIE_COVER, M.MOVIE_DURATION, WL.DATE
+-- FROM MOVIES M, WISH WL, RAKEUSER U
+-- WHERE U.USER_ID = '$id' AND 
+		-- WL.USER_ID = U.USER_ID AND
+		-- WL.MOVIE_ID = M.MOVIE_ID;
 
 -------------------END OF QUERIES---------------------------------------------------------------------------------------------------------
 
