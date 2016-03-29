@@ -33,7 +33,11 @@ define([
 					password: self.password()
 				}
 			}).done(function (rep) {
-				self.user(new User(rep));
+				var user = new User(rep);
+				self.user(user);
+				if (self.page.text === 'HomePage') {
+					self.page.getChannels(user);
+				}
 			});
 		};
 

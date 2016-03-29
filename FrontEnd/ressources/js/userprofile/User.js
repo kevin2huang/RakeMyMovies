@@ -20,6 +20,7 @@ define([
 			self.occupation = options.occupation;
 			self.gender = options.gender;
 			self.quote = options.quote;
+			self.userId = options.userId;
 			//Show me this
 		}
 		self.recent = ko.observableArray([]);
