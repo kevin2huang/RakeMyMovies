@@ -16,20 +16,25 @@ define([
 
 		self.username = ko.observable('');
 		self.password = ko.observable('');
-		self.user = ko.observable(new User());
+		self.user = ko.observable(null);
 
 		self.page = ko.observable(new HomePage());
 
 		/*================================
 					Functions
 		================================*/
-		self.signup = function () {
-			//TODO Link with database. This is a placeholder
-			var user = new User();
-			if (self.username() === user.username && self.password() === user.password) {
-				self.user(user);
-			}
-			//End of placeholder
+		self.login = function () {
+
+			$.ajax({
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/login.php",
+				method: "POST",
+				data: {
+					username: self.username(),
+					password: self.password()
+				}
+			}).done(function (rep) {
+				self.user(new User(rep));
+			});
 		};
 
 		self.logout = function() {
