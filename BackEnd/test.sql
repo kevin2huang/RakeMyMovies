@@ -5,15 +5,16 @@
 -- DROP TABLE GENRE;
 -- DROP TABLE PROFILE;
 -- DROP TABLE RAKEUSER;
--- DROP TABLE REVIEW;
+-- DROP TABLE REVIEW CASCADE;
 -- DROP TABLE STUDIO;
+-- DROP TABLE MOVIES CASCADE; 
 -- DROP TABLE MOVREV;
--- DROP TABLE MOVIES;
+-- DROP TABLE WISH
 
 -- CREATE TABLE MOVIES
 -- (MOVIE_ID SERIAL PRIMARY KEY,
 -- MOVIE_TITLE VARCHAR(20),
--- MOVIE_COVER BYTEA,
+-- MOVIE_COVER TEXT,
 -- MOVIE_RELEASE_DATE VARCHAR(20),
 -- MOVIE_DESCRIPTION VARCHAR(300), 
 -- MOVIE_DURATION INTEGER,
@@ -28,7 +29,7 @@
 -- USER_PASSWORD TEXT NOT NULL, 
 -- USER_GENDER CHAR(1),
 -- USER_DOB DATE,
--- USER_PICTURE BYTEA,
+-- USER_ICON TEXT,
 -- UNIQUE(USER_EMAIL));
 -- 
 -- CREATE TABLE GENRE
@@ -56,7 +57,8 @@
 -- PROFILE_CITY TEXT,
 -- PROFILE_OCCUPATION VARCHAR(30),
 -- PROFILE_COUNTRY TEXT,
--- PROFILE_QUOTE VARCHAR(100));
+-- PROFILE_QUOTE VARCHAR(100),
+-- UNIQUE(USER_ID));
 -- 
 -- CREATE TABLE REVIEW
 -- (REVIEW_ID SERIAL PRIMARY KEY,
@@ -89,15 +91,15 @@
 -- ******************************************************************************************************
 
 -- ***************USER***********************************************************************************
--- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_AGE, USER_PICTURE)
+-- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_DOB, USER_ICON)
 -- VALUES
--- ('K.Huang', 'KH@gmail.com', '1234', 'M', '22 April 1990', '')
+-- ('Abigael', 'abigael.tremblay@gmail.com', '1234', '', '22 April 1990', 'folder/folder/filename')
 -- ******************************************************************************************************
 
 -- *****************PROFILE******************************************************************************
--- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY)
+-- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
 -- VALUES
--- (1, 'ON', 'Ottawa', 'Student', 'Canada')
+-- (1, 'Ontario', 'Ottawa', 'Student', 'Canada', 'Today is such a nice day!')
 -- ******************************************************************************************************
 
 -- ***************STUDIO*********************************************************************************
@@ -125,9 +127,9 @@
 -- ******************************************************************************************************
 
 -- **************MOVIE **********************************************************************************************************
--- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY)
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY)
 -- VALUES 
--- ('Cloud Atlas', 'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
+-- ('Cloud Atlas','www.imdb.com/.../...' ,'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
 -- 'Rated R', 120, 'English', 'USA');
 -- ******************************************************************************************************************************
 
@@ -147,6 +149,12 @@
 -- FROM RAKEUSER U
 -- WHERE U.EMAIL = '$email' AND 
 	  -- U.PASSWORD = '$password';
+
+-- SELECT * 
+-- FROM RAKEUSER U 
+-- WHERE U.USER_EMAIL = 'abigael.tremblay@gmail.com' AND 
+--       U.USER_PASSWORD = '1234';
+
 -- ***************************************************************************************
 
 -- *******************PROFILE*************************************************************
@@ -154,6 +162,14 @@
 -- FROM PROFILE P, RAKEUSER U
 -- WHERE U.USER_ID = '$user_id' AND 
 	  -- U.USER_ID = P.USER_ID;
+
+-- SELECT * 
+-- FROM PROFILE P 
+-- WHERE (SELECT U.USER_ID 
+-- 	FROM RAKEUSER U 
+--         WHERE U.USER_EMAIL = 'abigael.tremblay@gmail.com' AND 
+--         U.USER_PASSWORD = '1234') = P.USER_ID;
+
 -- ***************************************************************************************
 
 -- *******************SIGN UP***********************************************************************
@@ -210,6 +226,7 @@
 -- WHERE U.USER_ID = '$id' AND 
 		-- WL.USER_ID = U.USER_ID AND
 		-- WL.MOVIE_ID = M.MOVIE_ID;
+-- ********************************************************************************************************
 
 -------------------END OF QUERIES---------------------------------------------------------------------------------------------------------
 
