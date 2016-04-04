@@ -168,6 +168,13 @@
 -- VALUES 
 -- ('Cloud Atlas','www.imdb.com/.../...' ,'October 26, 2012', 'Adam Ewing, an American lawyer, has come to the Chatham Islands to conclude a business arrangement with Reverend Horrox and his father-in-law.',
 -- 'Rated R', 120, 'English', 'USA');
+
+-- INSERT INTO MOVIES VALUES('The Shawshank Redemption','http://ia.media-imdb.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_UX182_CR0,0,182,268_AL_.jpg','14 October 1994','Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he claims he did not commit. The film portrays the man\'s unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red. ','R','142','English','USA')
+
+-- INSERT INTO MOVIES VALUES('The Godfather','http://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI4MF5BMl5BanBnXkFtZTcwMDA5Mzg3OA@@._V1_UX182_CR0,0,182,268_AL_.jpg','24 March 1972','When the aging head of a famous crime family decides to transfer his position to one of his subalterns, a series of unfortunate events start happening to the family, and a war begins between all the well-known families leading to insolence, deportation, murder and revenge, and ends with the favorable successor being finally chosen. ','R','175','English','USA')
+
+-- INSERT INTO MOVIES VALUES('The Godfather: Part II','http://ia.media-imdb.com/images/M/MV5BNDc2NTM3MzU1Nl5BMl5BanBnXkFtZTcwMTA5Mzg3OA@@._V1_UX182_CR0,0,182,268_AL_.jpg','20 December 1974','The continuing saga of the Corleone crime family tells the story of a young Vito Corleone growing up in Sicily and in 1910s New York; and follows Michael Corleone in the 1950s as he attempts to expand the family business into Las Vegas, Hollywood and Cuba. ','R','202','English','USA')
+
 -- ******************************************************************************************************************************************************
 
 -- ***************MOVREV*********************************************************************************************
@@ -222,6 +229,26 @@
 
 -- ******************HOMEPAGE***************************************************************************
 
+-- SELECT * 
+-- FROM MOVIES M  
+-- WHERE M.MOVIE_ID = " + '$movieID' + ";"
+
+-- SELECT * 
+-- FROM ACTOR A
+-- WHERE A.ACTOR_ID = (SELECT MA.ACTOR_ID 
+		-- FROM MOVACT MA, MOVIES M
+		-- WHERE M.MOVIE_ID = '$movieid' AND MA.MOVIE_ID = M.MOVIE_ID);
+
+-- SELECT M.*, A.*, D.*, S.*
+-- FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
+-- WHERE M.MOVIE_ID = '1' AND
+      -- A.ACTOR_ID = MA.ACTOR_ID AND
+      -- MA.MOVIE_ID = M.MOVIE_ID AND
+      -- D.DIRECTOR_ID = MD.DIRECTOR_ID AND 
+      -- MD.MOVIE_ID = MOVIE_ID AND 
+      -- SP.MOVIE_ID = M.MOVIE_ID AND 
+      -- SP.STUDIO_ID = S.STUDIO_ID;
+		
 -- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION 
 -- FROM MOVIES M, REVIEWS R, MOVREV MR
 -- WHERE MR.MOVIE_ID = M.MOVIE_ID AND 
