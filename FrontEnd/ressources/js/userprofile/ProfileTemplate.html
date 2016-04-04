@@ -66,8 +66,8 @@
 		</div>
 
 		<br/>
-
-		<button class="btn btn-primary">Save</button>
+		<div data-bind="text: ko.toJSON($parent)"></div>
+		<button class="btn btn-primary" data-bind="click: $parent.saveProfile">Save</button>
 
 	</div>
 	

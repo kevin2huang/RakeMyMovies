@@ -12,18 +12,29 @@ define([
 
 		self.text = "Subscriptions";
 
-		//self.user = user;
+		self.user = user;
 
 		self.genres = ko.observableArray([]);
-		self.genres().push('Horror');
-		self.genres().push('Action');
-		self.genres().push('Comedy');
-		self.genres().push('Documentary');
-		self.genres().push('New');
-		self.genres().push('Thriller');
-		self.genres().push('Animated');
-		self.genres().push('Drama');
-		self.genres().push('Western');
+		self.artists = ko.observableArray([]);
+
+		$.ajax({
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getSubscriptions.php",
+			method: "POST",
+			data: {
+				userId: self.user().userId,
+			}
+		}).done(function (rep) {
+			if (!!rep.genres && $.isArray(rep.genres)) {
+				$.each(rep.genres, function (key, value) {
+					self.genres().push(value);
+				});
+			}
+			if (!!rep.actors && $.isArray(rep.actors)) {
+				$.each(rep.genres, function (key, value) {
+					self.genres().push(value);
+				});
+			}
+		});
 
 		self.newGenreInput = ko.observable('');
 
@@ -39,17 +50,6 @@ define([
 				self.newGenreInput('');
 			}	
 		};
-
-		self.artists = ko.observableArray([]);
-		self.artists().push('Robert Downey Jr.');
-		self.artists().push('Tom Hanks');
-		self.artists().push('Jonny Depp');
-		self.artists().push('Tom Cruise');
-		self.artists().push('Will Smith');
-		self.artists().push('Brad Pitt');
-		self.artists().push('Morgan Freeman');
-		self.artists().push('George Clooney');
-		self.artists().push('Robin Williams');
 
 		self.newArtistInput = ko.observable('');
 

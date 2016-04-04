@@ -16,9 +16,13 @@ define([
 
 		self.username = ko.observable('');
 		self.password = ko.observable('');
-		self.user = ko.observable(null);
+		self.user = ko.observable(new User({
+			username: 'Abigael',
+			password: '1234',
+			email: 'abigael.tremblay@gmail.com'
+		}));
 
-		self.page = ko.observable(new HomePage());
+		self.page = ko.observable(new HomePage(self.user()));
 
 		/*================================
 					Functions
@@ -47,17 +51,39 @@ define([
 		};
 
 		self.setProfilePage = function () {
-			self.page(new UserProfilePage(self.user));
+			self.page(new UserProfilePage(self.user()));
 		};
 
 		self.setHomePage = function () {
-			self.page(new HomePage());
+			self.page(new HomePage(self.user()));
 		};
 
 		self.watchLater = function (movie) {
 			if (self.user() !== null) {
-				self.user().watchLater().push(movie);
+				$.ajax({
+					url: "http://localhost/DatabaseProject/BackEnd/ajax/addToWishList.php",
+					method: "POST",
+					data: {
+						userId: self.user().userId,
+						movieId: movie.movieId
+					}
+				}).done(function (rep) {
+					if (rep.status === 'OK') {
+						self.user().watchLater().push({
+							movie: movie,
+							timestamp: 'Mon Mar 28 2016'
+						});
+					}
+				});
 			}
+		};
+
+		self.saveProfile = function () {
+			$.ajax({
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/saveProfile.php",
+				method: "POST",
+				data: self.user()
+			});
 		};
 
 		self.hasUser = ko.computed(function () {

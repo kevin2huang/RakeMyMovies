@@ -7,13 +7,19 @@ define([
 
 	$('#page-top').append(template);
 
-	var Review = function (user) {
+	var Review = function (options) {
 		var self = this;
 
-		self.name = 'Anonymous';
-		self.description = 'This is a review. The description can be more or less long depending on the review.\
-		Most of the time, a review will be about one or two paragraphs long.';
-		self.rating = 5;
+		if (!!options) {
+			self.name = options.name;
+			self.description = options.description;
+			self.rating = options.rating;
+		} else {
+			self.name = 'Anonymous';
+			self.description = 'This is a review. The description can be more or less long depending on the review.\
+			Most of the time, a review will be about one or two paragraphs long.';
+			self.rating = 5;
+		}
 	};
 
 	var ReviewList = function (user) {
@@ -25,9 +31,19 @@ define([
 
 		self.reviews = ko.observableArray([]);
 
-		for(var i = 0; i < 5; i++) {
-			self.reviews().push(new Review());
-		}
+		$.ajax({
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getReviews.php",
+			method: "POST",
+			data: {
+				userId: self.user.userId,
+			}
+		}).done(function (rep) {
+			if ($.isArray(rep)) {
+				$.each(rep, function (index, value) {
+					self.reviews.push(new Review(value))
+				})
+			}
+		});
 
 		self.deleteReview = function(review) {
 			self.reviews.remove(review);

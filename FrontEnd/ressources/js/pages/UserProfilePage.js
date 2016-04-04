@@ -21,11 +21,11 @@ define([
 		self.user = user;
 
 		self.profiletabs = ko.observableArray([]);
-		self.profiletabs().push(new WatchLater());
-		self.profiletabs().push(new Recent());
-		self.profiletabs().push(new ReviewList());
-		self.profiletabs().push(new Profile());
-		self.profiletabs().push(new SubscriptionList());
+		self.profiletabs().push(new WatchLater(self.user));
+		self.profiletabs().push(new Recent(self.user));
+		self.profiletabs().push(new ReviewList(self.user));
+		self.profiletabs().push(new Profile(self.user));
+		self.profiletabs().push(new SubscriptionList(self.user));
 
 		self.profiletabsActive = ko.observable(self.profiletabs()[0]);
 

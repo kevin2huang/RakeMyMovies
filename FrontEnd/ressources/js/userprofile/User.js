@@ -21,7 +21,6 @@ define([
 			self.gender = options.gender;
 			self.quote = options.quote;
 			self.userId = options.userId;
-			//Show me this
 		}
 		self.recent = ko.observableArray([]);
 		self.watchLater = ko.observableArray([]);
@@ -32,7 +31,9 @@ define([
 			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
-				movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+				userId: self.user.userId,
+				listType: 'recent'
 			}
 		}).done(function (rep) {
 			var arr = [];
@@ -43,14 +44,16 @@ define([
 					timestamp: rep[i].timestamp
 				});
 			}
-			self.recent(rep);
+			self.recent(arr);
 		});
 
 		$.ajax({
 			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
-				movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]
+				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]
+				userId: self.user.userId,
+				listType: 'recent'
 			}
 		}).done(function (rep) {
 			var arr = [];
@@ -61,7 +64,7 @@ define([
 					timestamp: rep[i].timestamp
 				});
 			}
-			self.watchLater(rep);
+			self.watchLater(arr);
 		});
 
 		self.reviewList = new ReviewList(self);
