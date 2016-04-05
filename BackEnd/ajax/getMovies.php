@@ -1,16 +1,15 @@
 <?php
- $host        = "host=127.0.0.1";
-   $port        = "port=5432";
-   $dbname      = "dbname=postgres";
-   $credentials = "user=postgres password=root";
+   $host        = "host=web0.site.uottawa.ca";
+   $port        = "port=15432";
+   $dbname      = "dbname=khuan042"; //put your username here
+   $credentials = "user=khuan042 password=Huang756!"; //put username + password here
 
    $db = pg_connect( "$host $port $dbname $credentials"  );
-
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
-      //echo "Opened database successfully\n";
-      pg_query('SET search_path = "Test"');
+      echo "Opened database successfully\n";
+      pg_query('SET search_path = "RakeMyMovies";');
    }
 
 //array of movie IDs
