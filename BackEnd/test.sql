@@ -261,9 +261,27 @@
 -- top rated movies
 -- 4x random genres/actors + highest rating movie. total 4.
 
--- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION
--- FROM MOVIES M, GENRE G, ACTOR A, DIRECTOR D,
--- -- WHERE 
+-- List of movies with highest rating
+-- SELECT M.MOVIE_ID, AVG(R.REVIEW_RATING) AS Average_rating
+-- FROM REVIEW R, MOVIE M, MOVREV MR
+-- WHERE M.MOVIE_ID = MR.MOVIE_ID AND
+	  -- MR.REVIEW_ID = R.REVIEW_ID
+-- ORDER BY AVG(R.REVIEW_RATING);
+
+-- List movies where actor x plays in
+-- SELECT M.*
+-- FROM MOVIES M, ACTOR A, MOVACT MA
+-- WHERE A.ACTOR_ID = '$actorid' AND 
+	  -- MA.ACTOR_ID = A.ACTOR_ID AND 
+	  -- MA.MOVIE_ID = M.MOVIE_ID;
+
+-- List of movies with genre
+-- SELECT M.*
+-- FROM MOVIES M, GENRE G, MOVGEN MG
+-- WHERE G.GENRE_ID = '$genreid' AND 
+	  -- MG.GENRE_ID = G.GENRE_ID AND 
+	  -- MG.MOVIE_ID = M.MOVIE_ID;
+
 -- ******************************************************************************************************
 
 -- *****************ADD TO WISH LIST*********************************************************************
