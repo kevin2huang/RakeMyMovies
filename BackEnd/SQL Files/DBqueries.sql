@@ -9,6 +9,7 @@
 -- DROP TABLE STUDIO CASCADE;
 -- DROP TABLE MOVIES CASCADE; 
 -- DROP TABLE MOVREV;
+-- DROP TABLE MOVACT;
 -- DROP TABLE WISH
 
 -- CREATE TABLE MOVIES
@@ -105,8 +106,7 @@
 -- (MOVIE_ID INTEGER,
 -- FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID),
 -- ACTOR_ID INTEGER,
--- FOREIGN KEY (ACTOR_ID) REFERENCES ACTOR(ACTOR_ID),
--- ROLE VARCHAR(20));
+-- FOREIGN KEY (ACTOR_ID) REFERENCES ACTOR(ACTOR_ID));
 -- 	
 -- CREATE TABLE SPONSOR
 -- (MOVIE_ID INTEGER,
@@ -119,7 +119,9 @@
 -- FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID),
 -- DIR_ID INTEGER,
 -- FOREIGN KEY (DIR_ID) REFERENCES DIRECTOR(DIR_ID));
-	
+
+SELECT * FROM ACTOR, DIRECTOR, GENRE, MOVDIR, MOVACT, MOVGEN;
+
 --------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
 
 -- ***************REVIEW*********************************************************************************************
