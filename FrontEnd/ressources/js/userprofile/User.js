@@ -32,7 +32,7 @@ define([
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-				userId: self.user.userId,
+				userId: self.userId,
 				listType: 'recent'
 			}
 		}).done(function (rep) {
@@ -52,7 +52,7 @@ define([
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]
-				userId: self.user.userId,
+				userId: self.userId,
 				listType: 'recent'
 			}
 		}).done(function (rep) {

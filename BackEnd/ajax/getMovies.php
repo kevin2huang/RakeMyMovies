@@ -30,7 +30,7 @@ if(isset($_POST['movieIDs'])){
                                         A.ACTOR_ID = MA.ACTOR_ID AND
                                         MA.MOVIE_ID = M.MOVIE_ID AND
                                         D.DIRECTOR_ID = MD.DIRECTOR_ID AND 
-                                        MD.MOVIE_ID = MOVIE_ID AND 
+                                        MD.MOVIE_ID = M.MOVIE_ID AND 
                                         SP.MOVIE_ID = M.MOVIE_ID AND 
                                         SP.STUDIO_ID = S.STUDIO_ID;")
          /*

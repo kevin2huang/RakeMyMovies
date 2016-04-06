@@ -21,7 +21,7 @@ define([
 			url: "http://localhost/DatabaseProject/BackEnd/ajax/getSubscriptions.php",
 			method: "POST",
 			data: {
-				userId: self.user().userId,
+				userId: self.user.userId,
 			}
 		}).done(function (rep) {
 			if (!!rep.genres && $.isArray(rep.genres)) {
