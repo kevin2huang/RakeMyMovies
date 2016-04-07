@@ -66,7 +66,7 @@
 -- ('Elijah Wood'),
 -- ('Ellen Page'),
 -- ('Florence Lee'),
--- ('FranÃ§ois Cluzet'),
+-- ('Francois Cluzet'),
 -- ('Gabriel Byrne'),
 -- ('Gary Oldman'),
 -- ('Gary Sinise'),
