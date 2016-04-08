@@ -31,16 +31,17 @@ if(isset($_POST['email']) and isset($_POST['password'] and isset($_POST['usernam
                                 FROM RAKEUSER
                                 WHERE USER_EMAIL = " + $_POST['email'] + ";");
 
-       $insert_profile = pg_query($db, "INSERT INTO TABLE PROFILE (USER_ID, PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
+        
+              
+       $insert_profile = pg_query($db, "INSERT INTO TABLE PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
                                          VALUES 
                                          (" + $userid + ", 
-                                          " + $_POST['email'] + ", 
-                                          "+ $_POST['password'] + ", 
-                                          "+ $_POST['gender'] + ", 
-                                          "+ $_POST['DOB'] + ", 
-                                          "+ $_POST['icon'] + ", 
-                                          "+ $_POST['isadmin'] + ");");
-   if(!$ret or !$ret2)
+                                          " + $_POST['province'] + ", 
+                                          "+ $_POST['city'] + ", 
+                                          "+ $_POST['occupation'] + ", 
+                                          "+ $_POST['country'] + ", 
+                                          "+ $_POST['quote'] + ");");
+   if(!$insert_user or !$insert_profile)
    {
       echo pg_last_error($db);
       exit;
