@@ -88,6 +88,11 @@ header("content-type:application/json");
     $ch5_movies = array();
     $ch6_movies = array();
 
+    if(!$ch1 or !$ch2 or !$ch3 or !$ch4 or !$ch5 or !$ch6){
+      echo pg_last_error($db);
+      exit;
+    } 
+
      while($row = pg_fetch_row($ch1))
    {
             $ch1 = array('movieid' => $row[0], 

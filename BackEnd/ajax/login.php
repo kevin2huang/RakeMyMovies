@@ -27,7 +27,7 @@ if(isset($_POST['email']) and isset($_POST['password'])){
                                      FROM RAKEUSER U 
                                      WHERE U.USER_EMAIL = " + $_POST['email'] +" AND 
                                      U.USER_PASSWORD = "+ $_POST['password'] + ");");
-   if(!$ret){
+   if(!$ret or !$ret2){
       echo pg_last_error($db);
       exit;
    } 
