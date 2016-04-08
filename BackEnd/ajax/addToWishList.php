@@ -21,8 +21,14 @@ $response;
 if(isset($_POST['userId']) && isset($_POST['movieId'])){
     //Insert the new wish relation between the user and the movie
     $ret = pg_query($db, "INSERT INTO WISH (USER_ID, MOVIE_ID, WISH_TIMESTAMP)
-						  VALUES 
+						              VALUES 
                           (" + $user_id + ", " + $movie_id + ", " + $date + ");");
+
+    $ret2 = pg_query($db, "SELECT M.*, W.WISH_TIMESTAMP
+                           FROM MOVIES M, RAKEUSER U, WISH W
+                           WHERE U.USER_ID = " + $userid + " AND 
+                           W.USER_ID = U.USER_ID AND 
+                           W.MOVIE_ID = M.MOVIE_ID;");
 
     $response->status = 'OK';
 //} else {

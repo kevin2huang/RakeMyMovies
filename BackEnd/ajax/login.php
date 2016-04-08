@@ -15,7 +15,8 @@
 
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
-if(isset($_POST['email']) and isset($_POST['password'])){
+if(isset($_POST['email']) and isset($_POST['password']))
+{
        $ret = pg_query($db, "SELECT * 
                              FROM RAKEUSER U 
                              WHERE U.USER_EMAIL = " + $_POST['email'] + " AND 
@@ -27,38 +28,43 @@ if(isset($_POST['email']) and isset($_POST['password'])){
                                      FROM RAKEUSER U 
                                      WHERE U.USER_EMAIL = " + $_POST['email'] +" AND 
                                      U.USER_PASSWORD = "+ $_POST['password'] + ");");
-   if(!$ret or !$ret2){
+   if(!$ret or !$ret2)
+   {
       echo pg_last_error($db);
       exit;
    } 
-   $user = array();
-   $profile = array();
-   while($row = pg_fetch_row($ret))
+   else
    {
-            $user = array('userid' => $row[0], 
-                                 'username' => $row[1], 
-                                 'email' => $row[2],
-                                 'password' => $row[3], 
-                                 'gender' => $row[4],
-                                 'dob' => $row[5]);
-    }
+     $user = array();
+     $profile = array();
+     while($row = pg_fetch_row($ret))
+     {
+              $user = array('userid' => $row[0], 
+                                   'username' => $row[1], 
+                                   'email' => $row[2],
+                                   'password' => $row[3], 
+                                   'gender' => $row[4],
+                                   'dob' => $row[5]);
+      }
 
-    while($row2 = pg_fetch_row($ret2))
-    {
-        $profile = array('profileid' => $row2[0],
-                                    'userid' => $row2[1],
-                                    'province' => $row2[2],
-                                    'city' => $row2[3],
-                                    'occupation' => $row2[4],
-                                    'country' => $row2[5],
-                                    'quote' => $row2[6]);
-    }
-    $user_profile = array('user' => $user, 'profile' => $profile);
-    echo json_encode($user_profile);
-   // echo "Operation done successfully\n";
-    pg_close($db);
+      while($row2 = pg_fetch_row($ret2))
+      {
+          $profile = array('profileid' => $row2[0],
+                                      'userid' => $row2[1],
+                                      'province' => $row2[2],
+                                      'city' => $row2[3],
+                                      'occupation' => $row2[4],
+                                      'country' => $row2[5],
+                                      'quote' => $row2[6]);
+      }
+      $user_profile = array('user' => $user, 'profile' => $profile);
+      echo json_encode($user_profile);
+     // echo "Operation done successfully\n";
+      pg_close($db);
+  }
 }
-else{
+else
+{
     echo "Wrong email/pass";
 }
 
