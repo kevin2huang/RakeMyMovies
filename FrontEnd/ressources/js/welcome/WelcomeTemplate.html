@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" data-bind="click : setHomePage">CSI2132 Project</a>
+                <a class="navbar-brand" href="#" data-bind="click : setHomePage">Rake My Movies</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,7 +35,7 @@
                         <input type="text" class="form-control" placeholder="Password" data-bind="value : password"></input>
                     </div>
                     <button type="submit" class="btn btn-primary" data-bind="click : login">Login</button>
-                    <button type="submit" class="btn btn-warning">New user</button>
+                    <button data-toggle="modal" data-target="#signupModal" class="btn btn-warning" data-bind="click : function(){}">New user</button>
                     <!-- /ko -->
                     <!-- ko if : user() !== null -->
                     <button type="submit" class="btn btn-default" data-bind="click : setProfilePage">
@@ -129,6 +129,96 @@
                 <div class="modal-footer">
 
                     <button class="watchLaterButton btn btn-success" data-bind="click : $parent.watchLater($data), visible : $parent.hasUser">Watch later</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="signupModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" data-bind="with : signupUser">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sign up</h4>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <span class="text-danger col-sm-12">** : Those fields are mandatory</span>
+                    </div>
+                    <br>
+                    <div class="editFields">
+                        <div class="row">
+                            <span class="col-sm-2">**Username : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your username" data-bind="value : username"></input>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-sm-2">**Email : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your email" data-bind="value : email"></input>
+                            </span>
+                        </div>
+                        
+                        <div class="row">
+                            <span class="col-sm-2">**Password : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your password" data-bind="value : password"></input>
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-sm-2">Country : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your country" data-bind="value : country"></input>
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-sm-2">Province : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your province" data-bind="value : province"></input>
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-sm-2">City : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your city" data-bind="value : city"></input>
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-sm-2">Occupation : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Enter your occupation" data-bind="value : occupation"></input>
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-sm-2">Gender : </span>
+                            <span class="col-sm-8">
+                                <div class="genderOptions row">
+                                    <label class="radio-inline col-sm-1"><input type="radio" name="optradio">M</input></label>
+                                    <label class="radio-inline col-sm-1"><input type="radio" name="optradio">F</input></label>
+                                </div>
+                            </span>
+                        </div>
+
+                        <div class="row">
+                            <span class="col-sm-2">Quote : </span>
+                            <span class="col-sm-8">
+                                <input class="form-control" type="text" placeholder="Write something" data-bind="value : quote"></input>
+                            </span>
+                        </div>
+                        <br>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bind="click : $parent.signup">Done</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -1,64 +1,64 @@
 <script type="text/html" id="profile-template">
 	<div class="editFields">
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Username : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your username" data-bind="value : $parent.user().username"></input>
 			</span>
 		</div>
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Email : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your email" data-bind="value : $parent.user().email"></input>
 			</span>
 		</div>
 		
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Password : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your password" data-bind="value : $parent.user().password"></input>
 			</span>
 		</div>
 
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Country : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your country" data-bind="value : $parent.user().country"></input>
 			</span>
 		</div>
 
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Province : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your province" data-bind="value : $parent.user().province"></input>
 			</span>
 		</div>
 
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">City : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your city" data-bind="value : $parent.user().city"></input>
 			</span>
 		</div>
 
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Occupation : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Enter your occupation" data-bind="value : $parent.user().occupation"></input>
 			</span>
 		</div>
 
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Gender : </span>
 			<span class="col-sm-8">
 				<div class="genderOptions row">
-					<label class="radio-inline col-sm-1"><input type="radio" name="optradio">M</label>
-					<label class="radio-inline col-sm-1"><input type="radio" name="optradio">F</label>
+					<label class="radio-inline col-sm-1"><input type="radio" name="optradio">M</input></label>
+					<label class="radio-inline col-sm-1"><input type="radio" name="optradio">F</input></label>
 				</div>
 			</span>
 		</div>
 
-		<div class=row>
+		<div class="row">
 			<span class="col-sm-2">Quote : </span>
 			<span class="col-sm-8">
 				<input class="form-control" type="text" placeholder="Write something" data-bind="value : $parent.user().quote"></input>
@@ -66,7 +66,6 @@
 		</div>
 
 		<br/>
-		<div data-bind="text: ko.toJSON($parent)"></div>
 		<button class="btn btn-primary" data-bind="click: $parent.saveProfile">Save</button>
 
 	</div>

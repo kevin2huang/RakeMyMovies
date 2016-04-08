@@ -16,11 +16,13 @@ define([
 
 		self.username = ko.observable('');
 		self.password = ko.observable('');
-		self.user = ko.observable(new User({
+		self.signupUser = ko.observable(new User());
+		self.user = ko.observable(null);
+		/*self.user = ko.observable(new User({
 			username: 'Abigael',
 			password: '1234',
 			email: 'abigael.tremblay@gmail.com'
-		}));
+		}));*/
 
 		self.page = ko.observable(new HomePage(self.user()));
 
@@ -84,6 +86,35 @@ define([
 				method: "POST",
 				data: self.user()
 			});
+		};
+
+		self.isEmpty = function(str) {
+			return !(!!str && str != '');
+		};
+
+		self.computeEmpty = function (user, str) {
+			return ko.computed (function() {
+				a = user[str]();
+				return self.isEmpty(a);
+		}, self)};
+
+		self.signup = function () {
+			var user = ko.toJS(self.signupUser());
+			if  (!(self.isEmpty(user.username) || self.isEmpty(user.email) || self.isEmpty(user.password))) {
+				console.log('Yy');
+
+				$.ajax({
+					url: "http://localhost/DatabaseProject/BackEnd/ajax/signup.php",
+					method: "POST",
+					data: user
+				}).done(function (rep) {
+					if (rep.status === 'OK') {
+						self.user(user);
+					}
+				});
+			} else {
+				console.log('Fill in the required fields')
+			}
 		};
 
 		self.hasUser = ko.computed(function () {

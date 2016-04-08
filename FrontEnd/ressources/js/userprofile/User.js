@@ -10,20 +10,33 @@ define([
 	var User = function (options) {
 		var self = this;
 
+		self.username = ko.observable('');
+		self.password = ko.observable('');
+		self.email = ko.observable('');
+		self.country = ko.observable('');
+		self.province = ko.observable('');
+		self.city = ko.observable('');
+		self.occupation = ko.observable('');
+		self.gender = ko.observable('');
+		self.quote = ko.observable('');
+		self.userId = ko.observable(-1);
+
 		if (!!options) {
-			self.username = options.username;
-			self.password = options.password;
-			self.email = options.email;
-			self.country = options.country;
-			self.province = options.province;
-			self.city = options.city;
-			self.occupation = options.occupation;
-			self.gender = options.gender;
-			self.quote = options.quote;
-			self.userId = options.userId;
+			self.username(options.username);
+			self.password(options.password);
+			self.email(options.email);
+			self.country(options.country);
+			self.province(options.province);
+			self.city(options.city);
+			self.occupation(options.occupation);
+			self.gender(options.gender);
+			self.quote(options.quote);
+			self.userId(options.userId);
 		}
 		self.recent = ko.observableArray([]);
 		self.watchLater = ko.observableArray([]);
+		self.reviewList = new ReviewList(self);
+		self.subscription = new Subscription(self);
 
 		var date = new Date().toDateString();
 
@@ -66,10 +79,6 @@ define([
 			}
 			self.watchLater(arr);
 		});
-
-		self.reviewList = new ReviewList(self);
-
-		self.subscription = new Subscription(self);
 
 		self.removeWatchLater = function (m) {
 			self.watchLater.remove(m);
