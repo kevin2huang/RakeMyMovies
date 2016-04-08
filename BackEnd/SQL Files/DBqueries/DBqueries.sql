@@ -34,10 +34,14 @@
 -- USER_ICON TEXT,
 -- USER_ISADMIN BOOLEAN DEFAULT FALSE,
 -- UNIQUE(USER_EMAIL));
-
+-- 
 -- INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_DOB, USER_ICON, USER_ISADMIN)
 -- VALUES
--- ('kevin', 'kevin@gmail.com', '1234', 'M', 'feb 17 1994', 'icon1.png', 'f');
+-- ('kevin', 'kevin@gmail.com', '1234', 'M', 'feb 17 1994', 'icon1.png', TRUE);
+
+-- INSERT INTO RAKEUSER U, PROFILE P (U.USER_NAME, U.USER_EMAIL, U.USER_PASSWORD, U.USER_GENDER, U.USER_DOB, U.USER_ICON, U.USER_ISADMIN, P.USER_ID, P.PROVINCE, P.PROFILE_CITY, P.PROFILE_OCCUPATION, P.PROFILE_COUNTRY, P.PROFILE_QUOTE)
+-- VALUES 
+-- ('kevin', 'email', 'password', 'gender', 'DOB', 'icon', FALSE, U.USER_ID, 'province', 'city', 'occupation', 'country', 'quote');
 
 -- CREATE TABLE GENRE
 -- (GENRE_ID SERIAL PRIMARY KEY,

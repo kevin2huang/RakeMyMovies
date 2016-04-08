@@ -15,19 +15,31 @@
 
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
-if(isset($_POST['email']) and isset($_POST['password']))
+if(isset($_POST['email']) and isset($_POST['password'] and isset($_POST['username'])))
 {
-       $ret = pg_query($db, "SELECT * 
-                             FROM RAKEUSER U 
-                             WHERE U.USER_EMAIL = '" + $_POST['email'] + "' AND 
-                             U.USER_PASSWORD = '" + $_POST['password'] + "';");
+       $insert_user = pg_query($db, "INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_DOB, USER_ICON, USER_ISADMIN)
+                                     VALUES 
+                                     (" + $_POST['username'] + ", 
+                                      " + $_POST['email'] + ", 
+                                      "+ $_POST['password'] + ", 
+                                      "+ $_POST['gender'] + ", 
+                                      "+ $_POST['DOB'] + ", 
+                                      "+ $_POST['icon'] + ", 
+                                      "+ $_POST['isadmin'] + ");");
 
-       $ret2 = pg_query($db, "SELECT * 
-                              FROM PROFILE P 
-                              WHERE P.USER_ID = (SELECT U.USER_ID 
-                                     FROM RAKEUSER U 
-                                     WHERE U.USER_EMAIL = " + $_POST['email'] + " AND 
-                                     U.USER_PASSWORD = "+ $_POST['password'] + ");");
+       $userid = pg_query($db, "SELECT USER_ID 
+                                FROM RAKEUSER
+                                WHERE USER_EMAIL = " + $_POST['email'] + ";");
+
+       $insert_profile = pg_query($db, "INSERT INTO TABLE PROFILE (USER_ID, PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
+                                         VALUES 
+                                         (" + $userid + ", 
+                                          " + $_POST['email'] + ", 
+                                          "+ $_POST['password'] + ", 
+                                          "+ $_POST['gender'] + ", 
+                                          "+ $_POST['DOB'] + ", 
+                                          "+ $_POST['icon'] + ", 
+                                          "+ $_POST['isadmin'] + ");");
    if(!$ret or !$ret2)
    {
       echo pg_last_error($db);
