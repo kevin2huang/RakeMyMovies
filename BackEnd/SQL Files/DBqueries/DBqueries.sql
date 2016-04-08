@@ -1,4 +1,4 @@
-﻿SET search_path = "RakeMyMovies";
+﻿SET search_path = "RakeMyMovie";
 -- 
 -- DROP TABLE ACTOR;
 -- DROP TABLE DIRECTOR;
@@ -34,11 +34,6 @@
 -- USER_ICON TEXT,
 -- USER_ISADMIN BOOLEAN DEFAULT FALSE,
 -- UNIQUE(USER_EMAIL));
--- 
--- ALTER TABLE RAKEUSER
--- 	ADD COLUMN "USER_ISADMIN" BOOLEAN DEFAULT FALSE;
-
-SELECT * FROM RAKEUSER;
 
 -- CREATE TABLE GENRE
 -- (GENRE_ID SERIAL PRIMARY KEY,
@@ -125,8 +120,6 @@ SELECT * FROM RAKEUSER;
 -- FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID),
 -- DIR_ID INTEGER,
 -- FOREIGN KEY (DIR_ID) REFERENCES DIRECTOR(DIR_ID));
-
-SELECT * FROM ACTOR, DIRECTOR, GENRE, MOVDIR, MOVACT, MOVGEN;
 
 --------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
 
@@ -273,6 +266,17 @@ SELECT * FROM ACTOR, DIRECTOR, GENRE, MOVDIR, MOVACT, MOVGEN;
 -- SELECT M.MOVIE_TITLE, M.MOVIE_RELEASE_DATE, M.MOVIE_DESCRIPTION, M.MOVIE_TG_RATING, M.MOVIE_DURATION
 -- FROM MOVIES M, GENRE G, ACTOR A, DIRECTOR D,
 -- -- WHERE 
+
+SELECT M.*, A.*, D.*, S.*
+FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
+WHERE M.MOVIE_ID = 1 AND
+      A.ACTOR_ID = MA.ACTOR_ID AND
+      MA.MOVIE_ID = M.MOVIE_ID AND
+      D.DIRECTOR_ID = MD.DIRECTOR_ID AND 
+      MD.MOVIE_ID = M.MOVIE_ID AND 
+      SP.MOVIE_ID = M.MOVIE_ID AND 
+      SP.STUDIO_ID = S.STUDIO_ID;
+
 -- ******************************************************************************************************
 
 -- *****************ADD TO WISH LIST*********************************************************************

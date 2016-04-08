@@ -9,7 +9,7 @@
       echo "Error : Unable to open database\n";
    } else {
       echo "Opened database successfully\n";
-      pg_query('SET search_path = "RakeMyMovies";');
+      pg_query('SET search_path = "RakeMyMovie";');
    }
 
 //array of movie IDs
@@ -52,7 +52,7 @@ if(isset($_POST['movieIDs'])){
                                 FROM MOVDIR MD, MOVIES M
                                 WHERE M.MOVIE_ID = " + $movieid + " AND MD.MOVIE_ID = M.MOVIE_ID);");
 */
-    if(!$ret or !$ret2){
+    if(!$ret){
       echo pg_last_error($db);
       exit;
     } 
