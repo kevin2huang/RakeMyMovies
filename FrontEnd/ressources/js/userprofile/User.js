@@ -45,8 +45,8 @@ define([
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-				userId: self.userId(),
-				listType: 'recent'
+				userId: self.userId,
+				listType: 'watched'
 			}
 		}).done(function (rep) {
 			var arr = [];
@@ -66,7 +66,7 @@ define([
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]
 				userId: self.userId,
-				listType: 'recent'
+				listType: 'wish'
 			}
 		}).done(function (rep) {
 			var arr = [];

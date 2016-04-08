@@ -22,16 +22,16 @@ $response;
 if(isset($_POST['userId']) && isset($_POST['movieId'])){
     //Insert the new wish relation between the user and the movie
 
-    $select = pg_query($db, "SELECT M.*, W.WISH_TIMESTAMP
-                           FROM MOVIES M, RAKEUSER U, WISH W
-                           WHERE U.USER_ID = " + $userid + " AND 
-                           W.USER_ID = U.USER_ID AND 
-                           W.MOVIE_ID = M.MOVIE_ID;");
+    $delete = pg_query($db, "DELETE FROM WISH
+                             WHERE MOVIE_ID = " + $movieid + " AND 
+                             USER_ID = " + $userid + ";");
 
 
-    $response->status = 'OK';
-//} else {
-    //$response->status = 'FAILED';
-//}
+    $response->status = 'DELETED';
+} 
+else 
+{
+    $response->status = 'FAILED';
+}
     echo json_encode($response);
 ?>
