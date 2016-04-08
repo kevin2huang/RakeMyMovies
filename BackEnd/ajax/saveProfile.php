@@ -15,32 +15,34 @@
 header("content-type:application/json");
 $response;
 
-if ($email, $password, $username is not null){
- $ret = pg_query($db, "ALTER TABLE RAKEUSER U, PROFILE P
-						ALTER COLUMN U.USER_PASSWORD SET " + $password + 
-						"ALTER COLUMN U.USER_EMAIL SET " + $email + 
-						";");
+if (!is_null($_POST['email']) and !is_null($_POST['password']) and !is_null($_POST['username']))
+{
+	$up_user = pg_query($db, "UPDATE RAKEUSER
+							  SET USER_PASSWORD = " + $_POST['password'] + ", 
+							  USER_EMAIL = " + $_POST['email'] + ", 
+							  USER_NAME = " + $_POST['username'] + ", 
+							  USER_GENDER " + $_POST['gender'] + ",
+							  USER_DOB = " + $_POST['dob'] + ", 
+							  USER_ICON = " + $_POST['icon'] + ",
+							  USER_ISADMIN = " + $_POST['isadmin'] + ";");
 
-if(!$ret or !$ret2)
+	$up_profile = pg_query($db, "UPDATE PROFILE
+								 SET PROFILE_PROVINCE = " + $_POST['province'] + ",
+								 PROFILE_CITY =  " + $_POST['city'] + ",
+								 PROFILE_COUNTRY =  " + $_POST['country'] + ", 
+								 PROFILE_OCCUPATION =  " + $_POST['occupation'] + ",
+								 PROFILE_QUOTE =  " + $_POST['quote'] + ";");
+
+   if(!$up_user or !$up_profile)
    {
       echo pg_last_error($db);
       exit;
    } 
-	/*For each value of the data received, updata the tables for user and/or profile accordingly. 
-	Such values you may care about are : 
-		username
-		password
-		email
-		country
-		province
-		city
-		occupation
-		gender
-		quote
-		userId
-	*/
-
     $response->status = 'OK';
+}
+else
+{
+	$response->status = 'FAILED';
 }
     echo json_encode($response);
 ?>

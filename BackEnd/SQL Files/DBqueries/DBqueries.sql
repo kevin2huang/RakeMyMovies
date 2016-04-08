@@ -369,22 +369,22 @@
 
 -- ********************SAVE PROFILE**********************************************************************
 
--- do this for each change
--- ALTER TABLE RAKEUSER 
-	-- ALTER COLUMN USER_PASSWORD SET '$new_pass';
-UPDATE RAKEUSER U, PROFILE P
-						SET U.USER_PASSWORD = '12345', 
-						SET U.USER_EMAIL = 'newemail', 
-						SET U.USER_NAME = 'username', 
-						SET U.USER_GENDER = 'F',
-						SET U.USER_DOB = 'April 8 2016', 
-						SET U.USER_ICON = 'icon',
-						SET U.USER_ISADMIN = TRUE,
-						SET P.PROFILE_PROVINCE = 'province',
-						SET P.PROFILE_CITY = 'city',
-						SET P.PROFILE_COUNTRY = 'country', 
-						SET P.PROFILE_OCCUPATION = 'occupation',
-						SET P.PROFILE_QUOTE = 'canada is so lovely';
+-- UPDATE RAKEUSER
+-- SET USER_PASSWORD = '12345', 
+--  USER_EMAIL = 'newemail', 
+--  USER_NAME = 'username', 
+--  USER_GENDER = 'F',
+--  USER_DOB = 'April 8 2016', 
+--  USER_ICON = 'icon',
+--  USER_ISADMIN = TRUE;
+-- 
+-- UPDATE PROFILE
+-- SET PROFILE_PROVINCE = 'province',
+-- PROFILE_CITY = 'city',
+-- PROFILE_COUNTRY = 'country', 
+-- PROFILE_OCCUPATION = 'occupation',
+-- PROFILE_QUOTE = 'canada is so lovely';
+
 -- ******************************************************************************************************
 
 -- *********************WISH LIST************************************************************************
