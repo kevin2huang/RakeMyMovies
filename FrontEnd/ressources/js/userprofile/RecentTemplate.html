@@ -1,5 +1,5 @@
 <script type="text/html" id="recent-template">
-	<div class="recentWatchList container-fluid" data-bind="foreach : user().recent()">
+	<div class="recentWatchList container-fluid" data-bind="foreach : user.recent">
 		<div class="singleMovie row">
 			<span class="movieIndex col-sm-1"data-bind="text : 1 + $index()"></span>
 			<div class="movieImage col-sm-1">
