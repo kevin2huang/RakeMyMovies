@@ -193,7 +193,7 @@
 -- *********************LOGIN************************************************************************
 -- SELECT * 
 -- FROM RAKEUSER U
--- WHERE U.EMAIL = '' AND 
+-- WHERE U.EMAIL = '$email' AND 
 	  -- U.PASSWORD = '$password';
 
 -- SELECT * 
@@ -247,6 +247,29 @@
 --       MA.MOVIE_ID = M.MOVIE_ID AND
 --       MA.ACTOR_ID = A.ACTOR_ID;
 
+
+-- SELECT M.*
+-- FROM MOVIES M, ACTOR A, MOVACT MA
+-- WHERE A.ACTOR_ID = $actorid AND 
+--       MA.ACTOR_ID = A.ACTOR_ID AND
+--       MA.MOVIE_ID = M.MOVIE_ID
+-- LIMIT 6;
+
+-- SELECT M.*
+-- FROM MOVIES M, GENRE G, MOVGEN MG
+-- WHERE G.GENRE_ID = 4 AND 
+--       MG.GENRE_ID = G.GENRE_ID AND
+--       MG.MOVIE_ID = M.MOVIE_ID
+-- LIMIT 6;
+
+-- SELECT M.*
+-- FROM MOVIES M, RAKEUSER U, ACTOR A, USRACT UA, MOVACT MA
+-- WHERE U.USER_ID = $userid AND 
+--       UA.USER_ID = U.USER_ID AND 
+--       UA.ACTOR_ID = A.ACTOR_ID AND 
+--       MA.ACTOR_ID = M.MOVIE_ID
+-- LIMIT 6;
+
 -- SELECT M.*, A.*, D.*, S.*
 -- FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
 -- WHERE M.MOVIE_ID = '1' AND
@@ -276,12 +299,40 @@
 -- SELECT M.*, A.*, D.*, S.*
 -- FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
 -- WHERE M.MOVIE_ID = 2 AND
-      -- A.ACTOR_ID = MA.ACTOR_ID AND
-      -- MA.MOVIE_ID = M.MOVIE_ID AND
-      -- D.DIR_ID = MD.DIR_ID AND 
-      -- MD.MOVIE_ID = M.MOVIE_ID AND 
-      -- SP.MOVIE_ID = M.MOVIE_ID AND 
-      -- SP.STUDIO_ID = S.STUDIO_ID;
+--       A.ACTOR_ID = MA.ACTOR_ID AND
+--       MA.MOVIE_ID = M.MOVIE_ID AND
+--       D.DIR_ID = MD.DIR_ID AND 
+--       MD.MOVIE_ID = M.MOVIE_ID AND 
+--       SP.MOVIE_ID = M.MOVIE_ID AND 
+--       SP.STUDIO_ID = S.STUDIO_ID;
+
+-- SELECT M.*
+-- FROM MOVIES M 
+-- WHERE 
+-- 
+-- SELECT M.MOVIE_ID, AVG(R.REVIEW_RATING) AS Review_Average 
+-- FROM REVIEW R, MOVREV MR, MOVIES M
+-- WHERE R.REVIEW_ID = MR.REVIEW_ID AND 
+--       M.MOVIE_ID = MR.MOVIE_ID
+-- ORDER BY 2;
+-- 
+-- SELECT *
+-- FROM MOVIES
+-- WHERE MOVIE_ID = $movieid
+-- LIMIT 6;
+
+-- SELECT M.MOVIE_ID, M.MOVIE_TITLE, M.MOVIE_DURATION 
+-- FROM MOVIES M
+-- FULL OUTER JOIN MOVACT MA ON M.MOVIE_ID = MA.MOVIE_ID;
+
+SELECT M.MOVIE_ID, COUNT(R.*)
+FROM MOVIES M, REVIEW R, MOVREV MR
+WHERE MR.REVIEW_ID = R.REVIEW_ID AND
+      M.MOVIE_ID = MR.MOVIE_ID;
+
+-- SELECT COUNT(M.*) AS duration_count
+-- FROM MOVIES M
+-- WHERE MOVIE_DURATION > 120;
 
 -- ******************************************************************************************************
 

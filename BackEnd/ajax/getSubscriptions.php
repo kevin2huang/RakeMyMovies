@@ -15,10 +15,34 @@
 header("content-type:application/json");
 
 	//TODO Connect with database
+	$ret = pg_query($db, "SELECT G.* 
+						  FROM GENRE G, USRGEN UG
+						  WHERE UG.USER_ID = " + $userid + " AND 
+						  UG.GENRE_ID = G.GENRE_ID;");
 
-    $response->status = array('Horror', 'Action', 'Comedy', 'Documentary', 'New', 'Thriller', 'Animated', 'Drama', 'Western');
+	$ret2 = pg_query($db, "SELECT A.* 
+						  FROM ACTOR A, USRACT UA
+						  WHERE UA.USER_ID = " + $userid + " AND 
+						  UA.ACTOR_ID = A.ACTOR_ID;");
 
-    $response->artists = array('Robert Downey Jr.', 'Tom Hanks', 'Jonny Depp', 'Tom Cruise', 'Will Smith', 'Brad Pitt', 'Morgan Freeman', 'George Clooney', 'Robin Williams');
+	if(!$ret or !$ret2){
+      echo pg_last_error($db);
+      exit;
+    } 
 
-    echo json_encode($response);
+    while($row = pg_fetch_row($ret))
+   {
+            $genres = array('genreid' => $row[0], 
+                           'genre' => $row[1]);
+    }
+
+    while($row2 = pg_fetch_row($ret2))
+   {
+            $actors = array('actorid' => $row[0], 
+                           'actorname' => $row[1]);
+    }
+
+    $subscriptions = array('genres' => $genres, 'actors' => $actors);
+
+    echo json_encode($subscriptions);
 ?>
