@@ -193,7 +193,7 @@
 -- *********************LOGIN************************************************************************
 -- SELECT * 
 -- FROM RAKEUSER U
--- WHERE U.EMAIL = '$email' AND 
+-- WHERE U.EMAIL = '' AND 
 	  -- U.PASSWORD = '$password';
 
 -- SELECT * 
@@ -238,8 +238,14 @@
 -- SELECT * 
 -- FROM ACTOR A
 -- WHERE A.ACTOR_ID = (SELECT MA.ACTOR_ID 
-		-- FROM MOVACT MA, MOVIES M
-		-- WHERE M.MOVIE_ID = '$movieid' AND MA.MOVIE_ID = M.MOVIE_ID);
+-- 		    FROM MOVACT MA, MOVIES M
+-- 		    WHERE M.MOVIE_ID = 1 AND MA.MOVIE_ID = M.MOVIE_ID);
+
+-- SELECT A.* 
+-- FROM ACTOR A, MOVACT MA, MOVIES M
+-- WHERE M.MOVIE_ID = 1 AND 
+--       MA.MOVIE_ID = M.MOVIE_ID AND
+--       MA.ACTOR_ID = A.ACTOR_ID;
 
 -- SELECT M.*, A.*, D.*, S.*
 -- FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
@@ -267,15 +273,15 @@
 -- FROM MOVIES M, GENRE G, ACTOR A, DIRECTOR D,
 -- -- WHERE 
 
-SELECT M.*, A.*, D.*, S.*
-FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
-WHERE M.MOVIE_ID = 1 AND
-      A.ACTOR_ID = MA.ACTOR_ID AND
-      MA.MOVIE_ID = M.MOVIE_ID AND
-      D.DIRECTOR_ID = MD.DIRECTOR_ID AND 
-      MD.MOVIE_ID = M.MOVIE_ID AND 
-      SP.MOVIE_ID = M.MOVIE_ID AND 
-      SP.STUDIO_ID = S.STUDIO_ID;
+-- SELECT M.*, A.*, D.*, S.*
+-- FROM MOVIES M, ACTOR A, MOVACT MA, DIRECTOR D, MOVDIR MD, STUDIO S, SPONSOR SP
+-- WHERE M.MOVIE_ID = 2 AND
+      -- A.ACTOR_ID = MA.ACTOR_ID AND
+      -- MA.MOVIE_ID = M.MOVIE_ID AND
+      -- D.DIR_ID = MD.DIR_ID AND 
+      -- MD.MOVIE_ID = M.MOVIE_ID AND 
+      -- SP.MOVIE_ID = M.MOVIE_ID AND 
+      -- SP.STUDIO_ID = S.STUDIO_ID;
 
 -- ******************************************************************************************************
 
