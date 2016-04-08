@@ -43,6 +43,8 @@
 -- VALUES 
 -- ('kevin', 'email', 'password', 'gender', 'DOB', 'icon', FALSE, U.USER_ID, 'province', 'city', 'occupation', 'country', 'quote');
 
+-- SELECT * FROM RAKEUSER;
+
 -- CREATE TABLE GENRE
 -- (GENRE_ID SERIAL PRIMARY KEY,
 -- GENRE_NAME VARCHAR(20),
@@ -75,7 +77,7 @@
 -- PROFILE_COUNTRY TEXT,
 -- PROFILE_QUOTE VARCHAR(100),
 -- UNIQUE(USER_ID));
--- 
+
 -- CREATE TABLE REVIEW
 -- (REVIEW_ID SERIAL PRIMARY KEY,
 -- REVIEW_DESCRIPTION VARCHAR(500),
@@ -151,7 +153,7 @@
 -- *****************PROFILE******************************************************************************************
 -- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
 -- VALUES
--- (1, 'Ontario', 'Ottawa', 'Student', 'Canada', 'Today is such a nice day!')
+-- (3, 'Ontario', 'Ottawa', 'Student', 'Canada', 'Today is such a nice day!');
 -- ******************************************************************************************************************
 
 -- ***************STUDIO*********************************************************************************************
@@ -228,6 +230,7 @@
 -- 	FROM RAKEUSER U 
 --         WHERE U.USER_EMAIL = 'abigael.tremblay@gmail.com' AND 
 --         U.USER_PASSWORD = '1234') = P.USER_ID;
+
 
 -- ***************************************************************************************************
 
@@ -369,6 +372,19 @@
 -- do this for each change
 -- ALTER TABLE RAKEUSER 
 	-- ALTER COLUMN USER_PASSWORD SET '$new_pass';
+UPDATE RAKEUSER U, PROFILE P
+						SET U.USER_PASSWORD = '12345', 
+						SET U.USER_EMAIL = 'newemail', 
+						SET U.USER_NAME = 'username', 
+						SET U.USER_GENDER = 'F',
+						SET U.USER_DOB = 'April 8 2016', 
+						SET U.USER_ICON = 'icon',
+						SET U.USER_ISADMIN = TRUE,
+						SET P.PROFILE_PROVINCE = 'province',
+						SET P.PROFILE_CITY = 'city',
+						SET P.PROFILE_COUNTRY = 'country', 
+						SET P.PROFILE_OCCUPATION = 'occupation',
+						SET P.PROFILE_QUOTE = 'canada is so lovely';
 -- ******************************************************************************************************
 
 -- *********************WISH LIST************************************************************************

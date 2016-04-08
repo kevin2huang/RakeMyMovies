@@ -59,7 +59,6 @@ if(isset($_POST['email']) and isset($_POST['password']))
       }
       $user_profile = array('user' => $user, 'profile' => $profile);
       echo json_encode($user_profile);
-     // echo "Operation done successfully\n";
       pg_close($db);
   }
 }

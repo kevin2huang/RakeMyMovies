@@ -27,12 +27,12 @@ if(isset($_POST['email']) and isset($_POST['password'] and isset($_POST['usernam
                                       "+ $_POST['icon'] + ", 
                                       "+ $_POST['isadmin'] + ");");
 
-       $userid = pg_query($db, "SELECT USER_ID 
-                                FROM RAKEUSER
-                                WHERE USER_EMAIL = " + $_POST['email'] + ";");
-
-        
-              
+       $userid_q = pg_query($db, "SELECT USER_ID 
+                                  FROM RAKEUSER
+                                  WHERE USER_EMAIL = " + $_POST['email'] + ";");
+ 
+       $userid = pg_fetch_row($userid_q);
+       
        $insert_profile = pg_query($db, "INSERT INTO TABLE PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
                                          VALUES 
                                          (" + $userid + ", 
@@ -41,6 +41,9 @@ if(isset($_POST['email']) and isset($_POST['password'] and isset($_POST['usernam
                                           "+ $_POST['occupation'] + ", 
                                           "+ $_POST['country'] + ", 
                                           "+ $_POST['quote'] + ");");
+    
+
+
    if(!$insert_user or !$insert_profile)
    {
       echo pg_last_error($db);
@@ -48,37 +51,13 @@ if(isset($_POST['email']) and isset($_POST['password'] and isset($_POST['usernam
    } 
    else
    {
-     $user = array();
-     $profile = array();
-     while($row = pg_fetch_row($ret))
-     {
-              $user = array('userid' => $row[0], 
-                                   'username' => $row[1], 
-                                   'email' => $row[2],
-                                   'password' => $row[3], 
-                                   'gender' => $row[4],
-                                   'dob' => $row[5]);
-      }
-
-      while($row2 = pg_fetch_row($ret2))
-      {
-          $profile = array('profileid' => $row2[0],
-                                      'userid' => $row2[1],
-                                      'province' => $row2[2],
-                                      'city' => $row2[3],
-                                      'occupation' => $row2[4],
-                                      'country' => $row2[5],
-                                      'quote' => $row2[6]);
-      }
-      $user_profile = array('user' => $user, 'profile' => $profile);
-      echo json_encode($user_profile);
-     // echo "Operation done successfully\n";
+      echo "INSERTED";
       pg_close($db);
   }
 }
 else
 {
-    echo "Wrong email/pass";
+    echo "FAILED";
 }
 
 ?>
