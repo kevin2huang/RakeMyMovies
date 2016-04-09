@@ -15,19 +15,22 @@
 
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
+$_POST['email'] = 'kevin2huang@hotmail.com';
+$_POST['password'] = '12345';
+
 if(isset($_POST['email']) and isset($_POST['password']))
 {
        $ret = pg_query($db, "SELECT * 
                              FROM RAKEUSER U 
-                             WHERE U.USER_EMAIL = '" + $_POST['email'] + "' AND 
-                             U.USER_PASSWORD = '" + $_POST['password'] + "';");
+                             WHERE U.USER_EMAIL = " . "'" . $_POST['email'] . "'" . " AND 
+                             U.USER_PASSWORD = " . "'" . $_POST['password'] . "';");
 
        $ret2 = pg_query($db, "SELECT * 
                               FROM PROFILE P 
                               WHERE P.USER_ID = (SELECT U.USER_ID 
                                      FROM RAKEUSER U 
-                                     WHERE U.USER_EMAIL = " + $_POST['email'] + " AND 
-                                     U.USER_PASSWORD = "+ $_POST['password'] + ");");
+                                     WHERE U.USER_EMAIL = " . "'" . $_POST['email'] . "'" . " AND 
+                                     U.USER_PASSWORD = " .  "'" . $_POST['password'] . "');");
    if(!$ret or !$ret2)
    {
       echo pg_last_error($db);
@@ -44,7 +47,8 @@ if(isset($_POST['email']) and isset($_POST['password']))
                                    'email' => $row[2],
                                    'password' => $row[3], 
                                    'gender' => $row[4],
-                                   'dob' => $row[5]);
+                                   'dob' => $row[5],
+                                   'isadmin' => $row[6]);
       }
 
       while($row2 = pg_fetch_row($ret2))

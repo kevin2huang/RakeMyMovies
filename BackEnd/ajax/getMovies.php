@@ -25,7 +25,7 @@ if(isset($_POST['userID'])){
   {
           $list = pg_query($db, "SELECT M.*, W.WISH_TIMESTAMP
                                  FROM MOVIES M, RAKEUSER U, WISH W
-                                 WHERE U.USER_ID = " + $_POST['userID'] + " AND 
+                                 WHERE U.USER_ID = " . $_POST['userID'] . " AND 
                                  W.USER_ID = U.USER_ID AND 
                                  W.MOVIE_ID = M.MOVIE_ID;");
   }
@@ -33,7 +33,7 @@ if(isset($_POST['userID'])){
   {
       $list = pg_query($db, "SELECT M.*, WA.WATCHED_TIMESTAMP
                              FROM MOVIES M, RAKEUSER U, WATCHED WA
-                             WHERE U.USER_ID = " + $_POST['userID'] + " AND 
+                             WHERE U.USER_ID = " . $_POST['userID'] . " AND 
                              WA.USER_ID = U.USER_ID AND 
                              WA.MOVIE_ID = M.MOVIE_ID;");
   }
