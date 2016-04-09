@@ -17,7 +17,6 @@ date_default_timezone_set('EST');
 $date = date('j F Y');
 
 header("content-type:application/json");
-    //echo json_encode(array( 'movies' => "Yep"));
 
 $response;
 
@@ -30,7 +29,7 @@ if(isset($_POST['userId']) && isset($_POST['movieId']))
 
     if(!$add)
     {
-        echo pg_last_error($db);
+        echo 'FAILED';
         exit;
     }
     else

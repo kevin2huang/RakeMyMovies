@@ -9,7 +9,6 @@
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
-      echo "Opened database successfully\n";
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
