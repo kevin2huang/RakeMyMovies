@@ -10,30 +10,30 @@ define([
 	var User = function (options) {
 		var self = this;
 
-		self.username = ko.observable('');
-		self.password = ko.observable('');
-		self.email = ko.observable('');
-		self.country = ko.observable('');
-		self.province = ko.observable('');
-		self.city = ko.observable('');
-		self.occupation = ko.observable('');
-		self.gender = ko.observable('');
+		self.username = ko.observable('no username');
+		self.password = ko.observable('no password');
+		self.email = ko.observable('no email');
+		self.country = ko.observable('no country');
+		self.province = ko.observable('no province');
+		self.city = ko.observable('no city');
+		self.occupation = ko.observable('no occupation');
+		self.gender = ko.observable('no gender');
 		self.quote = ko.observable('');
 		self.userId = ko.observable(-1);
-		self.isadmin = ko.observable('');
+		self.isadmin = ko.observable(false);
 
 		if (!!options) {
-			self.username(options.username);
-			self.password(options.password);
-			self.email(options.email);
-			self.country(options.country);
-			self.province(options.province);
-			self.city(options.city);
-			self.occupation(options.occupation);
-			self.gender(options.gender);
-			self.quote(options.quote);
-			self.userId(options.userId);
-			self.isadmin(options.isadmin);
+			if (!!options.username) { self.username(options.username)};
+			if (!!options.password) { self.password(options.password)};
+			if (!!options.email) { self.email(options.email)};
+			if (!!options.country) { self.country(options.country)};
+			if (!!options.province) { self.province(options.province)};
+			if (!!options.city) { self.city(options.city)};
+			if (!!options.occupation) { self.occupation(options.occupation)};
+			if (!!options.gender) { self.gender(options.gender)};
+			if (!!options.quote) { self.quote(options.quote)};
+			if (!!options.userId) { self.userId(options.userId)};
+			if (!!options.isadmin) { self.isadmin(options.isadmin)};
 		}
 		self.recent = ko.observableArray([]);
 		self.watchLater = ko.observableArray([]);

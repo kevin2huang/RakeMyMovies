@@ -4,11 +4,12 @@ define([
 	'../userprofile/ReviewList',
 	'../userprofile/SubscriptionList',
 	'../userprofile/WatchLater',
+	'../userprofile/Administrator',
 	'text!ressources/js/pages/UserProfilePageTemplate.html',
 	'knockout',
 	'komapping',
 	'jquery'
-], function(Profile, Recent, ReviewList, SubscriptionList, WatchLater, template, ko, komapping, $) {
+], function(Profile, Recent, ReviewList, SubscriptionList, WatchLater, Administrator, template, ko, komapping, $) {
 	'use strict';
 
 	$('#page-top').append(template);
@@ -26,6 +27,7 @@ define([
 		self.profiletabs().push(new ReviewList(self.user));
 		self.profiletabs().push(new Profile(self.user));
 		self.profiletabs().push(new SubscriptionList(self.user));
+		self.profiletabs().push(new Administrator(self.user));
 
 		self.profiletabsActive = ko.observable(self.profiletabs()[0]);
 
