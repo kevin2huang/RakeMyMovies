@@ -65,7 +65,7 @@ define([
 						movieId: movie.movieId
 					}
 				}).done(function (rep) {
-					if (rep.status === 'OK') {
+					if (rep === 'OK') {
 						self.user().watchLater().push({
 							movie: movie,
 							timestamp: 'Mon Mar 28 2016'
