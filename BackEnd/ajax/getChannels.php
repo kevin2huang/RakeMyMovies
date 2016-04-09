@@ -95,7 +95,7 @@ header("content-type:application/json");
 
      while($row = pg_fetch_row($ch1))
    {
-            $ch1 = array('movieid' => $row[0], 
+            $ch1_movies = array('movieid' => $row[0], 
                            'movietitle' => $row[1], 
                            'moviecover' => $row[2],
                            'moviereleasedate' => $row[3], 
@@ -189,6 +189,12 @@ header("content-type:application/json");
 
             $channel[] = $elem;
         }
+        array(
+            array(
+              'name' => $name
+              'channel' => channel
+            )
+        )
     }
     */
     $channels = array('channel1' => $ch1_movies, 
