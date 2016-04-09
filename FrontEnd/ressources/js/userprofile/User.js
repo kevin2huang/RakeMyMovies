@@ -22,18 +22,18 @@ define([
 		self.userId = ko.observable(-1);
 		self.isadmin = ko.observable(false);
 
-		if (!!options) {
-			if (!!options.username) { self.username(options.username)};
-			if (!!options.password) { self.password(options.password)};
-			if (!!options.email) { self.email(options.email)};
-			if (!!options.country) { self.country(options.country)};
-			if (!!options.province) { self.province(options.province)};
-			if (!!options.city) { self.city(options.city)};
-			if (!!options.occupation) { self.occupation(options.occupation)};
-			if (!!options.gender) { self.gender(options.gender)};
-			if (!!options.quote) { self.quote(options.quote)};
-			if (!!options.userId) { self.userId(options.userId)};
-			if (!!options.isadmin) { self.isadmin(options.isadmin)};
+		if (!!options && !!options.user && !!options.profile) {
+			if (!!options.user.username) { self.username(options.user.username)};
+			if (!!options.user.password) { self.password(options.user.password)};
+			if (!!options.user.email) { self.email(options.user.email)};
+			if (!!options.profile.country) { self.country(options.profile.country)};
+			if (!!options.profile.province) { self.province(options.profile.province)};
+			if (!!options.profile.city) { self.city(options.profile.city)};
+			if (!!options.profileoccupation) { self.occupation(options.profile.occupation)};
+			if (!!options.user.gender) { self.gender(options.user.gender)};
+			if (!!options.profile.quote) { self.quote(options.profile.quote)};
+			if (!!options.user.userId) { self.userId(options.user.userId)};
+			if (!!options.user.isadmin) { self.isadmin(options.user.isadmin)};
 		}
 		self.recent = ko.observableArray([]);
 		self.watchLater = ko.observableArray([]);
@@ -43,7 +43,7 @@ define([
 		var date = new Date().toDateString();
 
 		$.ajax({
-			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
+			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -63,7 +63,7 @@ define([
 		});
 
 		$.ajax({
-			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
+			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]

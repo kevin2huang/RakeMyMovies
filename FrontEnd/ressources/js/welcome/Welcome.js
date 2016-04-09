@@ -17,14 +17,8 @@ define([
 		self.username = ko.observable('');
 		self.password = ko.observable('');
 		self.signupUser = ko.observable(new User());
-		//self.user = ko.observable(null);
-		self.user = ko.observable(new User({
-			username: 'Abigael',
-			password: '1234',
-			email: 'abigael.tremblay@gmail.com',
-			gender: 'F'
-		}));
-
+		self.user = ko.observable(null);
+		
 		self.page = ko.observable(new HomePage(self.user()));
 
 		/*================================
@@ -33,7 +27,7 @@ define([
 		self.login = function () {
 
 			$.ajax({
-				url: "http://localhost/DatabaseProject/BackEnd/ajax/login.php",
+				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/login.php",
 				method: "POST",
 				data: {
 					email: self.username(),
@@ -64,7 +58,7 @@ define([
 		self.watchLater = function (movie) {
 			if (self.user() !== null) {
 				$.ajax({
-					url: "http://localhost/DatabaseProject/BackEnd/ajax/addToWishList.php",
+					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/addToWishList.php",
 					method: "POST",
 					data: {
 						userId: self.user().userId,
@@ -83,7 +77,7 @@ define([
 
 		self.saveProfile = function () {
 			$.ajax({
-				url: "http://localhost/DatabaseProject/BackEnd/ajax/saveProfile.php",
+				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/saveProfile.php",
 				method: "POST",
 				data: self.user()
 			});
@@ -105,7 +99,7 @@ define([
 				console.log('Yy');
 
 				$.ajax({
-					url: "http://localhost/DatabaseProject/BackEnd/ajax/signup.php",
+					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/signup.php",
 					method: "POST",
 					data: user
 				}).done(function (rep) {

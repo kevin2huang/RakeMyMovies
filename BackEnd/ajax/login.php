@@ -9,14 +9,12 @@
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
-      echo "Opened database successfully\n";
+      //echo "Opened database successfully\n";
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
-
-echo ("<script>console.log('PHP : " . $_POST['email'] . "')</script>");
 
 if(isset($_POST['email']) and isset($_POST['password']))
 {

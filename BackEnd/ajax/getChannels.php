@@ -14,15 +14,15 @@
 
 header("content-type:application/json");
     //echo json_encode(array( 'movies' => "Yep"));
-
-    if(isset($_POST['userId'])){
+    $userid = $_POST['userid'];
+    /*if(isset($_POST['userId'])){
         //Do something if the user is set
 
     } 
     else 
     {
         //Do another search if the user is not set. Select different channels, top rated and so on
-    }
+    }*/
 
     $channels = array();
         
@@ -90,6 +90,7 @@ header("content-type:application/json");
 
     if(!$ch1 or !$ch2 or !$ch3 or !$ch4 or !$ch5 or !$ch6){
       echo pg_last_error($db);
+
       exit;
     } 
 

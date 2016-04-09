@@ -51,7 +51,7 @@ define([
 				userId = self.user.userId;
 			}
 			$.ajax({
-				url: "http://localhost/DatabaseProject/BackEnd/ajax/getChannels.php",
+				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getChannels.php",
 				method: "POST",
 				data: {
 					userId: userId

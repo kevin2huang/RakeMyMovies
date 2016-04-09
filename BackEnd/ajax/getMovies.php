@@ -119,6 +119,6 @@ if(isset($_POST['userID'])){
             'timestamp' => 'Mon Mar 28 2016'
         );
     */
-    echo json_encode('movies' => $movies);
+   // echo json_encode('movies' => $movies);
 }
 ?>
