@@ -36,7 +36,7 @@ define([
 				url: "http://localhost/DatabaseProject/BackEnd/ajax/login.php",
 				method: "POST",
 				data: {
-					email: self.email(),
+					email: self.username(),
 					password: self.password()
 				}
 			}).done(function (rep) {
