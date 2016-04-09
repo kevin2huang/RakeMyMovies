@@ -13,23 +13,35 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
+date_default_timezone_set('EST');
+$date = date('j F Y');
 
 header("content-type:application/json");
     //echo json_encode(array( 'movies' => "Yep"));
 
 $response;
 
-if(isset($_POST['userId']) && isset($_POST['movieId'])){
+if(isset($_POST['userId']) && isset($_POST['movieId']))
+{
     //Insert the new wish relation between the user and the movie
     $add = pg_query($db, "INSERT INTO WISH (USER_ID, MOVIE_ID, WISH_TIMESTAMP)
 						              VALUES 
-                          (" + $user_id + ", " + $movie_id + ", " + $date + ");");
+                          (" . $_POST['userId'] . ", " . $_POST['movieId'] . ", " . "'" . $date . "'" . ");");
 
-    $response->status = 'OK';
+    if(!$add)
+    {
+        echo pg_last_error($db);
+        exit;
+    }
+    else
+    {
+      $response = 'OK';
+    }
+    
   } 
   else 
   {
-      $response->status = 'FAILED';
+      $response = 'FAILED';
   }
     echo json_encode($response);
 ?>
