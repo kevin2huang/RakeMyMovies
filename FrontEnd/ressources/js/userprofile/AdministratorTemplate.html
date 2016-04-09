@@ -1,0 +1,48 @@
+<script type="text/html" id="administrator-template">
+	<div class="container-fluid" data-bind="with : profiletabsActive">
+		<br/>
+		<div class="row">
+			<div class="col-sm-12">
+				<span>Select a movie to edit: </span>
+				<select data-bind="options : movieList, optionsText: 'name', value : selectedMovie, click : getMovie"></select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-9">
+				<span>Directors: </span>
+				<select data-bind="options : directorList, optionsText: 'name', value : selectedDirector"></select>
+			</div>
+			<div class="col-sm-3">
+				<button class="btn" data-bind="click : add.bind($data, selectedDirector().name, 'director')">Add</button>
+				<button class="btn" data-bind="click : remove.bind($data, selectedDirector().name, 'director')">Remove</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-9">
+				<span>Genres: </span>
+				<select data-bind="options : genreList, optionsText: 'name', value : selectedGenre"></select>
+			</div>
+			<div class="col-sm-3">
+				<button class="btn" data-bind="click : add.bind($data, selectedGenre().name, 'genres')">Add</button>
+				<button class="btn" data-bind="click : remove.bind($data, selectedGenre().name, 'genres')">Remove</button>
+			</div>
+		</div>
+		<div class="separator"></div>
+		
+		<!-- ko if: !!movieInfo() -->
+		<div class="row">
+			<h3 class="col-sm-12" data-bind="text : movieInfo().name"></h3>
+		</div>
+		<div class="row">	
+			<span class="col-sm-2">Directors : </span>
+			<div class="col-sm-10" data-bind="text: movieInfo().director"></div>
+		</div>
+		<div class="row">
+			<span class="col-sm-2">Genres : </span>
+			<div class="col-sm-10" data-bind="text: movieInfo().genres"></div>
+		</div>
+		<!-- /ko -->
+
+		<button class="btn btn-primary" data-bind="click : save">Save</button>
+	</div>
+</script>

@@ -17,12 +17,13 @@ define([
 		self.username = ko.observable('');
 		self.password = ko.observable('');
 		self.signupUser = ko.observable(new User());
-		self.user = ko.observable(null);
-		/*self.user = ko.observable(new User({
+		//self.user = ko.observable(null);
+		self.user = ko.observable(new User({
 			username: 'Abigael',
 			password: '1234',
-			email: 'abigael.tremblay@gmail.com'
-		}));*/
+			email: 'abigael.tremblay@gmail.com',
+			gender: 'F'
+		}));
 
 		self.page = ko.observable(new HomePage(self.user()));
 
@@ -35,7 +36,7 @@ define([
 				url: "http://localhost/DatabaseProject/BackEnd/ajax/login.php",
 				method: "POST",
 				data: {
-					email: self.email(),
+					email: self.username(),
 					password: self.password()
 				}
 			}).done(function (rep) {

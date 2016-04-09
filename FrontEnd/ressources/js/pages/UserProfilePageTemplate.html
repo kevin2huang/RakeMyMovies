@@ -8,15 +8,17 @@
 					</div>
 					<span data-bind="text : $parent.user().username"></span>
 					<br/>
-					<span data-bind="text : 'Gender : ' + $parent.user().gender"></span>
+					<span>Gender : </span>
+					<span data-bind="text : $parent.user().gender"></span>
 					<br/>
 					<span data-bind="text : $parent.user().email"></span>
 					<br/>
-					<span data-bind="text : $parent.user().country + ','"></span> 
-					<span data-bind="text : $parent.user().province + ','"></span> 
+					<span data-bind="text : $parent.user().country"></span><span>, </span> 
+					<span data-bind="text : $parent.user().province"></span><span>, </span>
 					<span data-bind="text : $parent.user().city"></span>
 					<br/>
-					<span data-bind="text : 'Occupation : ' + $parent.user().occupation"></span>
+					<span>Occupation : </span>
+					<span data-bind="text : $parent.user().occupation"></span>
 					<br/>
 					<span><i data-bind="text : $parent.user().quote"></i></span>
 
@@ -49,6 +51,10 @@
 
 			    <!-- ko if : profiletabsActive().text === 'WatchLater' -->
 			        <!-- ko template: {name: 'watch-later-template'} -->
+			        <!-- /ko -->
+			    <!-- /ko -->
+			    <!-- ko if : profiletabsActive().text === 'Administrator' -->
+			        <!-- ko template: {name: 'administrator-template'} -->
 			        <!-- /ko -->
 			    <!-- /ko -->
 			    

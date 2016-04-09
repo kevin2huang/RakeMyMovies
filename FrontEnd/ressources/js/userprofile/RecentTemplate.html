@@ -1,16 +1,16 @@
 <script type="text/html" id="recent-template">
 	<div class="recentWatchList container-fluid" data-bind="foreach : user.recent">
 		<div class="singleMovie row">
-			<span class="movieIndex col-sm-1"data-bind="text : 1 + $index()"></span>
+			<span class="movieIndex col-sm-1" data-bind="text : 1 + $index()"></span>
 			<div class="movieImage col-sm-1">
 				<div class="movieDefaultImage">
 					<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
 				</div>
 			</div>
-			<span class="movieName col-sm-4"data-bind="text : movie.name"></span>
-			<span class="movieName col-sm-2"data-bind="text : timestamp"></span>
-			<span class="movietime col-sm-2"data-bind="text : movie.time"></span>
-			<button class="btn btn-primary">Write review</span>
+			<span class="movieName col-sm-4" data-bind="text : movie.name"></span>
+			<span class="movieName col-sm-2" data-bind="text : timestamp"></span>
+			<span class="movietime col-sm-2" data-bind="text : movie.time"></span>
+			<button class="btn btn-primary">Write review</button>
 		</div>
 		<div class="separator"></div>
 	</div>

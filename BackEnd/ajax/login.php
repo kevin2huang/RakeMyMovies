@@ -16,9 +16,7 @@
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
 
-$_POST['email'] = 'kevin2huang@hotmail.com';
-$_POST['password'] = '1234';
- 
+echo ("<script>console.log('PHP : " . $_POST['email'] . "');</script>");
 
 if(isset($_POST['email']) and isset($_POST['password']))
 {
