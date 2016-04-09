@@ -15,56 +15,66 @@
 
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
+
 $_POST['email'] = 'kevin2huang@hotmail.com';
-$_POST['password'] = '12345';
+$_POST['password'] = '1234';
+ 
 
 if(isset($_POST['email']) and isset($_POST['password']))
 {
        $ret = pg_query($db, "SELECT * 
                              FROM RAKEUSER U 
                              WHERE U.USER_EMAIL = " . "'" . $_POST['email'] . "'" . " AND 
-                             U.USER_PASSWORD = " . "'" . $_POST['password'] . "';");
+                             U.USER_PASSWORD = " . "'" . $_POST['password'] . "'" . ";");
 
-       $ret2 = pg_query($db, "SELECT * 
-                              FROM PROFILE P 
-                              WHERE P.USER_ID = (SELECT U.USER_ID 
-                                     FROM RAKEUSER U 
-                                     WHERE U.USER_EMAIL = " . "'" . $_POST['email'] . "'" . " AND 
-                                     U.USER_PASSWORD = " .  "'" . $_POST['password'] . "');");
-   if(!$ret or !$ret2)
-   {
-      echo pg_last_error($db);
-      exit;
-   } 
-   else
-   {
-     $user = array();
-     $profile = array();
-     while($row = pg_fetch_row($ret))
-     {
+       if(!$ret)
+       {
+        echo pg_last_error($db);
+        exit;
+       }
+       else
+       {
+          $user = array();
+          while($row = pg_fetch_row($ret))
+          {
+              $userid = $row[0];
               $user = array('userid' => $row[0], 
                                    'username' => $row[1], 
                                    'email' => $row[2],
                                    'password' => $row[3], 
                                    'gender' => $row[4],
                                    'dob' => $row[5],
-                                   'isadmin' => $row[6]);
-      }
+                                   'icon' => $row[6],
+                                   'isadmin' => $row[7]);
+          }
 
-      while($row2 = pg_fetch_row($ret2))
-      {
-          $profile = array('profileid' => $row2[0],
-                                      'userid' => $row2[1],
-                                      'province' => $row2[2],
-                                      'city' => $row2[3],
-                                      'occupation' => $row2[4],
-                                      'country' => $row2[5],
-                                      'quote' => $row2[6]);
-      }
+          $ret2 = pg_query($db, "SELECT * 
+                                  FROM PROFILE 
+                                  WHERE USER_ID = " . $userid . " ;");
+
+          if(!$ret2)
+          {
+            echo pg_last_error($db);
+            exit;
+          }
+          else
+          {
+            $profile = array();
+            while($row2 = pg_fetch_row($ret2))
+            {
+              $profile = array('profileid' => $row2[0],
+                                          'userid' => $row2[1],
+                                          'province' => $row2[2],
+                                          'city' => $row2[3],
+                                          'occupation' => $row2[4],
+                                          'country' => $row2[5],
+                                          'quote' => $row2[6]);
+            }
+          }
+       } 
       $user_profile = array('user' => $user, 'profile' => $profile);
       echo json_encode($user_profile);
       pg_close($db);
-  }
 }
 else
 {
