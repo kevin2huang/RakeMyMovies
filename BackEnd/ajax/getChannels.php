@@ -14,15 +14,15 @@
 
 header("content-type:application/json");
     //echo json_encode(array( 'movies' => "Yep"));
-    $userid = $_POST['userid'];
-    /*if(isset($_POST['userId'])){
+
+    if(isset($_POST['userId'])){
         //Do something if the user is set
 
     } 
     else 
     {
         //Do another search if the user is not set. Select different channels, top rated and so on
-    }*/
+    }
 
     $channels = array();
         
@@ -67,7 +67,7 @@ header("content-type:application/json");
     //Channel 5: Movies with a actor x
     $ch5 = pg_query($db, "SELECT M.*
                           FROM MOVIES M, ACTOR A, MOVACT MA
-                          WHERE A.ACTOR_ID = " + $ran_actor + " AND 
+                          WHERE A.ACTOR_ID = " . $ran_actor . " AND 
                           MA.ACTOR_ID = A.ACTOR_ID AND
                           MA.MOVIE_ID = M.MOVIE_ID
                           LIMIT 6;");
@@ -75,7 +75,7 @@ header("content-type:application/json");
     //Channel 6: Movies with a genre x
     $ch6 = pg_query($db, "SELECT M.*
                           FROM MOVIES M, GENRE G, MOVGEN MG
-                          WHERE G.GENRE_ID = " + $ran_genre + " AND 
+                          WHERE G.GENRE_ID = " . $ran_genre . " AND 
                           MG.GENRE_ID = G.GENRE_ID AND
                           MG.MOVIE_ID = M.MOVIE_ID
                           LIMIT 6;");
@@ -90,7 +90,6 @@ header("content-type:application/json");
 
     if(!$ch1 or !$ch2 or !$ch3 or !$ch4 or !$ch5 or !$ch6){
       echo pg_last_error($db);
-
       exit;
     } 
 
