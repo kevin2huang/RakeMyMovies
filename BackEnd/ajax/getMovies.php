@@ -12,14 +12,41 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-//array of movie IDs
+
 header("content-type:application/json");
 
-if(isset($_POST['movieIDs'])){
+if(isset($_POST['userID'])){
   
+  $movieids = array();
+  $timestamps = array();
   $movies = array();
 
-    foreach ($_POST['movieIDs'] as $movieID) {
+  if(listType == 'wish')
+  {
+          $list = pg_query($db, "SELECT M.*, W.WISH_TIMESTAMP
+                                 FROM MOVIES M, RAKEUSER U, WISH W
+                                 WHERE U.USER_ID = " + $_POST['userID'] + " AND 
+                                 W.USER_ID = U.USER_ID AND 
+                                 W.MOVIE_ID = M.MOVIE_ID;");
+  }
+  else if(listType == 'watched')
+  {
+      $list = pg_query($db, "SELECT M.*, WA.WATCHED_TIMESTAMP
+                             FROM MOVIES M, RAKEUSER U, WATCHED WA
+                             WHERE U.USER_ID = " + $_POST['userID'] + " AND 
+                             WA.USER_ID = U.USER_ID AND 
+                             WA.MOVIE_ID = M.MOVIE_ID;");
+  }
+  else{
+    echo "Error";
+  }
+
+  while ($row = pg_fetch_row($list)){
+     $movieids = array($row[0]);
+     $timestamps = array($row[9]);
+  }
+  
+    foreach ($movieids as $movieID) {
           $movie = array();
           $actors = array();
           $directors = array();

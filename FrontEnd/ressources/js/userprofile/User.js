@@ -20,6 +20,7 @@ define([
 		self.gender = ko.observable('');
 		self.quote = ko.observable('');
 		self.userId = ko.observable(-1);
+		self.isadmin = ko.observable('');
 
 		if (!!options) {
 			self.username(options.username);
@@ -32,6 +33,7 @@ define([
 			self.gender(options.gender);
 			self.quote(options.quote);
 			self.userId(options.userId);
+			self.isadmin(options.isadmin);
 		}
 		self.recent = ko.observableArray([]);
 		self.watchLater = ko.observableArray([]);

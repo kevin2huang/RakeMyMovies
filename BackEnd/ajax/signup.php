@@ -15,7 +15,21 @@
 
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
-if(isset($_POST['email']) and isset($_POST['password'] and isset($_POST['username'])))
+
+$_POST['username'] = 'kevin2huang';
+$_POST['email'] = 'kevin@hotmail.com';
+$_POST['password'] = '1234';
+$_POST['gender'] = 'M';
+$_POST['DOB'] = 'feb 17 1994';
+$_POST['icon'] = 'icon1.png';
+$_POST['isadmin'] = TRUE;
+$_POST['province'] = 'ON';
+$_POST['city'] = 'Ottawa';
+$_POST['occupation'] = 'Student';
+$_POST['country'] = 'Canada';
+$_POST['quote'] = 'What a nice day';
+
+if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']))
 {
        $insert_user = pg_query($db, "INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_DOB, USER_ICON, USER_ISADMIN)
                                      VALUES 

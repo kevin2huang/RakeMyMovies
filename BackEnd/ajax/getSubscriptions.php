@@ -4,7 +4,7 @@
    $dbname      = "dbname=khuan042"; //put your username here
    $credentials = "user=khuan042 password=Huang756!"; //put username + password here
 
-   $db = pg_connect( "$host $port $dbname $credentials"  );
+   $db = pg_connect( "$host $port $dbname $credentials" );
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
