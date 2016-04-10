@@ -6,13 +6,11 @@
    $credentials = "user=khuan042 password=Huang756!"; //put username + password here
 
    $db = pg_connect( "$host $port $dbname $credentials");
-
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
       pg_query('SET search_path = "RakeMyMovie";');
    }
-// isset = boolean to see if ___ exists
 
 if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']) and isset($_POST['dob']))
 {
@@ -48,7 +46,7 @@ if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['userna
    }
    else
    {
-      echo "INSERTED";
+      echo "OK";
       pg_close($db);
   }
 }
