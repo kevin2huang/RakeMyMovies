@@ -14,22 +14,51 @@
 
 header("content-type:application/json");
     //echo json_encode(array( 'movies' => "Yep"));
+    $ran_actor = rand(1, 100);
+    $ran_genre = rand(1, 22);
+    $channels = array();
+    
+    if(isset($_POST['userId']))
+    {
+      //Channel 2: Movies based on a users favorite genre
+      $ch2 = pg_query($db, "SELECT M.*
+                          FROM MOVIES M, RAKEUSER U, USRGEN UG, MOVGEN MG
+                          WHERE U.USER_ID = " . $userid . " AND 
+                          UG.USER_ID = U.USER_ID AND 
+                          UG.GENRE_ID = MG.GENRE_ID AND 
+                          MG.MOVIE_ID = M.MOVIE_ID
+                          LIMIT 6;");
 
-    if(isset($_POST['userId'])){
-        //Do something if the user is set
+      //Channel 3: Movies based on users favorite actors
+      $ch3 = pg_query($db, "SELECT M.*
+                          FROM MOVIES M, RAKEUSER U, USRACT UA, MOVACT MA
+                          WHERE U.USER_ID = " . $userid . " AND 
+                          UA.USER_ID = U.USER_ID AND 
+                          UA.ACTOR_ID = MA.ACTOR_ID AND
+                          MA.MOVIE_ID = M.MOVIE_ID
+                          LIMIT 6;");    
 
     } 
     else 
     {
-        //Do another search if the user is not set. Select different channels, top rated and so on
+      //Channel 2: Movies based on a randomly selected genre
+      $ch2 = pg_query($db, "SELECT M.*
+                            FROM MOVIES M, GENRE G, MOVGEN MG
+                            WHERE G.GENRE_ID = " . $ran_genre . " AND 
+                            MG.GENRE_ID = G.GENRE_ID AND
+                            MG.MOVIE_ID = M.MOVIE_ID
+                            LIMIT 6;");
+
+      //Channel 3: Movies based on randomly selected actor
+      $ch3 = pg_query($db, "SELECT M.*
+                          FROM MOVIES M, ACTOR A, MOVACT MA
+                          WHERE A.ACTOR_ID = " . $ran_actor . " AND 
+                          MA.ACTOR_ID = A.ACTOR_ID AND
+                          MA.MOVIE_ID = M.MOVIE_ID
+                          LIMIT 6;");
     }
 
-    $channels = array();
-        
-    //TODO Replace the following with a database check
-  
-    $ran_actor = rand(1, 100);
-    $ran_genre = rand(1, 22);
+   
 
     //Channel 1: Top rated 6 movies
     $ch1 = pg_query($db, "SELECT M.MOVIE_ID, AVG(R.REVIEW_RATING) AS Review_Average 
@@ -42,24 +71,6 @@ header("content-type:application/json");
                             FROM MOVIES
                             WHERE MOVIE_ID = "+ $movieid + "
                             LIMIT 6;");
-
-    //Channel 2: Movies based on a users favorite genre
-    $ch2 = pg_query($db, "SELECT M.*
-                          FROM MOVIES M, RAKEUSER U, GENRE G, USRGEN UG, MOVGEN MG
-                          WHERE U.USER_ID = " + $userid + " AND 
-                          UG.USER_ID = U.USER_ID AND 
-                          UG.GENRE_ID = G.GENRE_ID AND 
-                          MG.MOVIE_ID = M.MOVIE_ID
-                          LIMIT 6;");
-
-    //Channel 3: Movies based on users favorite actors
-    $ch3 = pg_query($db, "SELECT M.*
-                          FROM MOVIES M, RAKEUSER U, ACTOR A, USRACT UA, MOVACT MA
-                          WHERE U.USER_ID = " + $userid + " AND 
-                          UA.USER_ID = U.USER_ID AND 
-                          UA.ACTOR_ID = A.ACTOR_ID AND 
-                          MA.MOVIE_ID = M.MOVIE_ID
-                          LIMIT 6;");    
 
     //Channel 4: Movies with the most reviews
     $ch4 = pg_query($db, "");
