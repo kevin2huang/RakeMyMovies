@@ -12,8 +12,6 @@
    } else {
       pg_query('SET search_path = "RakeMyMovie";');
    }
-
-header("content-type:application/json");
 // isset = boolean to see if ___ exists
 
 if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']) and isset($_POST['dob']))
