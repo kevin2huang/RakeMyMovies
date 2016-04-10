@@ -24,13 +24,7 @@
     $m_id_ch5 = array();
     $m_id_ch6 = array();
 
-    //channel names
-    $ch1_name = "Top rated movies";
-    $ch2_name = "Genre";
-    $ch3_name = "Movies with Actor";
-    $ch4_name = "Most discussed movies";
-    $ch5_name = "Movies with Actor";
-    $ch6_name = "Genre";
+    $ch3_genreids = array();
 
     function makeMovie($ids, $database)   
     {  
@@ -106,21 +100,22 @@
 
     if(isset($_POST['userId']))
     {
+
       //Channel 2: Movies based on a users favorite genre
-      $ch2_genreids_query = pg_query($db, "SELECT G.GENRE_ID 
+      $ch3_genreids_query = pg_query($db, "SELECT G.GENRE_ID 
                           FROM GENRE G, RAKEUSER U, USRGEN UG
                           WHERE U.USER_ID = " . $userid . " AND 
                           UG.USER_ID = U.USER_ID AND 
                           UG.GENRE_ID = G.GENRE_ID");
 
-      while($row = pg_fetch_row($ch2_genreids_query)){
-        $ch2_genreids = array($row[0]);
+      while($row = pg_fetch_row($ch3_genreids_query)){
+        array_push($ch3_genreids, $row[0]);
       }
 
       //Channel 3: Movies based on users favorite actors
       $ch3 = pg_query($db, "SELECT M.*
                           FROM MOVIES M, RAKEUSER U, USRACT UA, MOVACT MA
-                          WHERE U.USER_ID = " . $userid . " AND 
+                          WHERE U.USER_ID = " . $_POST['userId'] . " AND 
                           UA.USER_ID = U.USER_ID AND 
                           UA.ACTOR_ID = MA.ACTOR_ID AND
                           MA.MOVIE_ID = M.MOVIE_ID
@@ -211,9 +206,12 @@
 
     //create name for each channels
     $ch1_name = "Top Rated Movies";
-    $ch2_name = ;
+    $ch2_name = "Most discussed movies";
+    $ch3_name = genre;
+    $ch4_name = "Movies with " .;
     $ch5_name = "Movies with " . $ch5_actorname;
-
+    $ch6_name = Director;
+    
     if(!$ch1 or !$ch2 or !$ch3 or !$ch4 or !$ch5 or !$ch6){
       echo pg_last_error($db);
       exit;
