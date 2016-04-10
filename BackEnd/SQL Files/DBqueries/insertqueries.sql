@@ -418,6 +418,9 @@
 -- INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Steven Spielberg');
 -- INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Tony Kaye');
 -- INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Akira Kurosawa');
+-- INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Damien Chazelle');
+-- INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Stanley Donen');
+-- INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Gene Kelly');
 -- SELECT * FROM DIRECTOR;
 -- 
 -- *************************************************************************
@@ -527,7 +530,9 @@
 -- ('William Holden'),
 -- ('Gloria Swanson'),
 -- ('Erich von Stroheim')
-
+-- ('Gene Kelly'),
+-- ('Donald O''Connor'),
+-- ('Debbie Reynolds')
 
 -- **********************************************************************************
 -- Movies
@@ -783,6 +788,7 @@
 -- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('The Night of the Hunter','http://ia.media-imdb.com/images/M/MV5BMTExODUyNTY4OTNeQTJeQWpwZ15BbWU3MDI5NjY2MTQ@._V1_UY268_CR6,0,182,268_AL_.jpg','24 November 1955','It''s the Great Depression. In the process of robbing a bank of $10,000, Ben Harper kills two people. Before he is captured, he is able to convince his adolescent son John and his daughter Pearl not to tell anyone, including their mother Willa, where he hid the money, namely in Pearl''s favorite toy, a doll that she carries everywhere with her. Ben, who is captured, tried and convicted, is sentenced to death. But before he is executed, Ben is in the state penitentiary with a cell mate, a man by the name of Harry Powell, a self-professed man of the cloth, who is really a con man and murderer, swindling lonely women, primarily rich widows, of their money before he kills them. Harry does whatever he can, unsuccessfully, to find out the location of the $10,000 from Ben. After Ben''s execution, Harry decides that Willa will be his next mark, figuring that someone in the family knows where the money is hidden. Despite vowing not to remarry, Willa ends up being easy prey for Harry''s outward ... ','Approved','92','English','Argentina');
 -- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('Sunset Blvd.','http://ia.media-imdb.com/images/M/MV5BMTc3NDYzODAwNV5BMl5BanBnXkFtZTgwODg1MTczMTE@._V1_UX182_CR0,0,182,268_AL_.jpg','25 August 1950','The story, set in ''50s Hollywood, focuses on Norma Desmond, a silent-screen goddess whose pathetic belief in her own indestructibility has turned her into a demented recluse. The crumbling Sunset Boulevard mansion where she lives with only her butler, Max who was once her director and husband has become her self-contained world. Norma dreams of a comeback to pictures and she begins a relationship with Joe Gillis, a small-time writer who becomes her lover, that will soon end with murder and total madness. ','Not Rated','110','English','Australia');
 -- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('Whiplash','http://ia.media-imdb.com/images/M/MV5BMTU4OTQ3MDUyMV5BMl5BanBnXkFtZTgwOTA2MjU0MjE@._V1_UX182_CR0,0,182,268_AL_.jpg','15 October 2014','A young and talented drummer attending a prestigious music academy finds himself under the wing of the most respected professor at the school, one who does not hold back on abuse towards his students. The two form an odd relationship as the student wants to achieve greatness, and the professor pushes him. ','R','107','English','Philippines')
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES ('Singin'' in the Rain','http://ia.media-imdb.com/images/M/MV5BMTUxMTIyNTI4Nl5BMl5BanBnXkFtZTcwNTk1ODQyMg@@._V1_UX182_CR0,0,182,268_AL_.jpg','11 April 1952','1927 Hollywood. Monumental Pictures'' biggest stars, glamorous on-screen couple Lina Lamont and Don Lockwood, are also an off-screen couple if the trade papers and gossip columns are to be believed. Both perpetuate the public perception if only to please their adoring fans and bring people into the movie theaters. In reality, Don barely tolerates her, while Lina, despite thinking Don beneath her, simplemindedly believes what she sees on screen in order to bolster her own stardom and sense of self-importance. R.F. Simpson, Monumental''s head, dismisses what he thinks is a flash in the pan: talking pictures. It isn''t until The Jazz Singer (1927) becomes a bona fide hit which results in all the movie theaters installing sound equipment that R.F. knows Monumental, most specifically in the form of Don and Lina, have to jump on the talking picture bandwagon, despite no one at the studio knowing anything about the technology. Musician Cosmo Brown, Don''s best friend, gets hired as Monumental''s ... ','Approved','103','English','USA')
 
 
 -- Movie Directors
@@ -832,6 +838,10 @@
 -- (39, 3),
 -- (40, 10);
 --INSERT INTO MOVDIR VALUES(41,32);
+--INSERT INTO MOVDIR VALUES(42, 34);
+-- (45, 35),
+-- (45, 36)
+
 
 --INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Billy Wilder');
 
@@ -843,7 +853,7 @@
 -- Movie Actor
 
 
--- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID)
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE)
 -- VALUES
 -- (1,92),
 -- (1,75),
@@ -969,6 +979,13 @@
 -- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(41, 101, 'Joe Gillis');
 -- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(41, 102, 'Norma Desmond');
 -- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(41, 103, 'Max Von Mayerling');
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(42, 107, 'Andrew')
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(42, 108, 'Fletcher')
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(42, 109, 'Nicole')
+-- (45,111,'Don Lockwood'),
+-- (45,112,'Cosmo Brown'),
+-- (45,113,'Kathy Selden')
+
 
 -- movie genre
 -- INSERT INTO MOVGEN (MOVIE_ID, GENRE_ID)
@@ -1012,9 +1029,13 @@
 -- (37,16),(37,20),
 -- (38,4),(38,5),(38,7),
 -- (39,5),(39,7),
--- (40,6),(40,7),(40,9);
-INSERT INTO MOVGEN VALUES(41,10);
-INSERT INTO MOVGEN VALUES(41,7);
+-- (40,6),(40,7),(40,9)
+-- (41,10),
+-- (41,7)
+-- (42,14)
+-- (45,5), 
+-- (45,7),
+-- (45,15)
 
 
 -- movie studio
@@ -1103,5 +1124,10 @@ INSERT INTO MOVGEN VALUES(41,7);
 -- (39,249),
 -- (39,302),
 -- (39,52),
--- (40,63);
--- INSERT INTO SPONSOR VALUES(41,231);
+-- (40,63),
+-- (41,231),
+-- (42,39),
+-- (42,41),
+-- (42,257),
+-- (45, 199),
+-- (45, 181);
