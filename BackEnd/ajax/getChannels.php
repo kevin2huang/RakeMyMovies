@@ -8,23 +8,31 @@
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
-      echo "Opened database successfully\n";
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
+
+   $_POST['userId'] = 10;
+
     $ran_actor = rand(1, 100);
     $ran_genre = rand(1, 22);
+    $ran_genre2 = rand(1, 22);
+    $ran_director = rand(1, 31);
     $channels = array();
 
     //movie id arrays for each channel
-    $m_id_ch1 = array();
-    $m_id_ch2 = array();
+    //$m_id_ch1 = array();
+    //$m_id_ch2 = array();
     $m_id_ch3 = array();
     $m_id_ch4 = array();
     $m_id_ch5 = array();
     $m_id_ch6 = array();
 
+    
     $ch3_genreids = array();
+    $ch4_actorids = array();
+    $ch5_genreids = array();
+    $ch6_directorids = array();
 
     function makeMovie($ids, $database)   
     {  
@@ -64,18 +72,18 @@
               } 
 
              while($row4 = pg_fetch_row($ret4)){
-                  $studios = array('studioid' => $row4[0],
-                                      'studioname' => $row4[1]);
+                  array_push($studios, array('studioid' => $row4[0],
+                                              'studioname' => $row4[1]));
              }     
 
              while($row3 = pg_fetch_row($ret3)){
-                  $directors = array('directorid' => $row3[0],
-                                      'directorname' => $row3[1]);
+                  array_push($directors, array('directorid' => $row3[0],
+                                                'directorname' => $row3[1]));
              } 
 
              while($row2 = pg_fetch_row($ret2)){
-                  $actors = array('actorid' => $row2[0],
-                                  'actorname' => $row2[1]);
+                  array_push($actors, array('actorid' => $row2[0],
+                                            'actorname' => $row2[1]));
              }
               
               while($row = pg_fetch_row($ret))
@@ -98,60 +106,129 @@
             return $movies;
     } 
 
+    function getGenreName($genreid, $database)
+    {
+       $genre_name_query = pg_query($database, "SELECT GENRE_NAME 
+                                                FROM GENRE
+                                                WHERE GENRE_ID = " . $genreid . ";");
+
+       while($row = pg_fetch_row($genre_name_query)){
+          $genre_name = $row[0];
+        }
+       return $genre_name;
+    }
+
+    function getDirectorName($directorid, $database)
+    {
+      $dir_name_query = pg_query($database, "SELECT DIR_NAME 
+                                                FROM DIRECTOR
+                                                WHERE DIR_ID = " . $directorid . ";");
+
+       while($row = pg_fetch_row($dir_name_query)){
+          $dir_name = $row[0];
+        }
+       return $dir_name;
+    }
+
+    function getActorName($actorid, $database)
+    {
+      $actor_name_query = pg_query($database, "SELECT ACTOR_NAME 
+                                                FROM ACTOR
+                                                WHERE ACTOR_ID = " . $actorid . ";");
+
+       while($row = pg_fetch_row($actor_name_query)){
+          $actor_name = $row[0];
+        }
+       return $actor_name;
+    }
+
+    function selectRandomIndex($arrayids){
+      return $arrayids[array_rand($arrayids)];
+    }
+
     if(isset($_POST['userId']))
     {
-
-      //Channel 2: Movies based on a users favorite genre
+      echo "in the if\n";
+      //Channel 3: Movies based on a users favorite genre
       $ch3_genreids_query = pg_query($db, "SELECT G.GENRE_ID 
                           FROM GENRE G, RAKEUSER U, USRGEN UG
-                          WHERE U.USER_ID = " . $userid . " AND 
+                          WHERE U.USER_ID = " . $_POST['userId'] . " AND 
                           UG.USER_ID = U.USER_ID AND 
-                          UG.GENRE_ID = G.GENRE_ID");
+                          UG.GENRE_ID = G.GENRE_ID;");
 
       while($row = pg_fetch_row($ch3_genreids_query)){
         array_push($ch3_genreids, $row[0]);
       }
 
-      //Channel 3: Movies based on users favorite actors
-      $ch3 = pg_query($db, "SELECT M.*
-                          FROM MOVIES M, RAKEUSER U, USRACT UA, MOVACT MA
+      $genreid = selectRandomIndex($ch3_genreids);
+      
+      $ch3_movieids_query = pg_query($db, "SELECT M.MOVIE_ID
+                                            FROM MOVIES M, MOVGEN MG, GENRE G
+                                            WHERE G.GENRE_ID =" . $genreid . "AND
+                                            MG.GENRE_ID = G.GENRE_ID AND
+                                            MG.MOVIE_ID = M.MOVIE_ID;");
+
+      while($row = pg_fetch_row($ch3_movieids_query)){
+        array_push($m_id_ch3, $row[0]);
+      }    
+
+      print_r($m_id_ch3);
+      //Channel 4: Movies based on users favorite actors
+      $ch4_actorids_query = pg_query($db, "SELECT A.ACTOR_ID 
+                          FROM ACTOR A, RAKEUSER U, USRACT UA
                           WHERE U.USER_ID = " . $_POST['userId'] . " AND 
                           UA.USER_ID = U.USER_ID AND 
-                          UA.ACTOR_ID = MA.ACTOR_ID AND
-                          MA.MOVIE_ID = M.MOVIE_ID
-                          LIMIT 6;");
+                          UA.ACTOR_ID = A.ACTOR_ID;");
+
+      while($row = pg_fetch_row($ch4_actorids_query)){
+        array_push($ch4_actorids, $row[0]);
+      }
+
+      $actorid = selectRandomIndex($ch4_actorids);
+
+      $ch4_movieids_query = pg_query($db, "SELECT M.MOVIE_ID
+                                            FROM MOVIES M, MOVACT MA, ACTOR A
+                                            WHERE A.ACTOR_ID =" . $actorid . "AND
+                                            MA.ACTOR_ID = A.ACTOR_ID AND
+                                            MA.MOVIE_ID = M.MOVIE_ID;");
+
+      while($row = pg_fetch_row($ch4_movieids_query)){
+        array_push($m_id_ch4, $row[0]);
+      }    
+      print_r($m_id_ch4);
     } 
     else 
     {
+      echo "in the else\n";
       //Channel 2: Movies based on a randomly selected genre
-      $ch2 = pg_query($db, "SELECT M.*, G.GENRE_NAME
+      $ch3_movies = pg_query($db, "SELECT M.*, G.GENRE_ID
                             FROM MOVIES M, GENRE G, MOVGEN MG
                             WHERE G.GENRE_ID = " . $ran_genre . " AND 
                             MG.GENRE_ID = G.GENRE_ID AND
                             MG.MOVIE_ID = M.MOVIE_ID
                             LIMIT 6;");
 
+      while($row = pg_fetch_row($ch3_movies)){
+        array_push($m_id_ch3, $row[0]);
+        $ch3_genreids = array($row[9]);
+      }
+
       //Channel 3: Movies based on randomly selected actor
-      $ch3 = pg_query($db, "SELECT M.*, A.ACTOR_NAME
+      $ch4_movies = pg_query($db, "SELECT M.*, A.ACTOR_ID
                           FROM MOVIES M, ACTOR A, MOVACT MA
                           WHERE A.ACTOR_ID = " . $ran_actor . " AND 
                           MA.ACTOR_ID = A.ACTOR_ID AND
                           MA.MOVIE_ID = M.MOVIE_ID
                           LIMIT 6;");
-    }
 
-    //get array of movie ids
-    while ($row = pg_fetch_row($ch2))
-    {
-       array_push($m_id_ch2, $row[0]);
-    }
-    while ($row = pg_fetch_row($ch3))
-    {
-       array_push($m_id_ch3, $row[0]);
+        while($row = pg_fetch_row($ch4_movies)){
+        array_push($m_id_ch4, $row[0]);
+        $ch4_actorids = array($row[9]);
+      }
     }
 
     //Channel 1: Top rated 6 movies
-    $ch1 = pg_query($db, "SELECT M.MOVIE_ID, AVG(R.REVIEW_RATING) AS Review_Average 
+   /* $ch1 = pg_query($db, "SELECT M.MOVIE_ID, AVG(R.REVIEW_RATING) AS Review_Average 
                           FROM REVIEW R, MOVREV MR, MOVIES M
                           WHERE R.REVIEW_ID = MR.REVIEW_ID AND 
                           MR.MOVIE_ID = MR.REVIEW_ID
@@ -162,73 +239,75 @@
                             WHERE MOVIE_ID = ". $movieid . "
                             LIMIT 6;");
 
-    //Channel 4: Movies with the most reviews
+    //Channel 2: Movies with the most reviews
     $ch4 = pg_query($db, "");
+*/
+    //Channe5 : Movies with a genre x
+    $ch5_movies = pg_query($db, "SELECT M.*, G.GENRE_ID
+                            FROM MOVIES M, GENRE G, MOVGEN MG
+                            WHERE G.GENRE_ID = " . $ran_genre2 . " AND 
+                            MG.GENRE_ID = G.GENRE_ID AND
+                            MG.MOVIE_ID = M.MOVIE_ID
+                            LIMIT 6;");
 
-    //Channel 5: Movies with a actor x
-    $ch5 = pg_query($db, "SELECT M.*, A.ACTOR_NAME
-                          FROM MOVIES M, ACTOR A, MOVACT MA
-                          WHERE A.ACTOR_ID = " . $ran_actor . " AND 
-                          MA.ACTOR_ID = A.ACTOR_ID AND
-                          MA.MOVIE_ID = M.MOVIE_ID
+      while($row = pg_fetch_row($ch5_movies)){
+        array_push($m_id_ch5, $row[0]);
+        $ch5_genreids = array($row[9]);
+      }
+
+    //Channel 6: Movies with a director x
+    $ch6_movies = pg_query($db, "SELECT M.*, D.DIR_ID
+                          FROM MOVIES M, DIRECTOR D, MOVDIR MD
+                          WHERE D.DIR_ID = " . $ran_director . " AND 
+                          MD.DIR_ID = D.DIR_ID AND
+                          MD.MOVIE_ID = M.MOVIE_ID
                           LIMIT 6;");
 
-    while ($row = pg_fetch_row($ch5))
-    {
-       $ch5_actorname = $row[9];
-    }
-
-    //Channel 6: Movies with a genre x
-    $ch6 = pg_query($db, "SELECT M.*
-                          FROM MOVIES M, GENRE G, MOVGEN MG
-                          WHERE G.GENRE_ID = " . $ran_genre . " AND 
-                          MG.GENRE_ID = G.GENRE_ID AND
-                          MG.MOVIE_ID = M.MOVIE_ID
-                          LIMIT 6;");
-
-    while ($row = pg_fetch_row($ch5))
-    {
-       array_push($m_id_ch5, $row[0]);
-    }
-
-    while ($row = pg_fetch_row($ch6))
+    while ($row = pg_fetch_row($ch6_movies))
     {
        array_push($m_id_ch6, $row[0]);
+       $ch6_directorids = array($row[9]);
     }
 
     //create list of movies
-    $ch1_movies = makeMovie($m_id_ch1, $db); 
-    $ch2_movies = makeMovie($m_id_ch2, $db); 
+    //$ch1_movies = makeMovie($m_id_ch1, $db); 
+    //$ch2_movies = makeMovie($m_id_ch2, $db); 
     $ch3_movies = makeMovie($m_id_ch3, $db); 
     $ch4_movies = makeMovie($m_id_ch4, $db); 
     $ch5_movies = makeMovie($m_id_ch5, $db); 
     $ch6_movies = makeMovie($m_id_ch6, $db); 
 
     //create name for each channels
-    $ch1_name = "Top Rated Movies";
-    $ch2_name = "Most discussed movies";
-    $ch3_name = genre;
-    $ch4_name = "Movies with " .;
-    $ch5_name = "Movies with " . $ch5_actorname;
-    $ch6_name = Director;
+    //$ch1_name = "Top Rated Movies";
+    //$ch2_name = "Most discussed movies";
+    $ch3_name = getGenreName($genreid, $db);
+    $ch4_name = "Movies with " . getActorName($actorid, $db);
+    $ch5_name = getGenreName($ch5_genreids[0], $db);
+    $ch6_name = getDirectorName($ch6_directorids[0], $db);
     
-    if(!$ch1 or !$ch2 or !$ch3 or !$ch4 or !$ch5 or !$ch6){
+    if(!$ch3_movies or !$ch4_movies or !$ch5_movies or !$ch6_movies){
       echo pg_last_error($db);
       exit;
-    } 
+    }
+    else{
 
-    $channels = array('channel1' => $ch1_movies, 
-                      'channel2' => $ch2_movies,
-                      'channel3' => $ch3_movies,
-                      'channel4' => $ch4_movies,
-                      'channel5' => $ch5_movies,
-                      'channel6' => $ch6_movies);
+    $ch3 = array('name' => $ch3_name,
+                  'movies' => $ch3_movies);
+    $ch4 = array('name' => $ch4_name,
+                  'movies' => $ch4_movies);
+    $ch5 = array('name' => $ch5_name,
+                  'movies' => $ch5_movies);
+    $ch6 = array('name' => $ch6_name,
+                  'movies' => $ch6_movies);
+
+    $channels = array($ch3, $ch4, $ch5, $ch6);
 
     $response = array('channels' => $channels);
-    $response 
-    echo json_encode($response);
-?>
+    echo "hello";
+    echo json_encode($response); 
+  }
 
+/*
 {
   channels: [
     {
@@ -241,3 +320,5 @@
     },
   ]
 }
+*/
+?>
