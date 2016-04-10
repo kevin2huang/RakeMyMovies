@@ -12,12 +12,90 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-header("content-type:application/json");
-    //echo json_encode(array( 'movies' => "Yep"));
     $ran_actor = rand(1, 100);
     $ran_genre = rand(1, 22);
     $channels = array();
-    
+
+    //movie id arrays for each channel
+    $m_id_ch1 = array();
+    $m_id_ch2 = array();
+    $m_id_ch3 = array();
+    $m_id_ch4 = array();
+    $m_id_ch5 = array();
+    $m_id_ch6 = array();
+
+    function makeMovie($ids, $database)   
+    {  
+            $movies = array();
+            foreach ($ids as $key=>$value) 
+            {
+                $movie = array();
+                $actors = array();
+                $directors = array();
+                $studios = array();
+
+               $ret = pg_query($database, "SELECT * 
+                                      FROM MOVIES
+                                      WHERE MOVIE_ID = " . $ids[$key] . ";");
+               
+               $ret2 = pg_query($database, "SELECT A.* 
+                                      FROM ACTOR A, MOVACT MA, MOVIES M
+                                      WHERE M.MOVIE_ID = " . $ids[$key] . " AND 
+                                            MA.MOVIE_ID = M.MOVIE_ID AND
+                                            MA.ACTOR_ID = A.ACTOR_ID;");
+
+               $ret3 = pg_query($database, "SELECT D.* 
+                                      FROM DIRECTOR D, MOVDIR MD, MOVIES M
+                                      WHERE M.MOVIE_ID = " . $ids[$key] . " AND 
+                                            MD.MOVIE_ID = M.MOVIE_ID AND
+                                            MD.DIR_ID = D.DIR_ID;");
+
+               $ret4 = pg_query($database, "SELECT S.* 
+                                      FROM STUDIO S, SPONSOR SP, MOVIES M
+                                      WHERE M.MOVIE_ID = " . $ids[$key] . " AND 
+                                            SP.MOVIE_ID = M.MOVIE_ID AND
+                                            SP.STUDIO_ID = S.STUDIO_ID;");
+
+              if(!$ret or !$ret2 or !$ret3 or !$ret4){
+                echo pg_last_error($database);
+                exit;
+              } 
+
+             while($row4 = pg_fetch_row($ret4)){
+                  $studios = array('studioid' => $row4[0],
+                                      'studioname' => $row4[1]);
+             }     
+
+             while($row3 = pg_fetch_row($ret3)){
+                  $directors = array('directorid' => $row3[0],
+                                      'directorname' => $row3[1]);
+             } 
+
+             while($row2 = pg_fetch_row($ret2)){
+                  $actors = array('actorid' => $row2[0],
+                                  'actorname' => $row2[1]);
+             }
+              
+              while($row = pg_fetch_row($ret))
+             {
+                      $movie = array('movieid' => $row[0], 
+                                     'movietitle' => $row[1], 
+                                     'moviecover' => $row[2],
+                                     'moviereleasedate' => $row[3], 
+                                     'moviedescription' => $row[4],
+                                     'movieduration' => $row[5],
+                                     'movielanguage' => $row[6],
+                                     'moviecountry' => $row[7],
+                                     'movietgrating' => $row[8],
+                                     'actors' => $actors,
+                                     'directors' => $directors,
+                                     'studios' => $studios);
+              }
+             array_push($movies, $movie);
+            }
+            return $movies;
+    } 
+
     if(isset($_POST['userId']))
     {
       //Channel 2: Movies based on a users favorite genre
@@ -36,8 +114,7 @@ header("content-type:application/json");
                           UA.USER_ID = U.USER_ID AND 
                           UA.ACTOR_ID = MA.ACTOR_ID AND
                           MA.MOVIE_ID = M.MOVIE_ID
-                          LIMIT 6;");    
-
+                          LIMIT 6;");
     } 
     else 
     {
@@ -58,7 +135,14 @@ header("content-type:application/json");
                           LIMIT 6;");
     }
 
-   
+    while ($row = pg_fetch_row($ch2))
+    {
+       array_push($m_id_ch2, $row[0]);
+    }
+    while ($row = pg_fetch_row($ch3))
+    {
+       array_push($m_id_ch3, $row[0]);
+    }
 
     //Channel 1: Top rated 6 movies
     $ch1 = pg_query($db, "SELECT M.MOVIE_ID, AVG(R.REVIEW_RATING) AS Review_Average 
@@ -91,96 +175,28 @@ header("content-type:application/json");
                           MG.MOVIE_ID = M.MOVIE_ID
                           LIMIT 6;");
 
+    while ($row = pg_fetch_row($ch5))
+    {
+       array_push($m_id_ch5, $row[0]);
+    }
 
-    $ch1_movies = array();
-    $ch2_movies = array();
-    $ch3_movies = array();
-    $ch4_movies = array();
-    $ch5_movies = array();
-    $ch6_movies = array();
+    while ($row = pg_fetch_row($ch6))
+    {
+       array_push($m_id_ch6, $row[0]);
+    }
+
+    $ch1_movies = makeMovie($m_id_ch1, $db); 
+    $ch2_movies = makeMovie($m_id_ch2, $db); 
+    $ch3_movies = makeMovie($m_id_ch3, $db); 
+    $ch4_movies = makeMovie($m_id_ch4, $db); 
+    $ch5_movies = makeMovie($m_id_ch5, $db); 
+    $ch6_movies = makeMovie($m_id_ch6, $db); 
 
     if(!$ch1 or !$ch2 or !$ch3 or !$ch4 or !$ch5 or !$ch6){
       echo pg_last_error($db);
       exit;
     } 
 
-     while($row = pg_fetch_row($ch1))
-   {
-            $ch1_movies = array('movieid' => $row[0], 
-                           'movietitle' => $row[1], 
-                           'moviecover' => $row[2],
-                           'moviereleasedate' => $row[3], 
-                           'moviedescription' => $row[4],
-                           'movieduration' => $row[5],
-                           'movielanguage' => $row[6],
-                           'moviecountry' => $row[7],
-                           'movietgrating' => $row[8]);
-    }
-
-    while($row = pg_fetch_row($ch2))
-   {
-            $ch2_movies = array('movieid' => $row[0], 
-                           'movietitle' => $row[1], 
-                           'moviecover' => $row[2],
-                           'moviereleasedate' => $row[3], 
-                           'moviedescription' => $row[4],
-                           'movieduration' => $row[5],
-                           'movielanguage' => $row[6],
-                           'moviecountry' => $row[7],
-                           'movietgrating' => $row[8]);
-    }
-
-    while($row = pg_fetch_row($ch3))
-   {
-            $ch3_movies = array('movieid' => $row[0], 
-                           'movietitle' => $row[1], 
-                           'moviecover' => $row[2],
-                           'moviereleasedate' => $row[3], 
-                           'moviedescription' => $row[4],
-                           'movieduration' => $row[5],
-                           'movielanguage' => $row[6],
-                           'moviecountry' => $row[7],
-                           'movietgrating' => $row[8]);
-    }
-
-    while($row = pg_fetch_row($ch4))
-   {
-            $ch4_movies = array('movieid' => $row[0], 
-                           'movietitle' => $row[1], 
-                           'moviecover' => $row[2],
-                           'moviereleasedate' => $row[3], 
-                           'moviedescription' => $row[4],
-                           'movieduration' => $row[5],
-                           'movielanguage' => $row[6],
-                           'moviecountry' => $row[7],
-                           'movietgrating' => $row[8]);
-    }
-
-    while($row = pg_fetch_row($ch5))
-   {
-            $ch5_movies = array('movieid' => $row[0], 
-                           'movietitle' => $row[1], 
-                           'moviecover' => $row[2],
-                           'moviereleasedate' => $row[3], 
-                           'moviedescription' => $row[4],
-                           'movieduration' => $row[5],
-                           'movielanguage' => $row[6],
-                           'moviecountry' => $row[7],
-                           'movietgrating' => $row[8]);
-    }
-
-    while($row = pg_fetch_row($ch6))
-   {
-            $ch6_movies = array('movieid' => $row[0], 
-                           'movietitle' => $row[1], 
-                           'moviecover' => $row[2],
-                           'moviereleasedate' => $row[3], 
-                           'moviedescription' => $row[4],
-                           'movieduration' => $row[5],
-                           'movielanguage' => $row[6],
-                           'moviecountry' => $row[7],
-                           'movietgrating' => $row[8]);
-    }
     $channels = array('channel1' => $ch1_movies, 
                       'channel2' => $ch2_movies,
                       'channel3' => $ch3_movies,
