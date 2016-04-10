@@ -16,6 +16,7 @@ define([
 		self.director = ko.observableArray(['Martin Luther King']);
 		self.cast = ko.observableArray(['Angelina Jolie', 'Brad Pit', 'Will smith', 'Leonardo DiCaprio']);
 		self.genres = ko.observableArray(['Horror', 'Comedy', 'Drama']);
+		self.movieId = ko.observable(-1);
 		if (!!options) {
 			if (!!options.name) { self.name(options.name)};
 			if (!!options.time) { self.time(options.time)};
@@ -25,6 +26,7 @@ define([
 			if (!!options.studio) { self.studio(options.studio)};
 			if (!!options.director) { self.director(options.director)};
 			if (!!options.cast) { self.cast(options.cast)};
+			if (!!options.movieId) { self.movieId(options.movieId)};
 		} 
 	};
 

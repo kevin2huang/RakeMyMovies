@@ -14,11 +14,13 @@ define([
 			self.name = options.name;
 			self.description = options.description;
 			self.rating = options.rating;
+			self.id = options.id
 		} else {
 			self.name = 'Anonymous';
 			self.description = 'This is a review. The description can be more or less long depending on the review.\
 			Most of the time, a review will be about one or two paragraphs long.';
 			self.rating = 5;
+			self.id = -1;
 		}
 	};
 
@@ -32,7 +34,7 @@ define([
 		self.reviews = ko.observableArray([]);
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getReviews.php",
+			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
 			method: "POST",
 			data: {
 				userId: self.user.userId,

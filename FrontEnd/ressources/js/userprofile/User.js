@@ -33,7 +33,7 @@ define([
 			if (!!options.profileoccupation) { self.occupation(options.profile.occupation)};
 			if (!!options.user.gender) { self.gender(options.user.gender)};
 			if (!!options.profile.quote) { self.quote(options.profile.quote)};
-			if (!!options.user.userId) { self.userId(options.user.userId)};
+			if (!!options.user.userid) { self.userId(options.user.userid)};
 			if (!!options.user.isadmin) { self.isadmin(options.user.isadmin)};
 			if (!!options.user.dob) { self.dob(options.user.dob)};
 		}

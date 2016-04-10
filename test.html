@@ -24,20 +24,11 @@
         function myFunction() {
             console.log('SENDING...');
             jQuery.ajax({
-                url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/signup.php",
-                method: "POST",
+                url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+                method: "GET",
                 data: {
-                    email: 'someEmail@something.com',
-                    username: 'someName',
-                    password: '1234',
-                    country: 'Canada',
-                    province: 'ON',
-                    city: 'Gatineau',
-                    occupation: 'student',
-                    gender: 'F',
-                    quote: 'I am a griffin',
-                    dob: '1 January 2016',
-                    isadmin: false
+                    userId: 10,
+                    movieId: 10
                 }
             }).done(function (rep) {
                 console.log('RESPONSE: ');

@@ -32,6 +32,8 @@ define([
 		self.profiletabsActive = ko.observable(self.profiletabs()[0]);
 
 		self.modalMovie = ko.observable(null);
+		self.modalReview = ko.observable(null);
+		self.sendReview = function() {};
 
 		self.setActiveTab = function (tab) {
 			self.profiletabsActive(tab);

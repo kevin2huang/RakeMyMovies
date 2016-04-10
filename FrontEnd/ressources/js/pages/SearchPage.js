@@ -1,5 +1,5 @@
 define([
-	'text!ressources/js/pages/HomePageTemplate.html',
+	'text!ressources/js/pages/SearchPageTemplate.html',
 	'../movie/Movie',
 	'knockout',
 	'komapping'
@@ -7,22 +7,6 @@ define([
 	'use strict';
 
 	$('#page-top').append(template);
-
-	var Channel = function (options) {
-		self = this;
-
-		self.name = "Some Channel";
-
-		self.movies = ko.observableArray([new Movie()]);
-
-		if (!!options && !!options.movies && $.isArray(options.movies)) {
-			for (var i = 0; i < 6 || i < options.movies.length; i++ ){
-				self.movies.push(new Movie(options[i]));
-			}
-
-			if (!!options.name) {self.name(options.name);}
-		}
-	};
 
 	var Review = function (options) {
 		var self = this;
@@ -45,18 +29,19 @@ define([
 		};
 	};
 
-	var HomePage = function (user) {
+	var SearchPage = function (searchBars) {
 		var self = this;
 
-		self.text = "HomePage";
+		self.text = "SearchPage";
 
-		self.user = user;
+		self.searchBars = searchBars;
 
-		self.channels = ko.observableArray([new Channel()]);
+		self.modalMovie = ko.observable();
+		self.modalReview = ko.observable();
 
-		self.modalMovie = ko.observable(null);
-		self.modalReview = ko.observable(null);
-
+		self.movieDisplay = ko.observableArray([new Movie(), new Movie(), new Movie(),
+			new Movie(), new Movie(), new Movie(),new Movie(), new Movie(), new Movie(),
+			new Movie(), new Movie(), new Movie(),new Movie(), new Movie(), new Movie()]);
 		/*================================
 					Functions
 		================================*/
@@ -64,31 +49,6 @@ define([
 		self.setModalMovie = function (movie) {
 			self.modalMovie(movie);
 		};
-
-		self.getChannels = function (user) {
-			if (!!user) {
-				self.user = user;
-			}
-
-			var userId;
-			if (!!self.user && self.user.userId) {
-				userId = self.user.userId;
-			}
-			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getChannels.php",
-				method: "POST",
-				data: {
-					userId: userId
-				}
-			}).done(function (rep) {
-				if (!!rep && !!rep.channels && $.isArray(rep.channels)) {
-					for(var i = 0; i < rep.channels.length; i++) {
-						self.channels.push(new Channel(rep.channels[i]))
-					}
-				}
-			});
-		};
-
 
 		self.getReview = function () {
 			self.modalReview(new Review())
@@ -123,12 +83,35 @@ define([
 			}).done(function (rep) {
 				self.modalReview(null);
 			});
-
 		};
 
-		self.getChannels();
+		self.refresh = function () {
+			var bars = self.searchBars;
+			if (bars.movie() === bars.movieList()[0] &&
+				bars.director() === bars.directorList()[0] &&
+				bars.genre() === bars.genre()[0]) {
+				return;
+			}
+			var search = {};
+			if (bars.movie() === bars.movieList()[0]) {search['movie'] = bars.movie().name; }
+			if (bars.director() === bars.directorList()[0]) {search['director'] = bars.director().name; }
+			if (bars.genre() === bars.genreList()[0]) {search['genre'] = bars.genre().name; }
+			$.ajax({
+				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+				method: "POST",
+				data: search
+			}).done(function (rep) {
+				self.movieDisplay([]);
+				if ($.isArray(rep)){
+					$.each(rep, function(index, value) {
+						self.movieDisplay.push(new Movie(rep[index]));
+					})
+				}
+			});
+		};
+
 	};
 
-	return HomePage;
+	return SearchPage;
 
 });

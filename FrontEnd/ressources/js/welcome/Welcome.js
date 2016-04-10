@@ -1,11 +1,46 @@
 define([
 	'../pages/UserProfilePage',
 	'../pages/HomePage',
+	'../pages/SearchPage',
 	'../userprofile/User',
 	'knockout',
 	'komapping'
-], function(UserProfilePage, HomePage, User, ko, komapping) {
+], function(UserProfilePage, HomePage, SearchPage, User, ko, komapping) {
 	'use strict';
+
+	var SearchDropDowns = function () {
+		self = this;
+
+		self.movie = ko.observable();
+		self.director = ko.observable();
+		self.genre = ko.observable();
+
+		self.movieList = ko.observableArray([{name:'--movies--'}]);
+		self.directorList = ko.observableArray([{name:'--directors--'}]);
+		self.genreList = ko.observableArray([{name:'--genres--'}]);
+
+		$.ajax({
+			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getAllNamesAndIds.php",
+			method: "POST",
+			data: {}
+		}).done(function (rep) {
+			if (!!rep && !!rep.movies && $.isArray(rep.movies)) {
+				$.each(rep.movies, function (index, value) {
+					self.movieList.push(value);	
+				});
+			}
+			if (!!rep && !!rep.directors && $.isArray(rep.directors)) {
+				$.each(rep.directors, function (index, value) {
+					self.directorList.push(value);	
+				});
+			}
+			if (!!rep && !!rep.genres && $.isArray(rep.genres)) {
+				$.each(rep.genres, function (index, value) {
+					self.genreList.push(value);	
+				});
+			}
+		});
+	};
 
 	var WelcomeSreen = function () {
 		var self = this;
@@ -17,9 +52,11 @@ define([
 		self.username = ko.observable('');
 		self.password = ko.observable('');
 		self.signupUser = ko.observable(new User());
-		self.user = ko.observable(null);
-		
+		//self.user = ko.observable(null);
+		self.user = ko.observable(new User());
+
 		self.page = ko.observable(new HomePage(self.user()));
+		self.searchBar = new SearchDropDowns();
 
 		self.day = ko.observable();
 		self.month = ko.observable();
@@ -137,6 +174,14 @@ define([
 				});
 			} else {
 				console.log('Fill in the required fields')
+			}
+		};
+
+		self.search = function () {
+			if (self.page().text !== 'SearchPage') {
+				self.page(new SearchPage(self.searchBar));
+			} else {
+				self.page().refresh();
 			}
 		};
 

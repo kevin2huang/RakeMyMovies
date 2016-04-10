@@ -1,11 +1,8 @@
-<script type="text/html" id="home-page-template">
+<script type="text/html" id="search-page-template">
 	<div class="container-fluid" data-bind="with : page()">
-		<div class="channelList" data-bind="foreach : channels">
-			<div class="channelName row">
-				<span class="col-sm-2 col-sm-offset-1" data-bind="text : name"></span>
-			</div>
-			<div class="manyMovies row" data-bind="foreach : movies">
-				<button class="col-sm-2" data-toggle="modal" data-target="#movieInfoModal" data-bind="click : $parents[1].setModalMovie.bind($data)">
+		<div class="channelList">
+			<div class="manyMovies row" data-bind="foreach : movieDisplay">
+				<button class="col-sm-2" data-toggle="modal" data-target="#movieInfoModal" data-bind="click : $parents[0].setModalMovie.bind($data)">
 					<div class="movieImage">
 						<div class="movieDefaultImage">
 							<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
@@ -18,9 +15,7 @@
 					</span>
 					<span data-bind="text : time"></span>
 				</button>
-			</div>
-			<div class="separator"></div>
-			
-		</div>
+			</div>	
+		</div>		
 	</div>
 </script>
