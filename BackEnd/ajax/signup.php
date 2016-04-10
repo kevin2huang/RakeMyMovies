@@ -5,7 +5,8 @@
    $dbname      = "dbname=khuan042"; //put your username here
    $credentials = "user=khuan042 password=Huang756!"; //put username + password here
 
-   $db = pg_connect( "$host $port $dbname $credentials"  );
+   $db = pg_connect( "$host $port $dbname $credentials");
+
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
@@ -15,9 +16,7 @@
 header("content-type:application/json");
 // isset = boolean to see if ___ exists
 
-echo $_POST;
-
-if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']))
+if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']) and isset($_POST['dob']))
 {
   
        $insert_user = pg_query($db, "INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_DOB, USER_ICON, USER_ISADMIN)
@@ -26,7 +25,7 @@ if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['userna
                                       " . "'" . $_POST['email'] . "'" . ", 
                                       ". "'" . $_POST['password'] . "'" . ", 
                                       ". "'" . $_POST['gender'] . "'" . ", 
-                                      " . "'" . $_POST['DOB'] . "'" . ",
+                                      " . "'" . $_POST['dob'] . "'" . ",
                                       ". "'" . $_POST['icon'] . "'" . ",
                                       " . $_POST['isadmin'] . ");");
 
