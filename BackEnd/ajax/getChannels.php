@@ -148,7 +148,6 @@
 
     if(isset($_POST['userId']))
     {
-      echo "in the if\n";
       //Channel 3: Movies based on a users favorite genre
       $ch3_genreids_query = pg_query($db, "SELECT G.GENRE_ID 
                           FROM GENRE G, RAKEUSER U, USRGEN UG
@@ -199,7 +198,6 @@
     } 
     else 
     {
-      echo "in the else\n";
       //Channel 2: Movies based on a randomly selected genre
       $ch3_movies = pg_query($db, "SELECT M.*, G.GENRE_ID
                             FROM MOVIES M, GENRE G, MOVGEN MG
@@ -303,7 +301,6 @@
     $channels = array($ch3, $ch4, $ch5, $ch6);
 
     $response = array('channels' => $channels);
-    echo "hello";
     echo json_encode($response); 
   }
 
