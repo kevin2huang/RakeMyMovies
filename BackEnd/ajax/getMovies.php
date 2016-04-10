@@ -195,7 +195,7 @@ if(isset($_POST['userId']))
     }
     $mmovies = makeMovieWithTS($movieids, $db, $timestamps);
   }
-  else
+  else if (isset($_POST['movieId']))
   {
     $list = pg_query($db, "SELECT *
                             FROM MOVIES 
@@ -206,6 +206,10 @@ if(isset($_POST['userId']))
        array_push($movieids, $row[0]);
     }
     $mmovies = makeMovieNoTS($movieids, $db);
+  }
+  else
+  {
+    echo "ERROR";
   }
 
    $allmovies = array('movies' => $mmovies);
