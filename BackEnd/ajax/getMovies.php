@@ -12,41 +12,35 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-
-header("content-type:application/json");
-
-if(isset($_POST['userID'])){
+if(isset($_POST['userId'])){
   
   $movieids = array();
   $timestamps = array();
   $movies = array();
-
-  if(listType == 'wish')
+  if ($_POST['listType'] === 'wish') 
   {
-          $list = pg_query($db, "SELECT M.*, W.WISH_TIMESTAMP
-                                 FROM MOVIES M, RAKEUSER U, WISH W
-                                 WHERE U.USER_ID = " . $_POST['userID'] . " AND 
-                                 W.USER_ID = U.USER_ID AND 
-                                 W.MOVIE_ID = M.MOVIE_ID;");
+    $list = pg_query($db, "SELECT M.*, W.WISH_TIMESTAMP
+                            FROM MOVIES M, RAKEUSER U, WISH W
+                            WHERE U.USER_ID = " . $_POST['userId'] . " AND 
+                            W.USER_ID = U.USER_ID AND 
+                            W.MOVIE_ID = M.MOVIE_ID;");
   }
-  else if(listType == 'watched')
+  else if($_POST['listType'] === 'watched')
   {
-      $list = pg_query($db, "SELECT M.*, WA.WATCHED_TIMESTAMP
-                             FROM MOVIES M, RAKEUSER U, WATCHED WA
-                             WHERE U.USER_ID = " . $_POST['userID'] . " AND 
-                             WA.USER_ID = U.USER_ID AND 
-                             WA.MOVIE_ID = M.MOVIE_ID;");
-  }
-  else{
-    echo "Error";
+    $list = pg_query($db, "SELECT M.*, W.WATCHED_TIMESTAMP
+                            FROM MOVIES M, RAKEUSER U, WATCHED W
+                            WHERE U.USER_ID = " . $_POST['userId'] . " AND 
+                            W.USER_ID = U.USER_ID AND 
+                            W.MOVIE_ID = M.MOVIE_ID;");
   }
 
-  while ($row = pg_fetch_row($list)){
-     $movieids = array($row[0]);
-     $timestamps = array($row[9]);
+  while ($row = pg_fetch_row($list))
+  {
+     array_push($movieids, $row[0]);
+     array_push($timestamps, $row[9]);
   }
-  
-    foreach ($movieids as $movieID) {
+
+    foreach ($movieids as $key=>$value) {
           $movie = array();
           $actors = array();
           $directors = array();
@@ -54,23 +48,23 @@ if(isset($_POST['userID'])){
 
          $ret = pg_query($db, "SELECT * 
                                 FROM MOVIES
-                                WHERE MOVIE_ID = " + $movieID + ";");
+                                WHERE MOVIE_ID = " . $movieids[$key] . ";");
          
          $ret2 = pg_query($db, "SELECT A.* 
                                 FROM ACTOR A, MOVACT MA, MOVIES M
-                                WHERE M.MOVIE_ID = " + $movieID + " AND 
+                                WHERE M.MOVIE_ID = " . $movieids[$key] . " AND 
                                       MA.MOVIE_ID = M.MOVIE_ID AND
                                       MA.ACTOR_ID = A.ACTOR_ID;");
 
          $ret3 = pg_query($db, "SELECT D.* 
                                 FROM DIRECTOR D, MOVDIR MD, MOVIES M
-                                WHERE M.MOVIE_ID = " + $movieID + " AND 
+                                WHERE M.MOVIE_ID = " . $movieids[$key] . " AND 
                                       MD.MOVIE_ID = M.MOVIE_ID AND
                                       MD.DIR_ID = D.DIR_ID;");
 
          $ret4 = pg_query($db, "SELECT S.* 
                                 FROM STUDIO S, SPONSOR SP, MOVIES M
-                                WHERE M.MOVIE_ID = " + $movieID + " AND 
+                                WHERE M.MOVIE_ID = " . $movieids[$key] . " AND 
                                       SP.MOVIE_ID = M.MOVIE_ID AND
                                       SP.STUDIO_ID = S.STUDIO_ID;");
 
@@ -107,18 +101,13 @@ if(isset($_POST['userID'])){
                            'movietgrating' => $row[8],
                            'actors' => $actors,
                            'directors' => $directors,
-                           'studios' => $studios);
+                           'studios' => $studios,
+                           'timestamp' => $timestamps[$key]);
     }
     
       array_push($movies, $movie);
     }
-
-    /*
-    $response[] = array(
-            'movie' => $elem,
-            'timestamp' => 'Mon Mar 28 2016'
-        );
-    */
-   // echo json_encode('movies' => $movies);
+   $allmovies = array('movies' => $movies);
+   echo json_encode($allmovies);
 }
 ?>
