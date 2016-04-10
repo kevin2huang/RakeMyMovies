@@ -54,19 +54,19 @@ if(isset($_POST['userId']))
         exit;
       } 
 
-     while($row4 = pg_fetch_row($ret4)){
-          $studios = array('studioid' => $row4[0],
-                              'studioname' => $row4[1]);
+    while($row4 = pg_fetch_row($ret4)){
+          array_push($studios, array('studioid' => $row4[0],
+                              'studioname' => $row4[1]));
      }     
 
      while($row3 = pg_fetch_row($ret3)){
-          $directors = array('directorid' => $row3[0],
-                              'directorname' => $row3[1]);
+          array_push($directors, array('directorid' => $row3[0],
+                              'directorname' => $row3[1]));
      } 
 
      while($row2 = pg_fetch_row($ret2)){
-          $actors = array('actorid' => $row2[0],
-                          'actorname' => $row2[1]);
+          array_push($actors, array('actorid' => $row2[0],
+                          'actorname' => $row2[1]));
      }
       
       while($row = pg_fetch_row($ret))
