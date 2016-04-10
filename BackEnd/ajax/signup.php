@@ -18,7 +18,6 @@ header("content-type:application/json");
 
 if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']) and isset($_POST['dob']))
 {
-  
        $insert_user = pg_query($db, "INSERT INTO RAKEUSER (USER_NAME, USER_EMAIL, USER_PASSWORD, USER_GENDER, USER_DOB, USER_ICON, USER_ISADMIN)
                                      VALUES 
                                      (" . "'" . $_POST['username'] . "'" . ", 
@@ -32,7 +31,7 @@ if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['userna
        $userid_q = pg_query($db, "SELECT USER_ID 
                                   FROM RAKEUSER
                                   WHERE USER_EMAIL = " . "'" . $_POST['email'] . "'" . ";");
- 
+
        $userid = pg_fetch_row($userid_q);
 
        $insert_profile = pg_query($db, "INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
@@ -43,7 +42,6 @@ if(isset($_POST['email']) and isset($_POST['password']) and isset($_POST['userna
                                           ". "'" . $_POST['occupation']. "'" . ", 
                                           " . "'" . $_POST['country'] . "'" . ", 
                                           ". "'" . $_POST['quote'] . "'" . ");");
-
 
    if(!$insert_user or !$userid_q or !$insert_profile)
    {

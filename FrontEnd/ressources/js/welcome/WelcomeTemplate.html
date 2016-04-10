@@ -169,6 +169,14 @@
                                 <input class="form-control" type="text" placeholder="Enter your password" data-bind="value : password"></input>
                             </span>
                         </div>
+                        <div class="row">
+                            <span class="col-sm-2">**Date of birth : </span>
+                            <span class="col-sm-8">
+                                <select data-bind="options : $parent.yearList, value : $parent.year"></select>
+                                <select data-bind="options : $parent.monthList, value : $parent.month"></select>
+                                <select data-bind="options : $parent.dayList, value : $parent.day"></select>
+                            </span>
+                        </div>
 
                         <div class="row">
                             <span class="col-sm-2">Country : </span>

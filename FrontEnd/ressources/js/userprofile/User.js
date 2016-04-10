@@ -21,6 +21,7 @@ define([
 		self.quote = ko.observable('');
 		self.userId = ko.observable(-1);
 		self.isadmin = ko.observable(false);
+		self.dob = ko.observable();
 
 		if (!!options && !!options.user && !!options.profile) {
 			if (!!options.user.username) { self.username(options.user.username)};
@@ -34,6 +35,7 @@ define([
 			if (!!options.profile.quote) { self.quote(options.profile.quote)};
 			if (!!options.user.userId) { self.userId(options.user.userId)};
 			if (!!options.user.isadmin) { self.isadmin(options.user.isadmin)};
+			if (!!options.user.dob) { self.dob(options.user.dob)};
 		}
 		self.recent = ko.observableArray([]);
 		self.watchLater = ko.observableArray([]);

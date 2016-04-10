@@ -21,6 +21,19 @@ define([
 		
 		self.page = ko.observable(new HomePage(self.user()));
 
+		self.day = ko.observable();
+		self.month = ko.observable();
+		self.year = ko.observable();
+
+		self.dayList = ko.observableArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+			11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]);
+		self.monthList = ko.observableArray(['January', 'February', 'Mars', 'April', 'May', 
+			'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+		self.yearList = ko.observableArray([]);
+		for (var i = 0; i < 100; i++) {
+			self.yearList.push(2016 - i);
+		}
+
 		/*================================
 					Functions
 		================================*/
@@ -95,8 +108,9 @@ define([
 
 		self.signup = function () {
 			var user = ko.toJS(self.signupUser());
-			if  (!(self.isEmpty(user.username) || self.isEmpty(user.email) || self.isEmpty(user.password))) {
-				console.log('Yy');
+			if  (!(self.isEmpty(user.username) || self.isEmpty(user.email) || 
+				self.isEmpty(user.password))) {
+				user['DOB'] = self.day + ' ' + self.month + ' ' + self.year;
 
 				$.ajax({
 					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/signup.php",
