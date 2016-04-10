@@ -24,10 +24,9 @@
         function myFunction() {
             console.log('SENDING...');
             jQuery.ajax({
-                url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+                url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/test.php",
                 method: "GET",
                 data: {
-                    userId: 10,
                     movieId: 10
                 }
             }).done(function (rep) {

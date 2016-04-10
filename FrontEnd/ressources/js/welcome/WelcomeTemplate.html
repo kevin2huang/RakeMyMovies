@@ -98,19 +98,21 @@
                                 <br/>
                                 <span data-bind="text : year"></span>
                                 <span> </span>
-                                 <span data-bind="text : studio"></span>
+                                <!-- ko foreach : studio -->
+                                    <span data-bind="text : studioname"></span>
+                                <!-- /ko -->
                                 <br/><br/>
                                 <span><strong>Director</strong></span>
                                 <br/>
                                 <div data-bind="foreach : director">
-                                    <span data-bind="text : $data"></span>
+                                    <span data-bind="text : directorname"></span>
                                     <br/>    
                                 </div>
                                 <br/>
                                 <span><strong>Cast</strong></span>
                                 <br/>
                                 <div data-bind="foreach : cast">
-                                    <span data-bind="text : $data"></span>
+                                    <span data-bind="text : actorname"></span>
                                     <br/>    
                                 </div>
                                 <br/>

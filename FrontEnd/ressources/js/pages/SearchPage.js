@@ -39,9 +39,7 @@ define([
 		self.modalMovie = ko.observable();
 		self.modalReview = ko.observable();
 
-		self.movieDisplay = ko.observableArray([new Movie(), new Movie(), new Movie(),
-			new Movie(), new Movie(), new Movie(),new Movie(), new Movie(), new Movie(),
-			new Movie(), new Movie(), new Movie(),new Movie(), new Movie(), new Movie()]);
+		self.movieDisplay = ko.observableArray([]);
 		/*================================
 					Functions
 		================================*/
@@ -87,21 +85,23 @@ define([
 
 		self.refresh = function () {
 			var bars = self.searchBars;
-			if (bars.movie() === bars.movieList()[0] &&
+			/*if (bars.movie() === bars.movieList()[0] &&
 				bars.director() === bars.directorList()[0] &&
-				bars.genre() === bars.genre()[0]) {
+				bars.genre() === bars.genreList()[0]) {
 				return;
-			}
+			}*/
 			var search = {};
-			if (bars.movie() === bars.movieList()[0]) {search['movie'] = bars.movie().name; }
-			if (bars.director() === bars.directorList()[0]) {search['director'] = bars.director().name; }
-			if (bars.genre() === bars.genreList()[0]) {search['genre'] = bars.genre().name; }
+			if (bars.movie() !== bars.movieList()[0]) {search['movie'] = bars.movie().name; }
+			if (bars.director() !== bars.directorList()[0]) {search['director'] = bars.director().name; }
+			if (bars.genre() !== bars.genreList()[0]) {search['genre'] = bars.genre().name; }
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/test.php",//getMovies
 				method: "POST",
 				data: search
 			}).done(function (rep) {
 				self.movieDisplay([]);
+				rep = JSON.parse(rep);
+				if (!$.isArray(rep) && $.isArray(rep.movies)) {rep = rep.movies;}
 				if ($.isArray(rep)){
 					$.each(rep, function(index, value) {
 						self.movieDisplay.push(new Movie(rep[index]));
@@ -109,6 +109,7 @@ define([
 				}
 			});
 		};
+		self.refresh();
 
 	};
 
