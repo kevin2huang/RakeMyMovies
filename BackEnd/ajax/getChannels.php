@@ -171,7 +171,6 @@
         array_push($m_id_ch3, $row[0]);
       }    
 
-      print_r($m_id_ch3);
       //Channel 4: Movies based on users favorite actors
       $ch4_actorids_query = pg_query($db, "SELECT A.ACTOR_ID 
                           FROM ACTOR A, RAKEUSER U, USRACT UA
@@ -194,7 +193,6 @@
       while($row = pg_fetch_row($ch4_movieids_query)){
         array_push($m_id_ch4, $row[0]);
       }    
-      print_r($m_id_ch4);
     } 
     else 
     {
