@@ -524,6 +524,10 @@
 -- ('Viggo Mortensen'),
 -- ('Virginia Cherrill'),
 -- ('Wendell Corey');
+-- ('William Holden'),
+-- ('Gloria Swanson'),
+-- ('Erich von Stroheim')
+
 
 -- **********************************************************************************
 -- Movies
@@ -777,7 +781,9 @@
 -- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('Akira','http://ia.media-imdb.com/images/M/MV5BNTk0MjE2NDc1Nl5BMl5BanBnXkFtZTgwODM3NTU3MzE@._V1_UY268_CR3,0,182,268_AL_.jpg','16 July 1988','Kaneda is a bike gang leader whose close friend Tetsuo gets involved in a government secret project known as Akira. On his way to save Tetsuo, Kaneda runs into a group of anti-government activists, greedy politicians, irresponsible scientists and a powerful military leader. The confrontation sparks off Tetsuo''s supernatural power leading to bloody death, a coup attempt and the final battle in Tokyo Olympiad where Akira''s secrets were buried 30 years ago. ','R','124','English','Japan');
 -- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('Before Sunset','http://ia.media-imdb.com/images/M/MV5BMTQ1MjAwNTM5Ml5BMl5BanBnXkFtZTYwNDM0MTc3._V1_UX182_CR0,0,182,268_AL_.jpg','30 July 2004','Early thirty-something American Jesse Wallace is in a Paris bookstore, the last stop on a tour to promote his best selling book, This Time. Although he is vague to reporters about the source material for the book, it is about his chance encounter nine years earlier on June 15-16, 1994 with a Parisienne named Celine, and the memorable and romantic day and evening they spent together in Vienna. At the end of their encounter at the Vienna train station, which is also how the book ends, they, not providing contact information to the other, vowed to meet each other again in exactly six months at that very spot. As the media scrum at the bookstore nears its conclusion, Jesse spots Celine in the crowd, she who only found out about the book when she earlier saw his photograph promoting this public appearance. Much like their previous encounter, Jesse and Celine, who is now an environmental activist, decide to spend time together until he is supposed to catch his flight back to New York, this ... ','R','80','English','USA');
 -- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('The Night of the Hunter','http://ia.media-imdb.com/images/M/MV5BMTExODUyNTY4OTNeQTJeQWpwZ15BbWU3MDI5NjY2MTQ@._V1_UY268_CR6,0,182,268_AL_.jpg','24 November 1955','It''s the Great Depression. In the process of robbing a bank of $10,000, Ben Harper kills two people. Before he is captured, he is able to convince his adolescent son John and his daughter Pearl not to tell anyone, including their mother Willa, where he hid the money, namely in Pearl''s favorite toy, a doll that she carries everywhere with her. Ben, who is captured, tried and convicted, is sentenced to death. But before he is executed, Ben is in the state penitentiary with a cell mate, a man by the name of Harry Powell, a self-professed man of the cloth, who is really a con man and murderer, swindling lonely women, primarily rich widows, of their money before he kills them. Harry does whatever he can, unsuccessfully, to find out the location of the $10,000 from Ben. After Ben''s execution, Harry decides that Willa will be his next mark, figuring that someone in the family knows where the money is hidden. Despite vowing not to remarry, Willa ends up being easy prey for Harry''s outward ... ','Approved','92','English','Argentina');
--- 
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('Sunset Blvd.','http://ia.media-imdb.com/images/M/MV5BMTc3NDYzODAwNV5BMl5BanBnXkFtZTgwODg1MTczMTE@._V1_UX182_CR0,0,182,268_AL_.jpg','25 August 1950','The story, set in ''50s Hollywood, focuses on Norma Desmond, a silent-screen goddess whose pathetic belief in her own indestructibility has turned her into a demented recluse. The crumbling Sunset Boulevard mansion where she lives with only her butler, Max who was once her director and husband has become her self-contained world. Norma dreams of a comeback to pictures and she begins a relationship with Joe Gillis, a small-time writer who becomes her lover, that will soon end with murder and total madness. ','Not Rated','110','English','Australia');
+-- INSERT INTO MOVIES (MOVIE_TITLE, MOVIE_COVER, MOVIE_RELEASE_DATE, MOVIE_DESCRIPTION, MOVIE_TG_RATING, MOVIE_DURATION, MOVIE_LANGUAGE, MOVIE_COUNTRY) VALUES('Whiplash','http://ia.media-imdb.com/images/M/MV5BMTU4OTQ3MDUyMV5BMl5BanBnXkFtZTgwOTA2MjU0MjE@._V1_UX182_CR0,0,182,268_AL_.jpg','15 October 2014','A young and talented drummer attending a prestigious music academy finds himself under the wing of the most respected professor at the school, one who does not hold back on abuse towards his students. The two form an odd relationship as the student wants to achieve greatness, and the professor pushes him. ','R','107','English','Philippines')
+
 
 -- Movie Directors
 -- INSERT INTO MOVDIR 
@@ -825,6 +831,10 @@
 -- (38, 22),
 -- (39, 3),
 -- (40, 10);
+--INSERT INTO MOVDIR VALUES(41,32);
+
+--INSERT INTO DIRECTOR (DIR_NAME) VALUES ('Billy Wilder');
+
 -- 
 -- SELECT * FROM MOVDIR;
 
@@ -956,6 +966,10 @@
 -- (40,73),
 -- (40,21);
 
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(41, 101, 'Joe Gillis');
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(41, 102, 'Norma Desmond');
+-- INSERT INTO MOVACT (MOVIE_ID, ACTOR_ID, ROLE) VALUES(41, 103, 'Max Von Mayerling');
+
 -- movie genre
 -- INSERT INTO MOVGEN (MOVIE_ID, GENRE_ID)
 -- VALUES
@@ -999,6 +1013,9 @@
 -- (38,4),(38,5),(38,7),
 -- (39,5),(39,7),
 -- (40,6),(40,7),(40,9);
+INSERT INTO MOVGEN VALUES(41,10);
+INSERT INTO MOVGEN VALUES(41,7);
+
 
 -- movie studio
 -- INSERT INTO SPONSOR (MOVIE_ID, STUDIO_ID)
@@ -1087,3 +1104,4 @@
 -- (39,302),
 -- (39,52),
 -- (40,63);
+-- INSERT INTO SPONSOR VALUES(41,231);
