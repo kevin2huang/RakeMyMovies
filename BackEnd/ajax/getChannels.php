@@ -181,33 +181,6 @@ header("content-type:application/json");
                            'moviecountry' => $row[7],
                            'movietgrating' => $row[8]);
     }
-/*
-    for ($i = 0; $i < 5; $i++) {
-        $channel = array();
-
-        for ($j = 0; $j < 6; $j++) {
-
-            $elem = array(
-                'name' => 'This is a movie',
-                'time' => '1h30',
-                'rating' => 5,
-                'description' => 'This is a random description of a movie. Most movies contain a certain number of actors, named the cast, along with usually one or more directors and one or more studio. A good movie gets a good rating, whereas a bad movie gets a bad rating.',
-                'year' => '1996',
-                'studio' => 'Walt Disney',
-                'director' => array('Martin Luther King'),
-                'cast' => array('Angelina Jolie', 'Brad Pit', 'Will smith', 'Leonardo DiCaprio')
-           );
-
-            $channel[] = $elem;
-        }
-        array(
-            array(
-              'name' => $name
-              'channel' => channel
-            )
-        )
-    }
-    */
     $channels = array('channel1' => $ch1_movies, 
                       'channel2' => $ch2_movies,
                       'channel3' => $ch3_movies,
@@ -216,6 +189,19 @@ header("content-type:application/json");
                       'channel6' => $ch6_movies);
 
     $response = array('channels' => $channels);
-
+    $response 
     echo json_encode($response);
 ?>
+
+{
+  channels: [
+    {
+      name: "Top rated movies"
+      movies: [...]
+    },
+    {
+      name: "Top rated movies"
+      movies: [...]
+    },
+  ]
+}

@@ -17,8 +17,10 @@ define([
 
 		if (!!options && !!options.movies && $.isArray(options.movies)) {
 			for (var i = 0; i < 6 || i < options.movies.length; i++ ){
-				self.movies.push(new Movie(options.movies[i]));
+				self.movies.push(new Movie(options.[i]));
 			}
+
+			if (!!options.name) {self.name(options.name);}
 		}
 	};
 
