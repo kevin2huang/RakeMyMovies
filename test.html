@@ -25,9 +25,9 @@
             console.log('SENDING...');
             jQuery.ajax({
                 url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
-                method: "GET",
+                method: "POST",
                 data: {
-                    directorId: 7
+                    directorId: 8
                 }
             }).done(function (rep) {
                 console.log('RESPONSE: ');
