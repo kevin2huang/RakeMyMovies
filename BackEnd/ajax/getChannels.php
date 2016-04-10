@@ -15,8 +15,14 @@
    $_POST['userId'] = 10;
 
     $ran_actor = rand(1, 100);
-    $ran_genre = rand(1, 22);
-    $ran_genre2 = rand(1, 22);
+    do {   
+        $ran_genre = rand(1, 22);
+    }while(in_array($ran_genre, array(11)));
+
+    do {   
+        $ran_genre2 = rand(1, 22);
+    }while(in_array($ran_genre2, array(11)));
+
     $ran_director = rand(1, 31);
     $channels = array();
 
