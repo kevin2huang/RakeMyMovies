@@ -107,16 +107,30 @@ define([
 		}, self)};
 
 		self.signup = function () {
-			var user = ko.toJS(self.signupUser());
+			var user = {
+				username : self.signupUser().username(),
+				password : self.signupUser().password(),
+				email : self.signupUser().email(),
+				country : self.signupUser().country(),
+				province : self.signupUser().province(),
+				city : self.signupUser().city(),
+				occupation : self.signupUser().occupation(),
+				gender : self.signupUser().gender(),
+				quote : self.signupUser().quote(),
+				userId : self.signupUser().userId(),
+				isadmin : self.signupUser().isadmin(),
+				dob : self.day() + ' ' + self.month() + ' ' + self.year()
+
+			};
 			if  (!(self.isEmpty(user.username) || self.isEmpty(user.email) || 
 				self.isEmpty(user.password))) {
-				user['DOB'] = self.day + ' ' + self.month + ' ' + self.year;
 
 				$.ajax({
 					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/signup.php",
 					method: "POST",
 					data: user
 				}).done(function (rep) {
+					console.log(rep);
 					if (rep.status === 'OK') {
 						self.user(user);
 					}

@@ -17,7 +17,7 @@ define([
 		self.province = ko.observable('no province');
 		self.city = ko.observable('no city');
 		self.occupation = ko.observable('no occupation');
-		self.gender = ko.observable('no gender');
+		self.gender = ko.observable('M');
 		self.quote = ko.observable('');
 		self.userId = ko.observable(-1);
 		self.isadmin = ko.observable(false);
