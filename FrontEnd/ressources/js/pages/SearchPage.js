@@ -85,17 +85,18 @@ define([
 
 		self.refresh = function () {
 			var bars = self.searchBars;
-			/*if (bars.movie() === bars.movieList()[0] &&
+			if (bars.movie() === bars.movieList()[0] &&
 				bars.director() === bars.directorList()[0] &&
 				bars.genre() === bars.genreList()[0]) {
 				return;
-			}*/
+			}
 			var search = {};
-			if (bars.movie() !== bars.movieList()[0]) {search['movie'] = bars.movie().name; }
-			if (bars.director() !== bars.directorList()[0]) {search['director'] = bars.director().name; }
-			if (bars.genre() !== bars.genreList()[0]) {search['genre'] = bars.genre().name; }
+			if (bars.movie() !== bars.movieList()[0]) {search['movieId'] = bars.movie().id; }
+			else if (bars.genre() !== bars.genreList()[0]) {search['genreId'] = bars.genre().id; }
+			else if (bars.director() !== bars.directorList()[0]) {search['directorId'] = bars.director().id; }
+
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/test.php",//getMovies
+				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
 				method: "POST",
 				data: search
 			}).done(function (rep) {

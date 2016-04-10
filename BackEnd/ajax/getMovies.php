@@ -8,7 +8,6 @@
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
-      echo "Opened database successfully\n";
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
@@ -200,6 +199,34 @@ if(isset($_POST['userId']))
     $list = pg_query($db, "SELECT *
                             FROM MOVIES 
                             WHERE MOVIE_ID = " . $_POST['movieId'] . ";");
+  
+    while ($row = pg_fetch_row($list))
+    {
+       array_push($movieids, $row[0]);
+    }
+    $mmovies = makeMovieNoTS($movieids, $db);
+  }
+  else if (isset($_POST['genreId']))
+  {
+    $list = pg_query($db, "SELECT M.*
+                            FROM MOVIES M, GENRE G, MOVGEN MG
+                            WHERE G.GENRE_ID = " . $_POST['genreId'] . "AND
+                            G.GENRE_ID = MG.GENRE_ID AND 
+                            MG.MOVIE_ID = M.MOVIE_ID;");
+  
+    while ($row = pg_fetch_row($list))
+    {
+       array_push($movieids, $row[0]);
+    }
+    $mmovies = makeMovieNoTS($movieids, $db);
+  }
+  else if (isset($_POST['directorId']))
+  {
+    $list = pg_query($db, "SELECT M.*
+                            FROM MOVIES M, DIRECTOR D, MOVDIR MD
+                            WHERE D.DIR_ID = " . $_POST['directorId'] . "AND
+                            D.GIR_ID = MD.DIR_ID AND
+                            MD.MOVIE_ID = M.MOVIE_ID;");
   
     while ($row = pg_fetch_row($list))
     {

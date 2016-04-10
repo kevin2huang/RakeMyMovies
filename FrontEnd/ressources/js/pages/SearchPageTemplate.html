@@ -4,9 +4,14 @@
 			<div class="manyMovies row" data-bind="foreach : movieDisplay">
 				<button class="col-sm-2" data-toggle="modal" data-target="#movieInfoModal" data-bind="click : $parents[0].setModalMovie.bind($data)">
 					<div class="movieImage">
-						<div class="movieDefaultImage">
-							<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-						</div>
+						<!-- ko if : image -->
+							<img data-bind="attr: {src : image}">
+						<!-- /ko -->
+						<!-- ko ifnot : image -->
+							<div class="movieDefaultImage">
+								<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+							</div>
+						<!-- /ko -->
 					</div>
 					<div class="movieName" data-bind="text : name"></div>
 					
