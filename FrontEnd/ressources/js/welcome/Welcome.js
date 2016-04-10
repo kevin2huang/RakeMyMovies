@@ -24,6 +24,9 @@ define([
 			method: "POST",
 			data: {}
 		}).done(function (rep) {
+			if (typeof rep === 'string') {
+				rep = JSON.parse(rep);
+			}
 			if (!!rep && !!rep.movies && $.isArray(rep.movies)) {
 				$.each(rep.movies, function (index, value) {
 					self.movieList.push(value);	

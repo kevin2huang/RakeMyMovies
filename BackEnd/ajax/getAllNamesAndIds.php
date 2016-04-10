@@ -10,11 +10,6 @@
    } else {
       pg_query('SET search_path = "RakeMyMovie";');
    }
-
-
-header("content-type:application/json");
-
-if(isset($_POST['userID'])){
   
   $response = array();
   $movies = array();
@@ -26,37 +21,37 @@ if(isset($_POST['userID'])){
 
 
   while ($row = pg_fetch_row($list)){
-    $movies[] = array(
+    array_push($movies, array(
       'name'=> $row[0],
-      'id' => $row[1]);
+      'id' => $row[1]));
   }
-  $response['movies'] => $movies;
-
 
   $list = pg_query($db, "SELECT D.DIR_NAME, D.DIR_ID
                                  FROM DIRECTOR D;");
 
 
   while ($row = pg_fetch_row($list)){
-    $directors[] = array(
+    array_push($directors, array(
       'name'=> $row[0],
-      'id' => $row[1]);
+      'id' => $row[1]));
   }
-  $response['directors'] => $directors;
-
 
   $list = pg_query($db, "SELECT G.GENRE_NAME, G.GENRE_ID
                                  FROM GENRE G;");
 
 
   while ($row = pg_fetch_row($list)){
-    $genres[] = array(
+    array_push($genres, array(
       'name'=> $row[0],
-      'id' => $row[1]);
+      'id' => $row[1]));
   }
-  $response['genres'] => $genres;
+
+  $response = array(
+    'movies' => $movies,
+    'directors' => $directors,
+    'genres' => $genres
+    );
   
  
     echo json_encode($response);
-}
 ?>
