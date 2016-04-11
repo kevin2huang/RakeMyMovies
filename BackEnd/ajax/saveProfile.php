@@ -11,7 +11,6 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-header("content-type:application/json");
 $response;
 
 if (!is_null($_POST['email']) and !is_null($_POST['password']) and !is_null($_POST['username']))

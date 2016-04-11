@@ -23,8 +23,8 @@ if(isset($_POST['userId']) && isset($_POST['movieId'])){
     //Insert the new wish relation between the user and the movie
 
     $delete = pg_query($db, "DELETE FROM WISH
-                             WHERE MOVIE_ID = " + $movieid + " AND 
-                             USER_ID = " + $userid + ";");
+                             WHERE MOVIE_ID = " . $movieid . " AND 
+                             USER_ID = " . $userid . ";");
 
 
     $response->status = 'DELETED';
