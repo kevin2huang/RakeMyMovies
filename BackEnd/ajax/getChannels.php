@@ -25,7 +25,7 @@
 
     //movie id arrays for each channel
     $m_id_ch1 = array();
-    //$m_id_ch2 = array();
+    $m_id_ch2 = array();
     $m_id_ch3 = array();
     $m_id_ch4 = array();
     $m_id_ch5 = array();
@@ -218,7 +218,7 @@
     } 
     else 
     {
-      //Channel 2: Movies based on a randomly selected genre
+      //Channel 3: Movies based on a randomly selected genre
       $ch3_movies_query = pg_query($db, "SELECT M.*, G.GENRE_ID
                             FROM MOVIES M, GENRE G, MOVGEN MG
                             WHERE G.GENRE_ID = " . $ran_genre . " AND 
@@ -231,7 +231,7 @@
         $ch3_genreids = array($row[9]);
       }
 
-      //Channel 3: Movies based on randomly selected actor
+      //Channel 4: Movies based on randomly selected actor
       $ch4_movies_query = pg_query($db, "SELECT M.*, A.ACTOR_ID
                           FROM MOVIES M, ACTOR A, MOVACT MA
                           WHERE A.ACTOR_ID = " . $ran_actor . " AND 
@@ -264,7 +264,16 @@
     }
 
     //Channel 2: Movies with the most reviews
-    //$ch2 = pg_query($db, "");
+    $ch2_movies_query = pg_query($db, "SELECT M.MOVIE_ID, COUNT(R.REVIEW_ID)
+                                        FROM MOVIES M, MOVREV MR, REVIEW R
+                                        WHERE R.REVIEW_ID = MR.REVIEW_ID AND 
+                                          MR.MOVIE_ID = M.MOVIE_ID
+                                        GROUP BY M.MOVIE_ID
+                                        ORDER BY COUNT(R.REVIEW_ID) DESC;");
+
+    while($row = pg_fetch_row($ch2_movies_query)){
+      array_push($m_id_ch2, $row[0]);
+    }
 
     //Channe5 : Movies with a genre x
     $ch5_movies_query = pg_query($db, "SELECT M.*, G.GENRE_ID
@@ -295,7 +304,7 @@
 
     //create list of movies
     $ch1_movies = makeMovie($m_id_ch1, $db); 
-    //$ch2_movies = makeMovie($m_id_ch2, $db); 
+    $ch2_movies = makeMovie($m_id_ch2, $db); 
     $ch3_movies = makeMovie($m_id_ch3, $db); 
     $ch4_movies = makeMovie($m_id_ch4, $db); 
     $ch5_movies = makeMovie($m_id_ch5, $db); 
@@ -303,26 +312,26 @@
 
     //create name for each channels
     $ch1_name = "Top Rated Movies";
-    //$ch2_name = "Most discussed movies";
+    $ch2_name = "Most Talked About Movies";
     $ch3_name = getGenreName($genreid, $db);
     $ch4_name = "Movies with " . getActorName($actorid, $db);
     $ch5_name = getGenreName($ch5_genreids[0], $db);
     $ch6_name = getDirectorName($ch6_directorids[0], $db);
     
-    if(!$ch1_movies_query or !$ch5_movies_query or !$ch6_movies_query){
+    if(!$ch1_movies_query or !$ch2_movies_query or !$ch5_movies_query or !$ch6_movies_query){
       echo pg_last_error($db);
       exit;
     }
     else{
 
     $ch1 = array('name' => $ch1_name, 'movies' => $ch1_movies);
-
+    $ch2 = array('name' => $ch2_name, 'movies' => $ch2_movies);
     $ch3 = array('name' => $ch3_name, 'movies' => $ch3_movies);
     $ch4 = array('name' => $ch4_name, 'movies' => $ch4_movies);
     $ch5 = array('name' => $ch5_name, 'movies' => $ch5_movies);
     $ch6 = array('name' => $ch6_name, 'movies' => $ch6_movies);
 
-    $channels = array($ch1, $ch3, $ch4, $ch5, $ch6);
+    $channels = array($ch1, $ch2, $ch3, $ch4, $ch5, $ch6);
 
     $response = array('channels' => $channels);
     echo json_encode($response);
