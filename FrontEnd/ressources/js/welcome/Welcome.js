@@ -28,16 +28,25 @@ define([
 				rep = JSON.parse(rep);
 			}
 			if (!!rep && !!rep.movies && $.isArray(rep.movies)) {
+				rep.movies.sort(function (a, b) {
+					return a.name.localeCompare(b.name);
+				});
 				$.each(rep.movies, function (index, value) {
 					self.movieList.push(value);	
 				});
 			}
 			if (!!rep && !!rep.directors && $.isArray(rep.directors)) {
+				rep.directors.sort(function (a, b) {
+					return a.name.localeCompare(b.name);
+				});
 				$.each(rep.directors, function (index, value) {
 					self.directorList.push(value);	
 				});
 			}
 			if (!!rep && !!rep.genres && $.isArray(rep.genres)) {
+				rep.genres.sort(function (a, b) {
+					return a.name.localeCompare(b.name);
+				});
 				$.each(rep.genres, function (index, value) {
 					self.genreList.push(value);	
 				});

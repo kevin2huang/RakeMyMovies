@@ -24,10 +24,10 @@
         function myFunction() {
             console.log('SENDING...');
             jQuery.ajax({
-                url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
+                url: "http://localhost/DatabaseProject/BackEnd/ajax/getChannels.php",
                 method: "GET",
                 data: {
-                    userId: 10,
+                   // userId: 10,
                 }
             }).done(function (rep) {
                 console.log('RESPONSE: ');
