@@ -15,6 +15,8 @@
     do {   
         $ran_genre = rand(1, 22);
     }while(in_array($ran_genre, array(11)));
+    
+    $actorid = $ran_actor;
 
     do {   
         $ran_genre2 = rand(1, 22);
@@ -229,7 +231,7 @@
 
       while($row = pg_fetch_row($ch3_movies_query)){
         array_push($m_id_ch3, $row[0]);
-        $ch3_genreids = array($row[10]);
+        array_push($ch3_genreids, $row[10]);
       }
 
       //Channel 4: Movies based on randomly selected actor
@@ -242,7 +244,7 @@
 
         while($row = pg_fetch_row($ch4_movies_query)){
         array_push($m_id_ch4, $row[0]);
-        $ch4_actorids = array($row[10]);
+        array_push($ch4_actorids, $row[10]);
       }
 
       if(!$ch3_movies_query or !$ch4_movies_query){
