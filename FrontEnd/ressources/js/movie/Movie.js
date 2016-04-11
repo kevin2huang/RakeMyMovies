@@ -9,7 +9,7 @@ define([
 
 		self.name = ko.observable('This is a movie');
 		self.time = ko.observable('1h30');
-		self.rating = ko.observable(5);
+		self.rating = ko.observable(0);
 		self.description = ko.observable("This is a random description of a movie. Most movies contain a certain number of actors, named the cast, along with usually one or more directors and one or more studio. A good movie gets a good rating, whereas a bad movie gets a bad rating.");
 		self.year = ko.observable(1995);
 		self.studio = ko.observableArray(['Walt Disney']);

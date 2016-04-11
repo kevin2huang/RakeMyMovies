@@ -14,7 +14,7 @@ define([
 
 		self.name = ko.observable('Anonymous');
 		self.description = ko.observable('This is a review. The description can be more or less long depending on the review. Most of the time, a review will be about one or two paragraphs long.');
-		self.rating = ko.observable(5);
+		self.rating = ko.observable(0);
 		self.id = ko.observable(-1);
 		self.update = false;
 		if (!!options) {

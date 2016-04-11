@@ -95,6 +95,9 @@
                                 <span data-bind="foreach : new Array(rating())">
                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                 </span>
+                                <span data-bind="foreach : new Array(5 - rating())">
+                                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                </span>
                                 <br/>
                                 <span data-bind="text : year"></span>
                                 <span> </span>

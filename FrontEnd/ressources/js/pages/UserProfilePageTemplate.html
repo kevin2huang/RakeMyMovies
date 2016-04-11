@@ -28,7 +28,9 @@
 			</div>
 			<div class="userTabs col-sm-9">
 				<ul class="nav nav-tabs" data-bind="foreach : profiletabs">
+					 <!-- ko if : !($data.text === 'Administrator' && user.isadmin() === 'f') -->
 			        <li role="presentation" data-bind="css : {active : $parent.profiletabsActive() === $data}"><a href="#" data-bind="text : $data.text, click : $parent.setActiveTab.bind($data)"></a></li>
+			        <!-- /ko -->
 			    </ul>
 
 			    <!-- ko if : profiletabsActive().text === 'Profile' -->
@@ -56,11 +58,9 @@
 			        <!-- /ko -->
 			    <!-- /ko -->
 
-			    <!-- ko if : user.isadmin -->
-				    <!-- ko if : profiletabsActive().text === 'Administrator' -->
-				        <!-- ko template: {name: 'administrator-template'} -->
-				        <!-- /ko -->
-				    <!-- /ko -->
+			    <!-- ko if : profiletabsActive().text === 'Administrator' -->
+			        <!-- ko template: {name: 'administrator-template'} -->
+			        <!-- /ko -->
 			    <!-- /ko -->
 			    
 			</div>
