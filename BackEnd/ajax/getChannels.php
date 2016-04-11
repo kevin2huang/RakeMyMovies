@@ -113,6 +113,7 @@
                                      'movielanguage' => $row[6],
                                      'moviecountry' => $row[7],
                                      'movietgrating' => $row[8],
+                                     'trailerUrl' => $row[9],
                                      'actors' => $actors,
                                      'directors' => $directors,
                                      'studios' => $studios,
