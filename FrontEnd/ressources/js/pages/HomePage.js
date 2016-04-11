@@ -13,7 +13,7 @@ define([
 
 		self.name = "Some Channel";
 
-		self.movies = ko.observableArray([new Movie()]);
+		self.movies = ko.observableArray([]);
 
 		if (!!options && !!options.movies && $.isArray(options.movies)) {
 			for (var i = 0; i < 6 || i < options.movies.length; i++ ){
@@ -52,7 +52,7 @@ define([
 
 		self.user = user;
 
-		self.channels = ko.observableArray([new Channel()]);
+		self.channels = ko.observableArray([]);
 
 		self.modalMovie = ko.observable(null);
 		self.modalReview = ko.observable(null);
@@ -75,7 +75,7 @@ define([
 				userId = self.user.userId;
 			}
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getChannels.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/getChannels.php",
 				method: "POST",
 				data: {
 					userId: userId
@@ -93,7 +93,7 @@ define([
 		self.getReview = function () {
 			self.modalReview(new Review())
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 				method: "GET",
 				data: {
 					userId: self.user.userId(),
@@ -111,7 +111,7 @@ define([
 
 		self.sendReview = function () {
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 				method: "POST",
 				data: {
 					userId: self.user.userId(),

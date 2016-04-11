@@ -10,16 +10,16 @@ define([
 	var User = function (options) {
 		var self = this;
 
-		self.username = ko.observable('no username');
-		self.password = ko.observable('no password');
-		self.email = ko.observable('no email');
-		self.country = ko.observable('no country');
-		self.province = ko.observable('no province');
-		self.city = ko.observable('no city');
-		self.occupation = ko.observable('no occupation');
-		self.gender = ko.observable('M');
-		self.quote = ko.observable('');
-		self.userId = ko.observable(-1);
+		self.username = ko.observable();
+		self.password = ko.observable();
+		self.email = ko.observable();
+		self.country = ko.observable();
+		self.province = ko.observable();
+		self.city = ko.observable();
+		self.occupation = ko.observable();
+		self.gender = ko.observable();
+		self.quote = ko.observable();
+		self.userId = ko.observable();
 		self.isadmin = ko.observable(false);
 		self.dob = ko.observable();
 
@@ -45,17 +45,19 @@ define([
 		var date = new Date().toDateString();
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-				userId: self.userId,
+				userId: self.userId(),
 				listType: 'watched'
 			}
 		}).done(function (rep) {
+			rep = JSON.parse(rep);
+			if (!!rep.movies) {rep = rep.movies;}
 			var arr = [];
 			for (var i = 0; i < rep.length; i++) {
-				var mov = new Movie(rep[i].movie);
+				var mov = new Movie(rep[i]);
 				arr.push({
 					movie: mov,
 					timestamp: rep[i].timestamp
@@ -65,17 +67,19 @@ define([
 		});
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]
-				userId: self.userId,
+				userId: self.userId(),
 				listType: 'wish'
 			}
 		}).done(function (rep) {
+			rep = JSON.parse(rep);
+			if (!!rep.movies) {rep = rep.movies;}
 			var arr = [];
 			for (var i = 0; i < rep.length; i++) {
-				var mov = new Movie(rep[i].movie);
+				var mov = new Movie(rep[i]);
 				arr.push({
 					movie: mov,
 					timestamp: rep[i].timestamp

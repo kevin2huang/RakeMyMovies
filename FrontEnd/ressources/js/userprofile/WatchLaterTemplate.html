@@ -3,14 +3,19 @@
 		<div class="singleMovie row">
 			<span class="movieIndex col-sm-1" data-bind="text : 1 + $index()"></span>
 			<div class="movieImage col-sm-1">
-				<div class="movieDefaultImage">
-					<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
-				</div>
+				<!-- ko if : movie.image -->
+	                <img data-bind="attr: {src : movie.image}">
+	            <!-- /ko -->
+	            <!-- ko ifnot : movie.image -->
+	                <div class="movieDefaultImage">
+	                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+	                </div>
+	            <!-- /ko -->
 			</div>
 			<span class="movieName col-sm-4" data-bind="text : movie.name"></span>
 			<span class="movieName col-sm-2" data-bind="text : timestamp"></span>
 			<span class="movietime col-sm-2" data-bind="text : movie.time"></span>
-			<button class="btn" data-bind="click : $component.user.removeWatchLater.bind($data)">
+			<button class="btn" data-bind="click : $component.user().removeWatchLater.bind($data)">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 			</button>
 		</div>

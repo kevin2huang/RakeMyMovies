@@ -38,13 +38,13 @@ if( isset($_POST['userId']) and isset($_POST['movieId']) and
 	
 } 
 
-$response = array();
+/*$response = array();
  for ($i = 0; $i < 5; $i++) {
  	$response[] = array(
  		'description': 'This is a review. The description can be more or less long depending on the review. Most of the time, a review will be about one or two paragraphs long.',
  		'rating': 5,
  		'name': 'Anonymous'
- 		);
+ 		);*/
 }
 
     echo json_encode($response);

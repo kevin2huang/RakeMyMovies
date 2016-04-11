@@ -51,10 +51,11 @@ define([
 		self.selectedGenre = ko.observable();
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getAllNamesAndIds.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getAllNamesAndIds.php",
 			method: "POST",
 			data: {}
 		}).done(function (rep) {
+			rep = JSON.parse(rep);
 			if (!!rep && !!rep.movies && $.isArray(rep.movies)) {
 				self.movieList(rep.movies);
 			}
@@ -69,12 +70,14 @@ define([
 		self.getMovie = function () {
 			if (!!self.selectedMovie()) {
 				$.ajax({
-					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+					url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 					method: "POST",
 					data: {
 						movieId : self.selectedMovie().id
 					}
 				}).done(function (rep) {
+					rep = JSON.parse(rep);
+					if (!!rep.movies && $.isArray(rep.movies)) {rep = rep.movies[0];}
 					self.movieInfo(new Movie(rep))
 				});
 			}
@@ -88,9 +91,10 @@ define([
 		};
 		self.save = function () {
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/updateMovie.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/updateMovie.php",
 				method: "POST",
 				data: {
+					movieId: selectedMovie().movieId(),
 					directors: movieInfo().directors(),
 					genres: movieInfo().genres()
 				}

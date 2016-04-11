@@ -18,7 +18,7 @@ define([
 		self.artists = ko.observableArray([]);
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getSubscriptions.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getSubscriptions.php",
 			method: "POST",
 			data: {
 				userId: self.user.userId,

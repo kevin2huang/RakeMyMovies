@@ -20,7 +20,7 @@ define([
 		self.genreList = ko.observableArray([{name:'--genres--'}]);
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getAllNamesAndIds.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getAllNamesAndIds.php",
 			method: "POST",
 			data: {}
 		}).done(function (rep) {
@@ -55,8 +55,7 @@ define([
 		self.username = ko.observable('');
 		self.password = ko.observable('');
 		self.signupUser = ko.observable(new User());
-		//self.user = ko.observable(null);
-		self.user = ko.observable(new User());
+		self.user = ko.observable(null);
 
 		self.page = ko.observable(new HomePage(self.user()));
 		self.searchBar = new SearchDropDowns();
@@ -80,7 +79,7 @@ define([
 		self.login = function () {
 
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/login.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/login.php",
 				method: "POST",
 				data: {
 					email: self.username(),
@@ -111,7 +110,7 @@ define([
 		self.watchLater = function (movie) {
 			if (self.user() !== null) {
 				$.ajax({
-					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/addToWishList.php",
+					url: "http://localhost/DatabaseProject/BackEnd/ajax/addToWishList.php",
 					method: "POST",
 					data: {
 						userId: self.user().userId,
@@ -130,7 +129,7 @@ define([
 
 		self.saveProfile = function () {
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/saveProfile.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/saveProfile.php",
 				method: "POST",
 				data: self.user()
 			});
@@ -166,12 +165,11 @@ define([
 				self.isEmpty(user.password))) {
 
 				$.ajax({
-					url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/signup.php",
+					url: "http://localhost/DatabaseProject/BackEnd/ajax/signup.php",
 					method: "POST",
 					data: user
 				}).done(function (rep) {
-					console.log(rep);
-					if (rep.status === 'OK') {
+					if (rep === 'OK') {
 						self.user(user);
 					}
 				});
