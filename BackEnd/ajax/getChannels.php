@@ -11,8 +11,6 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-    $_POST['userId'] = 10;
-
     $ran_actor = rand(1, 100);
     do {   
         $ran_genre = rand(1, 22);
@@ -39,6 +37,18 @@
     $ch5_genreids = array();
     $ch6_directorids = array();
 
+    function getMovieRating($movieid, $database){
+      $getmovierat = pg_query($database, "SELECT AVG(R.REVIEW_RATING)
+                                           FROM REVIEW R, MOVIES M, MOVREV MR 
+                                           WHERE M.MOVIE_ID = ". $movieid ." AND 
+                                           M.MOVIE_ID = MR.MOVIE_ID AND 
+                                           MR.REVIEW_ID = R.REVIEW_ID
+                                           GROUP BY R.REVIEW_RATING
+                                           ORDER BY AVG(R.REVIEW_RATING);");
+      $rating = pg_fetch_row($getmovierat);
+      return round($rating[0]);
+    }
+
     function makeMovie($ids, $database)   
     {  
             $movies = array();
@@ -48,6 +58,7 @@
                 $actors = array();
                 $directors = array();
                 $studios = array();
+                $movie_rating = getMovieRating($ids[$key], $database);
 
                $ret = pg_query($database, "SELECT * 
                                       FROM MOVIES
@@ -104,7 +115,8 @@
                                      'movietgrating' => $row[8],
                                      'actors' => $actors,
                                      'directors' => $directors,
-                                     'studios' => $studios);
+                                     'studios' => $studios,
+                                     'rating' => $movie_rating);
               }
              array_push($movies, $movie);
             }
