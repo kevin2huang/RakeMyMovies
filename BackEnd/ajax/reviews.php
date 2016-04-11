@@ -46,7 +46,7 @@ if(isset($_GET['userId']) and isset($_GET['movieId'])) {
 else if (isset($_GET['userId'])) {
 	$reviews = array();
 	$getreviews = pg_query($db, "SELECT DISTINCT R.*
-								FROM REVIEW R, RAKEUSER U, USRREV UR, MOVREV MR
+								FROM REVIEW R, RAKEUSER U, USRREV UR
 								WHERE U.USER_ID = " . $_GET['userId'] . " AND 
 								U.USER_ID = UR.USER_ID AND
 								UR.REVIEW_ID = R.REVIEW_ID;");
