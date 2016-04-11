@@ -9,10 +9,12 @@ define([
 
 	$('#page-top').append(template);
 
-	var SearchPage = function (searchBars) {
+	var SearchPage = function (searchBars, user) {
 		var self = this;
 
 		self.text = "SearchPage";
+
+		self.user = user;
 
 		self.searchBars = searchBars;
 
