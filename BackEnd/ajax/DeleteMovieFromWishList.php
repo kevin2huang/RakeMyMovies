@@ -9,29 +9,22 @@
    if(!$db){
       echo "Error : Unable to open database\n";
    } else {
-      echo "Opened database successfully\n";
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-
-header("content-type:application/json");
-    //echo json_encode(array( 'movies' => "Yep"));
-
-$response;
-
-if(isset($_POST['userId']) && isset($_POST['movieId'])){
+if(isset($_POST['userId']) and isset($_POST['movieId'])){
     //Insert the new wish relation between the user and the movie
 
     $delete = pg_query($db, "DELETE FROM WISH
-                             WHERE MOVIE_ID = " . $movieid . " AND 
-                             USER_ID = " . $userid . ";");
+                             WHERE MOVIE_ID = " . $_POST['movieId'] . " AND 
+                             USER_ID = " . $_POST['userId'] . ";");
 
 
-    $response->status = 'DELETED';
-} 
+    $response = 'DELETED';
+}
 else 
 {
-    $response->status = 'FAILED';
+    $response = 'FAILED';
 }
     echo json_encode($response);
 ?>

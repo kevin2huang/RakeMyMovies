@@ -14,26 +14,26 @@
 if (isset($_POST['email']) and isset($_POST['password']) and isset($_POST['username']))
 {
 	$up_user = pg_query($db, "UPDATE RAKEUSER
-							  SET USER_PASSWORD = " . $_POST['password'] . ", 
-							  USER_EMAIL = " . $_POST['email'] . ", 
-							  USER_NAME = " . $_POST['username'] . ", 
-							  USER_GENDER " . $_POST['gender'] . ",
-							  USER_DOB = " . $_POST['dob'] . ", 
-							  USER_ICON = " . $_POST['icon'] . ",
-							  USER_ISADMIN = " . $_POST['isadmin'] . ";");
+            							  SET USER_PASSWORD = " . "'". $_POST['password'] . "'". ", 
+            							  USER_EMAIL = " . "'". $_POST['email'] . "'" . ", 
+            							  USER_NAME = " . "'" . $_POST['username'] . "'" .", 
+            							  USER_GENDER " . "'" . $_POST['gender'] . "'" . ",
+            							  USER_DOB = " . "'" . $_POST['dob'] . "'" . ", 
+            							  USER_ICON = " . "'" . $_POST['icon'] . "'" . ",
+            							  USER_ISADMIN = " . $_POST['isadmin'] . ";");
 
 	$up_profile = pg_query($db, "UPDATE PROFILE
-								 SET PROFILE_PROVINCE = " . $_POST['province'] . ",
-								 PROFILE_CITY =  " . $_POST['city'] . ",
-								 PROFILE_COUNTRY =  " . $_POST['country'] . ", 
-								 PROFILE_OCCUPATION =  " . $_POST['occupation'] . ",
-								 PROFILE_QUOTE =  " . $_POST['quote'] . ";");
+              								 SET PROFILE_PROVINCE = " . "'" . $_POST['province'] . "'" . ",
+              								 PROFILE_CITY =  " . "'" . $_POST['city'] . "'" . ",
+              								 PROFILE_COUNTRY =  " . "'" . $_POST['country'] . "'" . ", 
+              								 PROFILE_OCCUPATION =  " . "'" . $_POST['occupation'] . "'" . ",
+              								 PROFILE_QUOTE =  " . "'" . $_POST['quote'] . "'" . ";");
 
    if(!$up_user or !$up_profile)
    {
       echo pg_last_error($db);
       exit;
-   } 
+   }
     $response = 'OK';
 }
 else
