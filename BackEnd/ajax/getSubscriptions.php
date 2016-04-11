@@ -34,7 +34,7 @@ if(isset($_POST['userid'])){
     while($row = pg_fetch_row($ret))
    {
         array_push($genres, array('genreid' => $row[0], 
-                                  'genre' => $row[1]));
+                                  'genrename' => $row[1]));
    }
 
     while($row2 = pg_fetch_row($ret2))
