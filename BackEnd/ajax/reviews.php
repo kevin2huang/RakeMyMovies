@@ -23,6 +23,14 @@ if(isset($_GET['userId']) and isset($_GET['movieId'])) {
 								UR.REVIEW_ID = R.REVIEW_ID AND 
 								R.REVIEW_ID = MR.REVIEW_ID AND 
 								MR.MOVIE_ID = " . $_GET['movieId'] . ";");
+	$getmoviename_query = pg_query($db, "SELECT MOVIE.TITLE
+										 FROM MOVIES
+										 WHERE MOVIE_ID = " . $_GET['movieId'] . ";");
+
+	while(pg_fetch_row($getmoviename_query)){
+		$movie_name = $row[0]
+	}
+
 	if(!$getreview){
 		echo "EMPTY";
 	}
@@ -35,7 +43,7 @@ if(isset($_GET['userId']) and isset($_GET['movieId'])) {
 								'reviewdate' => $row[3]);
 		}
 	}
-	
+	$mov_rev = array('moviename' => $movie_name, 'review' => $thereview);
 	echo json_encode($thereview);
 	/*
 	Get the rating and the description of the review between that user and that movie. If none
@@ -45,11 +53,13 @@ if(isset($_GET['userId']) and isset($_GET['movieId'])) {
 /* No movieId was passed, only the userId. Return every review written by this user*/
 else if (isset($_GET['userId'])) {
 	$reviews = array();
-	$getreviews = pg_query($db, "SELECT DISTINCT R.*
+	$getreviews = pg_query($db, "SELECT DISTINCT M.MOVIE_TITLE, R.*
 								FROM REVIEW R, RAKEUSER U, USRREV UR
 								WHERE U.USER_ID = " . $_GET['userId'] . " AND 
 								U.USER_ID = UR.USER_ID AND
-								UR.REVIEW_ID = R.REVIEW_ID;");
+								UR.REVIEW_ID = R.REVIEW_ID AND 
+								R.REVIEW_ID = MR.REVIEW_ID AND 
+								MR.MOVIE_ID = M.MOVIE_ID;");
 	if(!$getreviews){
 		pg_last_error($db);
 		exit;
@@ -94,7 +104,12 @@ if( isset($_POST['userId']) and isset($_POST['movieId']) and
 	{
 		$create_review = pg_query($db, "INSERT INTO REVIEW (REVIEW_DESCRIPTION, REVIEW_RATING, REVIEW_DATE)
 										VALUES 
-										('" . $_POST['text'] . "'," . $_POST['rating'] ", '" . $date . "');");
+										('" . $_POST['text'] . "'," . $_POST['rating'] . ", '" . $date . "');");
+
+		$getreviewid = pg_query($db, "SELECT M.MOVIE_TITLE
+										  FROM MOVIES M, REVIEW R, MOVREV MR
+										  WHERE R.REVIEW_DESCRIPTION = " . "'" . $_POST['text'] . "'" "AND 
+										  		R.REVIEW_RATING = " . $_POST['rating'] . " ;");
 
 		while($row = pg_fetch_row($create_review)){
 			$reviewid = $row[0];
