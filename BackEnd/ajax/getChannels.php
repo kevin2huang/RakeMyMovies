@@ -15,7 +15,7 @@
     do {   
         $ran_genre = rand(1, 22);
     }while(in_array($ran_genre, array(11)));
-    
+
     $actorid = $ran_actor;
 
     do {   
@@ -320,7 +320,7 @@
     $ch3_name = getGenreName($genreid, $db);
     $ch4_name = "Movies with " . getActorName($actorid, $db);
     $ch5_name = getGenreName($ch5_genreids[0], $db);
-    $ch6_name = getDirectorName($ch6_directorids[0], $db);
+    $ch6_name = "Movies by "  . getDirectorName($ch6_directorids[0], $db);
     
     if(!$ch1_movies_query or !$ch2_movies_query or !$ch5_movies_query or !$ch6_movies_query){
       echo pg_last_error($db);
