@@ -77,9 +77,9 @@ define([
 				url: "http://localhost/DatabaseProject/BackEnd/ajax/updateMovie.php",
 				method: "POST",
 				data: {
-					movieId: movieInfo().movieId(),
-					directors: movieInfo().director(),
-					genres: movieInfo().genres()
+					movieId: self.movieInfo().movieId(),
+					directors: self.movieInfo().director(),
+					genres: self.movieInfo().genres()
 				}
 			});
 		};

@@ -55,9 +55,12 @@
 			        <!-- ko template: {name: 'watch-later-template'} -->
 			        <!-- /ko -->
 			    <!-- /ko -->
-			    <!-- ko if : profiletabsActive().text === 'Administrator' -->
-			        <!-- ko template: {name: 'administrator-template'} -->
-			        <!-- /ko -->
+
+			    <!-- ko if : user.isadmin -->
+				    <!-- ko if : profiletabsActive().text === 'Administrator' -->
+				        <!-- ko template: {name: 'administrator-template'} -->
+				        <!-- /ko -->
+				    <!-- /ko -->
 			    <!-- /ko -->
 			    
 			</div>

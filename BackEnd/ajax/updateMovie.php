@@ -12,25 +12,24 @@
       pg_query('SET search_path = "RakeMyMovie";');
    }
 
-$_POST['movieid']
-$_POST['directors'] = array();
-$_POST['genres'] = array(3,6,9);
+//$_POST['movieid'];
+//$_POST['directors'] = array();
+//$_POST['genres'] = array(3,6,9);
 
-if(isset($_POST['movieid'])){
+if(isset($_POST['movieId'])){
 	$delete_movdir = pg_query($db, "DELETE 
 									FROM MOVDIR
-									WHERE MOVIE_ID = " . $_POST['movieid'] . ";");
+									WHERE MOVIE_ID = " . $_POST['movieId'] . ";");
 
 	$delete_movgen = pg_query($db, "DELETE 
 									FROM MOVGEN
-									WHERE MOVIE_ID = " . $_POST['movieid'] . ";");
+									WHERE MOVIE_ID = " . $_POST['movieId'] . ";");
 
-	if(!is_null($_POST['directors']){
-
-		foreach($director as $_POST['directors']){
+	if(isset($_POST['directors'])){
+		foreach($_POST['directors'] as $director){
 			$insert_movdir = pg_query($db, "INSERT INTO MOVDIR 
 											VALUES 
-											(" . $_POST['movieid'] . ", " . $director . ");");
+											(" . $_POST['movieId'] . ", " . $director['directorid'] . ");");
 
 			if(!$insert_movdir){
 				echo pg_last_error($db);
@@ -41,12 +40,20 @@ if(isset($_POST['movieid'])){
 
 	}
 
-	if(!is_null($_POST['genres']){
+	if(!is_null($_POST['genres'])){
 
-		foreach($genre as $_POST['genres']){
+		foreach($_POST['genres'] as $genre){
+			$get_mov_gen = pg_query($db, "SELECT GENRE_ID 
+											FROM GENRE
+											WHERE GENRE_NAME = '" . $genre ."';");
+
+			while($row = pg_fetch_row($get_mov_gen)) {
+				$genre_id = $row[0];
+			}
+
 			$insert_movgen = pg_query($db, "INSERT INTO MOVGEN 
 											VALUES 
-											(" . $_POST['movieid'] . ", " . $genre . ");");
+											(" . $_POST['movieId'] . ", " . $genre_id . ");");
 			if(!$insert_movgen){
 				echo pg_last_error($db);
 				exit;
