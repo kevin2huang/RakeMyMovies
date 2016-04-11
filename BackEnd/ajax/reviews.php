@@ -29,7 +29,7 @@ if(isset($_GET['userId']) and isset($_GET['movieId'])) {
                      WHERE MOVIE_ID = " . $_GET['movieId'] . ";");
 
   while(pg_fetch_row($getmoviename_query)){
-    $movie_name = $row[0]
+    $movie_name = $row[0];
   }
 
   if(!$getreview){
@@ -38,13 +38,13 @@ if(isset($_GET['userId']) and isset($_GET['movieId'])) {
   else
   {
     while($row = pg_fetch_row($getreview)){
-      $thereview = array('reviewid' => $row[0],
+      $thereview = array('moviename' => $movie_name,
+      				'reviewid' => $row[0],
                 'reviewdescription' => $row[1],
                 'reviewrating' => $row[2],
                 'reviewdate' => $row[3]);
     }
   }
-  array_push($thereview, 'moviename' => $movie_name);
   $rreviews = array('review' => $thereview);
   echo json_encode($rreviews);
   /*
