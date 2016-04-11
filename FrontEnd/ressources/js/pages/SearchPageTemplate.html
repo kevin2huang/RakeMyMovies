@@ -14,11 +14,12 @@
 						<!-- /ko -->
 					</div>
 					<div class="movieName" data-bind="text : name"></div>
-					
+					<span data-bind="text : time"></span>
+					<span> min</span>
+					<br/>
 					<span data-bind="foreach : new Array(rating())">
 						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 					</span>
-					<span data-bind="text : time"></span>
 				</button>
 			</div>	
 		</div>		

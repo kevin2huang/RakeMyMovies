@@ -55,6 +55,7 @@ define([
 			method: "POST",
 			data: {}
 		}).done(function (rep) {
+			rep = JSON.parse(rep);
 			if (!!rep && !!rep.movies && $.isArray(rep.movies)) {
 				self.movieList(rep.movies);
 			}
@@ -75,6 +76,8 @@ define([
 						movieId : self.selectedMovie().id
 					}
 				}).done(function (rep) {
+					rep = JSON.parse(rep);
+					if (!!rep.movies && $.isArray(rep.movies)) {rep = rep.movies[0];}
 					self.movieInfo(new Movie(rep))
 				});
 			}
@@ -91,6 +94,7 @@ define([
 				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/updateMovie.php",
 				method: "POST",
 				data: {
+					movieId: selectedMovie().movieId(),
 					directors: movieInfo().directors(),
 					genres: movieInfo().genres()
 				}

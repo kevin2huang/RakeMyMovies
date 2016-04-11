@@ -13,7 +13,7 @@ define([
 
 		self.name = "Some Channel";
 
-		self.movies = ko.observableArray([new Movie()]);
+		self.movies = ko.observableArray([]);
 
 		if (!!options && !!options.movies && $.isArray(options.movies)) {
 			for (var i = 0; i < 6 || i < options.movies.length; i++ ){
@@ -52,7 +52,7 @@ define([
 
 		self.user = user;
 
-		self.channels = ko.observableArray([new Channel()]);
+		self.channels = ko.observableArray([]);
 
 		self.modalMovie = ko.observable(null);
 		self.modalReview = ko.observable(null);

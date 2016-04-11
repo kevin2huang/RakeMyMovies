@@ -8,18 +8,20 @@
 					</div>
 					<span data-bind="text : $parent.user().username"></span>
 					<br/>
-					<span>Gender : </span>
+					<span data-bind="visible : $parent.user().gender">Gender : </span>
 					<span data-bind="text : $parent.user().gender"></span>
 					<br/>
 					<span data-bind="text : $parent.user().email"></span>
 					<br/>
-					<span data-bind="text : $parent.user().country"></span><span>, </span> 
-					<span data-bind="text : $parent.user().province"></span><span>, </span>
+					<span data-bind="text : $parent.user().country"></span>
+					<span data-bind="visible : $parent.user().province">, </span> 
+					<span data-bind="text : $parent.user().province"></span>
+					<span data-bind="visible : $parent.user().city">, </span>
 					<span data-bind="text : $parent.user().city"></span>
-					<br/>
-					<span>Occupation : </span>
+					<br data-bind="visible : $parent.user().country() || $parent.user().province || $parent.user().city()"/>
+					<span data-bind="visible : $parent.user().occupation">Occupation : </span>
 					<span data-bind="text : $parent.user().occupation"></span>
-					<br/>
+					<br data-bind="visible : $parent.user().occupation"/>
 					<span><i data-bind="text : $parent.user().quote"></i></span>
 
 				</div>

@@ -175,7 +175,7 @@ if(isset($_POST['userId']))
 
     $mmovies = makeMovieWithTS($movieids, $db, $timestamps);
   }
-}
+
   else if($_POST['listType'] === 'watched')
   {
     $list = pg_query($db, "SELECT M.*, W.WATCHED_TIMESTAMP
@@ -191,6 +191,7 @@ if(isset($_POST['userId']))
     }
     $mmovies = makeMovieWithTS($movieids, $db, $timestamps);
   }
+}
   else if (isset($_POST['movieId']))
 {
   $list = pg_query($db, "SELECT *

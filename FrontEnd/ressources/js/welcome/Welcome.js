@@ -55,8 +55,7 @@ define([
 		self.username = ko.observable('');
 		self.password = ko.observable('');
 		self.signupUser = ko.observable(new User());
-		//self.user = ko.observable(null);
-		self.user = ko.observable(new User());
+		self.user = ko.observable(null);
 
 		self.page = ko.observable(new HomePage(self.user()));
 		self.searchBar = new SearchDropDowns();
@@ -170,8 +169,7 @@ define([
 					method: "POST",
 					data: user
 				}).done(function (rep) {
-					console.log(rep);
-					if (rep.status === 'OK') {
+					if (rep === 'OK') {
 						self.user(user);
 					}
 				});
