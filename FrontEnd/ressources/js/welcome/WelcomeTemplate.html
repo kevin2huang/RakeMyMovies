@@ -89,56 +89,63 @@
                 </div>
                 <div class="modal-body container-fluid">
                     <div class="row">
-                        <div class="movieInfo col-sm-8">
-                        <div class="row">
-                            <div class="actorInfo col-sm-4">
-                                <span data-bind="foreach : new Array(rating())">
-                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                </span>
-                                <span data-bind="foreach : new Array(5 - rating())">
-                                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                                </span>
-                                <br/>
-                                <span data-bind="text : year"></span>
-                                <span> </span>
-                                <!-- ko foreach : studio -->
-                                    <span data-bind="text : studioname"></span>
+                        <div class="movieInfo col-sm-8" data-bind="css : {'col-sm-6' : trailerUrl}">
+                            <div class="row">
+                                <div class="actorInfo col-sm-4">
+                                    <span data-bind="foreach : new Array(rating())">
+                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </span>
+                                    <span data-bind="foreach : new Array(5 - rating())">
+                                        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                                    </span>
                                     <br/>
-                                <!-- /ko -->
-                                <br/><br/>
-                                <span><strong>Director</strong></span>
-                                <br/>
-                                <div data-bind="foreach : director">
-                                    <span data-bind="text : directorname"></span>
-                                    <br/>    
-                                </div>
-                                <br/>
-                                <span><strong>Cast</strong></span>
-                                <br/>
-                                <div data-bind="foreach : cast">
-                                    <span data-bind="text : actorname"></span>
-                                    <br/>    
-                                </div>
-                                <br/>
-                               
-                            </div>
-                            <div class="movieDescription">
-                                <p data-bind="text : description"></p>                                
-                            </div>
-                        </div>
-                        </div>
-                        <div class="moviePicture col-sm-4">
-                            <div class="movieImage">
-                                <!-- ko if : image -->
-                                    <img data-bind="attr: {src : image}">
-                                <!-- /ko -->
-                                <!-- ko ifnot : image -->
-                                    <div class="movieDefaultImage">
-                                        <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                    <span data-bind="text : year"></span>
+                                    <span> </span>
+                                    <!-- ko foreach : studio -->
+                                        <span data-bind="text : studioname"></span>
+                                        <br/>
+                                    <!-- /ko -->
+                                    <br/><br/>
+                                    <span><strong>Director</strong></span>
+                                    <br/>
+                                    <div data-bind="foreach : director">
+                                        <span data-bind="text : directorname"></span>
+                                        <br/>    
                                     </div>
+                                    <br/>
+                                    <span><strong>Cast</strong></span>
+                                    <br/>
+                                    <div data-bind="foreach : cast">
+                                        <span data-bind="text : actorname"></span>
+                                        <br/>    
+                                    </div>
+                                    <br/>
+                                   
+                                </div>
+                                <div class="movieDescription">
+                                    <p data-bind="text : description"></p>                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moviePicture col-sm-4" data-bind="css : {'col-sm-6' : trailerUrl}">
+                            <div class="movieImage">
+                                <!-- ko ifnot: trailerUrl -->
+                                    <!-- ko if : image -->
+                                        <img data-bind="attr: {src : image}">
+                                    <!-- /ko -->
+                                    <!-- ko ifnot : image -->
+                                        <div class="movieDefaultImage">
+                                            <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                                        </div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                                <!-- ko if : trailerUrl -->
+                                <iframe width="548px" height="243px" data-bind="attr: {src : trailerUrl}">
+                                </iframe>
                                 <!-- /ko -->
                             </div>
                         </div>
+
                     </div>   
                 </div>
 
