@@ -10,6 +10,17 @@
    } else {
       pg_query('SET search_path = "RakeMyMovie";');
    }
+function getMovieRating($movieid, $database){
+      $getmovierat = pg_query($database, "SELECT AVG(R.REVIEW_RATING)
+                                           FROM REVIEW R, MOVIES M, MOVREV MR 
+                                           WHERE M.MOVIE_ID = ". $movieid ." AND 
+                                           M.MOVIE_ID = MR.MOVIE_ID AND 
+                                           MR.REVIEW_ID = R.REVIEW_ID
+                                           GROUP BY R.REVIEW_RATING
+                                           ORDER BY AVG(R.REVIEW_RATING);");
+      $rating = pg_fetch_row($getmovierat);
+      return round($rating[0]);
+    }
 
 function makeMovieNoTS($ids, $database)
   {  
@@ -19,6 +30,7 @@ function makeMovieNoTS($ids, $database)
           $actors = array();
           $directors = array();
           $studios = array();
+          $avgrating = getMovieRating($ids[$key], $database); 
 
          $ret = pg_query($database, "SELECT * 
                                 FROM MOVIES
@@ -75,7 +87,8 @@ function makeMovieNoTS($ids, $database)
                              'movietgrating' => $row[8],
                              'actors' => $actors,
                              'directors' => $directors,
-                             'studios' => $studios);
+                             'studios' => $studios,
+                             'rating' => $avgrating);
       }
        array_push($movies, $movie);
     }
@@ -89,6 +102,7 @@ function makeMovieWithTS($ids, $database, $ts)
           $actors = array();
           $directors = array();
           $studios = array();
+          $avgrating = getMovieRating($ids[$key], $database); 
 
          $ret = pg_query($database, "SELECT * 
                                 FROM MOVIES
@@ -146,6 +160,7 @@ function makeMovieWithTS($ids, $database, $ts)
                            'actors' => $actors,
                            'directors' => $directors,
                            'studios' => $studios,
+                           'rating' => $avgrating,
                            'timestamp' => $ts[$key]);
     }
      array_push($movies, $movie);
