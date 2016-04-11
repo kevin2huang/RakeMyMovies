@@ -21,14 +21,14 @@ if(isset($_POST['userId']) and isset($_POST['movieId'])){
                              USER_ID = " . $_POST['userId'] . ";");
 
 
-    $response = 'DELETED';
+    echo 'DELETED';
    }
    elseif ($_POST['listType'] === 'watched') {
      $delete = pg_query($db, "DELETE FROM WATCHED
                              WHERE MOVIE_ID = " . $_POST['movieId'] . " AND 
                              USER_ID = " . $_POST['userId'] . ";");
 
-    $response = 'DELETED';
+    echo'DELETED';
    }
    else{
     echo "ERROR";
@@ -36,8 +36,7 @@ if(isset($_POST['userId']) and isset($_POST['movieId'])){
 }
 else 
 {
-    $response = 'FAILED';
+    echo 'FAILED';
 }
-    echo json_encode($response);
     pg_close($db);
 ?>

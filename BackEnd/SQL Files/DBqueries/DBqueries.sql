@@ -223,6 +223,15 @@
 --       R.REVIEW_ID = MR.REVIEW_ID AND
 --       MR.MOVIE_ID = M.MOVIE_ID;
 
+-- SELECT DISTINCT M.MOVIE_TITLE, R.*
+-- 								FROM REVIEW R, RAKEUSER U, USRREV UR, MOVREV MR, MOVIES M
+-- 								WHERE U.USER_ID = 10 AND 
+-- 								U.USER_ID = UR.USER_ID AND
+-- 								UR.REVIEW_ID = R.REVIEW_ID AND 
+-- 								R.REVIEW_ID = MR.REVIEW_ID AND 
+-- 								MR.MOVIE_ID = M.MOVIE_ID;
+
+SELECT * FROM USRREV;
 
 --------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
 

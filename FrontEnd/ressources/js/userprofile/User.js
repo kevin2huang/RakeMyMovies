@@ -89,7 +89,49 @@ define([
 		});
 
 		self.removeWatchLater = function (m) {
-			self.watchLater.remove(m);
+			$.ajax({
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/DeleteMovieFromWishList.php",
+				method: "POST",
+				data: {
+					userId: self.userId(),
+					movieId: m.movie.movieId(),
+					listType: 'wish'
+				}
+			}).done(function (rep) {
+				if (rep === 'DELETED') {
+					self.watchLater.remove(m);
+				}
+			});
+		};
+
+		self.moveToRecent = function (m) {
+			$.ajax({
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/DeleteMovieFromWishList.php",
+				method: "POST",
+				data: {
+					userId: self.userId(),
+					movieId: m.movie.movieId(),
+					listType: 'wish'
+				}
+			}).done(function (rep) {
+				if (rep === 'DELETED') {
+					$.ajax({
+						url: "http://localhost/DatabaseProject/BackEnd/ajax/addToWishList.php",
+						method: "POST",
+						data: {
+							userId: self.userId(),
+							movieId: m.movie.movieId(),
+							listType: 'watched'
+						}
+					}).done(function (rep) {
+						if (rep === 'OK') {
+							self.watchLater.remove(m);
+							m.timestamp = new Date().toDateString();
+							self.recent.push(m)
+						}
+					});
+				}
+			});
 		};
 	};
 
