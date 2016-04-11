@@ -28,6 +28,9 @@ define([
 				rep = JSON.parse(rep);
 			}
 			if (!!rep && !!rep.movies && $.isArray(rep.movies)) {
+				rep.movies.sort(function (a, b) {
+					return a.name.localeCompare(b.name);
+				});
 				$.each(rep.movies, function (index, value) {
 					self.movieList.push(value);	
 				});
