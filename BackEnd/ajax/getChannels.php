@@ -229,7 +229,7 @@
 
       while($row = pg_fetch_row($ch3_movies_query)){
         array_push($m_id_ch3, $row[0]);
-        $ch3_genreids = array($row[9]);
+        $ch3_genreids = array($row[10]);
       }
 
       //Channel 4: Movies based on randomly selected actor
@@ -242,7 +242,7 @@
 
         while($row = pg_fetch_row($ch4_movies_query)){
         array_push($m_id_ch4, $row[0]);
-        $ch4_actorids = array($row[9]);
+        $ch4_actorids = array($row[10]);
       }
 
       if(!$ch3_movies_query or !$ch4_movies_query){
@@ -287,7 +287,7 @@
 
       while($row = pg_fetch_row($ch5_movies_query)){
         array_push($m_id_ch5, $row[0]);
-        $ch5_genreids = array($row[9]);
+        $ch5_genreids = array($row[10]);
       }
 
     //Channel 6: Movies with a director x
@@ -301,7 +301,7 @@
     while ($row = pg_fetch_row($ch6_movies_query))
     {
        array_push($m_id_ch6, $row[0]);
-       $ch6_directorids = array($row[9]);
+       $ch6_directorids = array($row[10]);
     }
 
     //create list of movies
@@ -325,7 +325,6 @@
       exit;
     }
     else{
-
     $ch1 = array('name' => $ch1_name, 'movies' => $ch1_movies);
     $ch2 = array('name' => $ch2_name, 'movies' => $ch2_movies);
     $ch3 = array('name' => $ch3_name, 'movies' => $ch3_movies);
