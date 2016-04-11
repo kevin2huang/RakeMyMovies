@@ -18,7 +18,7 @@ define([
 		self.id = ko.observable(-1);
 		self.update = false;
 		if (!!options) {
-			if (options.name) {self.name(options.name);}
+			if (options.moviename) {self.name(options.moviename);}
 			if (options.reviewdescription) {self.description(options.reviewdescription);}
 			if (options.reviewrating) {
 				self.rating(options.reviewrating);
