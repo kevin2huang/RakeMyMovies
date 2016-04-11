@@ -269,7 +269,8 @@
                                         WHERE R.REVIEW_ID = MR.REVIEW_ID AND 
                                           MR.MOVIE_ID = M.MOVIE_ID
                                         GROUP BY M.MOVIE_ID
-                                        ORDER BY COUNT(R.REVIEW_ID) DESC;");
+                                        ORDER BY COUNT(R.REVIEW_ID) DESC
+                                        LIMIT 6;");
 
     while($row = pg_fetch_row($ch2_movies_query)){
       array_push($m_id_ch2, $row[0]);
