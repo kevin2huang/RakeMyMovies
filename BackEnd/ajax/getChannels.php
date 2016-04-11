@@ -289,7 +289,7 @@
 
       while($row = pg_fetch_row($ch5_movies_query)){
         array_push($m_id_ch5, $row[0]);
-        $ch5_genreids = array($row[10]);
+        array_push($ch5_genreids, array($row[10]));
       }
 
     //Channel 6: Movies with a director x
