@@ -36,11 +36,17 @@ define([
 				});
 			}
 			if (!!rep && !!rep.directors && $.isArray(rep.directors)) {
+				rep.directors.sort(function (a, b) {
+					return a.name.localeCompare(b.name);
+				});
 				$.each(rep.directors, function (index, value) {
 					self.directorList.push(value);	
 				});
 			}
 			if (!!rep && !!rep.genres && $.isArray(rep.genres)) {
+				rep.genres.sort(function (a, b) {
+					return a.name.localeCompare(b.name);
+				});
 				$.each(rep.genres, function (index, value) {
 					self.genreList.push(value);	
 				});
