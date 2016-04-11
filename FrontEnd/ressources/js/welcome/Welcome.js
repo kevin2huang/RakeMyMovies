@@ -91,6 +91,8 @@ define([
 				self.user(user);
 				if (self.page().text === 'HomePage') {
 					self.page().getChannels(user);
+				} else if (self.page().text === 'SearchPage') {
+					self.page(new SearchPage(self.searchBar, self.user()));
 				}
 			});
 		};
@@ -183,7 +185,7 @@ define([
 
 		self.search = function () {
 			if (self.page().text !== 'SearchPage') {
-				self.page(new SearchPage(self.searchBar));
+				self.page(new SearchPage(self.searchBar, self.user()));
 			} else {
 				self.page().refresh();
 			}
