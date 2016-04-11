@@ -22,6 +22,7 @@ define([
 		self.language = ko.observable('ENG');
 		self.releaseDate = ko.observable('1 Jan 2010');
 		self.tg = ko.observable('G');
+		self.trailerUrl = ko.observable('http://www.youtube.com/embed/XGSy3_Czz8k'); //trailerUrl
 		if (!!options) {
 			if (!!options.movietitle) { self.name(options.movietitle);}
 			if (!!options.movieduration) { self.time(options.movieduration);}
@@ -37,6 +38,7 @@ define([
 			if (!!options.movielanguage) {self.language(options.movielanguage);}
 			if (!!options.moviereleasedate) {self.releaseDate(options.moviereleasedate);}
 			if (!!options.movietgrating) {self.tg(options.movietgrating);}
+			if (!!options.trailerUrl) {self.trailerUrl(options.trailerUrl);}
 		} 
 	};
 
