@@ -231,7 +231,7 @@
 
       while($row = pg_fetch_row($ch3_movies_query)){
         array_push($m_id_ch3, $row[0]);
-        array_push($ch3_genreids, $row[10]);
+        $ch3_genreids = array($row[10]);
       }
 
       //Channel 4: Movies based on randomly selected actor
@@ -289,7 +289,7 @@
 
       while($row = pg_fetch_row($ch5_movies_query)){
         array_push($m_id_ch5, $row[0]);
-        array_push($ch5_genreids, array($row[10]));
+        $ch5_genreids = array($row[10]);
       }
 
     //Channel 6: Movies with a director x
@@ -317,7 +317,7 @@
     //create name for each channels
     $ch1_name = "Top Rated Movies";
     $ch2_name = "Most Talked About Movies";
-    $ch3_name = getGenreName($genreid, $db);
+    $ch3_name = getGenreName($ch3_genreids[0], $db);
     $ch4_name = "Movies with " . getActorName($actorid, $db);
     $ch5_name = getGenreName($ch5_genreids[0], $db);
     $ch6_name = "Movies by "  . getDirectorName($ch6_directorids[0], $db);
