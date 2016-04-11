@@ -15,39 +15,12 @@ define([
 
 		self.user = user;
 
-		self.movieList = ko.observableArray([{
-			name: 'test',
-			id: 1
-		}, {
-			name: 'fluff',
-			id: 2
-		}, {
-			name: 'foo',
-			id: 3
-		}]);
+		self.movieList = ko.observableArray([]);
 		self.selectedMovie = ko.observable();
 		self.movieInfo = ko.observable();
-		self.directorList = ko.observableArray([{
-			name: 'test',
-			id: 1
-		}, {
-			name: 'fluff',
-			id: 2
-		}, {
-			name: 'foo',
-			id: 3
-		}]);
+		self.directorList = ko.observableArray([]);
 		self.selectedDirector = ko.observable();
-		self.genreList = ko.observableArray([{
-			name: 'test',
-			id: 1
-		}, {
-			name: 'fluff',
-			id: 2
-		}, {
-			name: 'foo',
-			id: 3
-		}]);
+		self.genreList = ko.observableArray([]);
 		self.selectedGenre = ko.observable();
 
 		$.ajax({
@@ -60,7 +33,12 @@ define([
 				self.movieList(rep.movies);
 			}
 			if (!!rep && !!rep.directors && $.isArray(rep.directors)) {
-				self.directorList(rep.directors);
+				$.each(rep.directors, function (i, value) {
+					self.directorList.push({
+						directorid: rep.directors[i].id,
+						directorname: rep.directors[i].name
+					});
+				});
 			}
 			if (!!rep && !!rep.genres && $.isArray(rep.genres)) {
 				self.genreList(rep.genres);
@@ -89,13 +67,18 @@ define([
 		self.remove = function (name, observableArr) {
 			self.movieInfo()[observableArr].remove(name);
 		};
+		self.removeDir = function (name, observableArr) {
+			self.movieInfo()[observableArr].remove(function(value) {
+				return value.directorname === name.directorname;
+			});
+		};
 		self.save = function () {
 			$.ajax({
 				url: "http://localhost/DatabaseProject/BackEnd/ajax/updateMovie.php",
 				method: "POST",
 				data: {
-					movieId: selectedMovie().movieId(),
-					directors: movieInfo().directors(),
+					movieId: movieInfo().movieId(),
+					directors: movieInfo().director(),
 					genres: movieInfo().genres()
 				}
 			});

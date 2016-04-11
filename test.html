@@ -24,11 +24,10 @@
         function myFunction() {
             console.log('SENDING...');
             jQuery.ajax({
-                url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
+                url: "http://localhost/DatabaseProject/BackEnd/ajax/getChannels.php",
                 method: "POST",
                 data: {
                     userId: 10,
-                    listType: 'watched'
                 }
             }).done(function (rep) {
                 console.log('RESPONSE: ');

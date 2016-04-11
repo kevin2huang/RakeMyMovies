@@ -10,11 +10,13 @@
 		<div class="row">
 			<div class="col-sm-9">
 				<span>Directors: </span>
-				<select data-bind="options : directorList, optionsText : 'name', value : selectedDirector"></select>
+				<select data-bind="options : directorList, optionsText : 'directorname', value : selectedDirector"></select>
 			</div>
 			<div class="col-sm-3">
-				<button class="btn" data-bind="click : add.bind($data, selectedDirector().name, 'director')">Add</button>
-				<button class="btn" data-bind="click : remove.bind($data, selectedDirector().name, 'director')">Remove</button>
+				<!-- ko if: selectedDirector -->
+				<button class="btn" data-bind="click : add.bind($data, selectedDirector(), 'director')">Add</button>
+				<button class="btn" data-bind="click : removeDir.bind($data, selectedDirector(), 'director')">Remove</button>
+				<!-- /ko -->
 			</div>
 		</div>
 		<div class="row">
@@ -23,8 +25,10 @@
 				<select data-bind="options : genreList, optionsText : 'name', value : selectedGenre"></select>
 			</div>
 			<div class="col-sm-3">
+				<!-- ko if: selectedGenre -->
 				<button class="btn" data-bind="click : add.bind($data, selectedGenre().name, 'genres')">Add</button>
 				<button class="btn" data-bind="click : remove.bind($data, selectedGenre().name, 'genres')">Remove</button>
+				<!-- /ko -->
 			</div>
 		</div>
 		<div class="separator"></div>
@@ -35,7 +39,9 @@
 		</div>
 		<div class="row">	
 			<span class="col-sm-2">Directors : </span>
-			<div class="col-sm-10" data-bind="text: movieInfo().director"></div>
+			<div class="col-sm-10" data-bind="foreach : movieInfo().director">
+				<span data-bind="text: $data.directorname"></span>
+			</div>
 		</div>
 		<div class="row">
 			<span class="col-sm-2">Genres : </span>
