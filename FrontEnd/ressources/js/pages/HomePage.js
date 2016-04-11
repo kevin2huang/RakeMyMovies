@@ -75,7 +75,7 @@ define([
 				userId = self.user.userId;
 			}
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getChannels.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/getChannels.php",
 				method: "POST",
 				data: {
 					userId: userId
@@ -93,7 +93,7 @@ define([
 		self.getReview = function () {
 			self.modalReview(new Review())
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 				method: "GET",
 				data: {
 					userId: self.user.userId(),
@@ -111,7 +111,7 @@ define([
 
 		self.sendReview = function () {
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 				method: "POST",
 				data: {
 					userId: self.user.userId(),

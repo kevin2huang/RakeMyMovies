@@ -51,7 +51,7 @@ define([
 		self.getReview = function () {
 			self.modalReview(new Review())
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 				method: "GET",
 				data: {
 					userId: self.user.userId(),
@@ -69,7 +69,7 @@ define([
 
 		self.sendReview = function () {
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 				method: "POST",
 				data: {
 					userId: self.user.userId(),
@@ -96,7 +96,7 @@ define([
 			else if (bars.director() !== bars.directorList()[0]) {search['directorId'] = bars.director().id; }
 
 			$.ajax({
-				url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+				url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 				method: "POST",
 				data: search
 			}).done(function (rep) {

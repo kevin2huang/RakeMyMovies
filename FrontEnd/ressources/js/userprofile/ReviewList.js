@@ -34,7 +34,7 @@ define([
 		self.reviews = ko.observableArray([]);
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/reviews.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/reviews.php",
 			method: "POST",
 			data: {
 				userId: self.user.userId,

@@ -45,7 +45,7 @@ define([
 		var date = new Date().toDateString();
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -67,7 +67,7 @@ define([
 		});
 
 		$.ajax({
-			url: "http://localhost:8888/DatabaseProject/BackEnd/ajax/getMovies.php",
+			url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
 			method: "POST",
 			data: {
 				//movieIDs: [1, 2, 3, 4, 5, 6, 7, 8]
