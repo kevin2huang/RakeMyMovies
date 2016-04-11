@@ -121,7 +121,7 @@ else
 {
 	echo "FAILED";
 } 
-
+pg_close($db);
 /*$response = array();
  for ($i = 0; $i < 5; $i++) {
  	$response[] = array(

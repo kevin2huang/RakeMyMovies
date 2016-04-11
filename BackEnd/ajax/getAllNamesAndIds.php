@@ -46,12 +46,17 @@
       'id' => $row[1]));
   }
 
+  if(!$list){
+    echo pg_last_error($db);
+    exit;
+  }
+
   $response = array(
     'movies' => $movies,
     'directors' => $directors,
     'genres' => $genres
     );
   
- 
     echo json_encode($response);
+    pg_close($db);
 ?>

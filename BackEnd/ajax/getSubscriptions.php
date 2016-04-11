@@ -51,4 +51,5 @@ if(isset($_POST['userid'])){
   {
     echo 'FAILED';
   }
+  pg_close($db);
 ?>

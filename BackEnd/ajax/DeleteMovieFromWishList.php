@@ -27,4 +27,5 @@ else
     $response = 'FAILED';
 }
     echo json_encode($response);
+    pg_close($db);
 ?>

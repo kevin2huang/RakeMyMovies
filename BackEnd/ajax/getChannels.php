@@ -305,7 +305,8 @@
     $channels = array($ch3, $ch4, $ch5, $ch6);
 
     $response = array('channels' => $channels);
-    echo json_encode($response); 
+    echo json_encode($response);
+    pg_close($db); 
   }
 
 /*

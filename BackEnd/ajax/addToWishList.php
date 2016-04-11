@@ -15,29 +15,50 @@
 date_default_timezone_set('EST');
 $date = date('j F Y');
 
-$response;
-
-if(isset($_POST['userId']) && isset($_POST['movieId']))
+if(isset($_POST['userId']) and isset($_POST['movieId']))
 {
-    //Insert the new wish relation between the user and the movie
-    $add = pg_query($db, "INSERT INTO WISH (USER_ID, MOVIE_ID, WISH_TIMESTAMP)
-						              VALUES 
-                          (" . $_POST['userId'] . ", " . $_POST['movieId'] . ", " . "'" . $date . "'" . ");");
+   if($_POST['listType'] === 'wish')
+   {
+      //Insert the new wish relation between the user and the movie
+      $add = pg_query($db, "INSERT INTO WISH (USER_ID, MOVIE_ID, WISH_TIMESTAMP)
+                            VALUES 
+                            (" . $_POST['userId'] . ", " . $_POST['movieId'] . ", " . "'" . $date . "'" . ");");
 
-    if(!$add)
-    {
-        echo 'FAILED';
-        exit;
+      if(!$add)
+      {
+          echo 'FAILED';
+          exit;
+      }
+      else
+      {
+        $response = 'OK';
+      }
+   }
+   else if($_POST['listType'] === 'watched')
+   {
+        //Insert the new wish relation between the user and the movie
+        $add = pg_query($db, "INSERT INTO WATCHED (USER_ID, MOVIE_ID, WATCHED_TIMESTAMP)
+                              VALUES 
+                              (" . $_POST['userId'] . ", " . $_POST['movieId'] . ", " . "'" . $date . "'" . ");");
+
+        if(!$add)
+        {
+            echo 'FAILED';
+            exit;
+        }
+        else
+        {
+          $response = 'OK';
+        }
     }
-    else
-    {
-      $response = 'OK';
+    else{
+      echo "ERROR";
     }
-    
   } 
   else 
   {
       $response = 'FAILED';
   }
     echo json_encode($response);
+    pg_close($db);
 ?>

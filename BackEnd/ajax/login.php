@@ -76,5 +76,6 @@ else
 {
     echo "Wrong email/pass";
 }
+pg_close($db);
 
 ?>

@@ -72,6 +72,7 @@ else
 {
 	echo "FAILED";
 }
+pg_close($db);
 /*
 	Update movie
 

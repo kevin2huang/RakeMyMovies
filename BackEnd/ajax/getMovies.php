@@ -239,4 +239,5 @@ else if (isset($_POST['directorId']))
 
    $allmovies = array('movies' => $mmovies);
    echo json_encode($allmovies);
+   pg_close($db);
 ?>
