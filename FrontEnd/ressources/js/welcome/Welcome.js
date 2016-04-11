@@ -86,6 +86,7 @@ define([
 					password: self.password()
 				}
 			}).done(function (rep) {
+				rep = JSON.parse(rep);
 				var user = new User(rep);
 				self.user(user);
 				if (self.page().text === 'HomePage') {
@@ -108,19 +109,21 @@ define([
 		};
 
 		self.watchLater = function (movie) {
+			var date = new Date().toDateString();
 			if (self.user() !== null) {
 				$.ajax({
 					url: "http://localhost/DatabaseProject/BackEnd/ajax/addToWishList.php",
 					method: "POST",
 					data: {
-						userId: self.user().userId,
-						movieId: movie.movieId
+						userId: self.user().userId(),
+						movieId: movie.movieId(),
+						listType: 'wish'
 					}
 				}).done(function (rep) {
 					if (rep === 'OK') {
 						self.user().watchLater().push({
 							movie: movie,
-							timestamp: 'Mon Mar 28 2016'
+							timestamp: date
 						});
 					}
 				});

@@ -1,33 +1,13 @@
 define([
 	'text!ressources/js/pages/SearchPageTemplate.html',
 	'../movie/Movie',
+	'../userprofile/Review',
 	'knockout',
 	'komapping'
-], function(template, Movie, ko, komapping) {
+], function(template, Movie, Review, ko, komapping) {
 	'use strict';
 
 	$('#page-top').append(template);
-
-	var Review = function (options) {
-		var self = this;
-
-		self.description = ko.observable('');
-		self.rating = ko.observable(0);
-		self.update = false;
-
-		if (!!options) {
-			if (!!options.description) {self.description(options.description); update = true; }
-			if (!!options.rating) {self.rating(options.rating); update = true;}
-		}
-
-		self.changeRating = function (a) {
-			var rating = self.rating();
-			rating += a;
-			if (rating > 5) {rating = 5; }
-			if (rating < 0) {rating = 0; }
-			self.rating(rating);
-		};
-	};
 
 	var SearchPage = function (searchBars) {
 		var self = this;
@@ -61,7 +41,8 @@ define([
 				if (rep === 'EMPTY') {
 					self.modalReview(new Review());
 				} else {
-
+					rep['update'] = true;
+					self.modalReview(new Review(rep))
 				}
 			});
 

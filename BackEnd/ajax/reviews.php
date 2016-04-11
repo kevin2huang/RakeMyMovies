@@ -63,22 +63,17 @@ else if (isset($_GET['userId'])) {
 	}
 	$rreviews = array('reviews' => $reviews);
 	echo json_encode($rreviews);
-}
-else
-{
-	echo "EMPTY";
-}
+} 
 
-if( isset($_POST['userId']) and isset($_POST['movieId']) and 
+else if( isset($_POST['userId']) and isset($_POST['movieId']) and 
 	isset($_POST['rating']) and isset($_POST['text'])) 
 {
 
 	/*If $_POST_['update'] is true, then a review already exists in the database between this user and that movie. Update its rating and description values*/
-	if( isset($_POST['update']) and $_POST['update'])
-	{
+	if( isset($_POST['update']) and $_POST['update']) {
 		$update_review = pg_query($db, "UPDATE REVIEW AS R
-										SET REVIEW_DESCRIPTION = ". $_POST['text'] . ",
-										REVIEW_RATING = " . $_POST['rating'] . ", 
+										SET REVIEW_DESCRIPTION = '". $_POST['text'] . "',
+										REVIEW_RATING = " . $_POST['rating'] . "
 										FROM MOVIES M, MOVREV MR, RAKEUSER U, USRREV UR
 										WHERE M.MOVIE_ID = " . $_POST['movieId'] ." AND
 										MR.MOVIE_ID = M.MOVIE_ID AND
@@ -90,16 +85,15 @@ if( isset($_POST['userId']) and isset($_POST['movieId']) and
 		echo "OK";
 	} 
 	/*Else, then no review previously exists between this user and that movie. Create a new review relation*/
-	else 
-	{
+	else  {
 		$create_review = pg_query($db, "INSERT INTO REVIEW (REVIEW_DESCRIPTION, REVIEW_RATING, REVIEW_DATE)
 										VALUES 
-										('" . $_POST['text'] . "'," . $_POST['rating'] ", '" . $date . "');");
+										('" . $_POST['text'] . "'," . $_POST['rating'] . ", '" . $date . "');");
 
 		while($row = pg_fetch_row($create_review)){
 			$reviewid = $row[0];
 		}
-
+		echo "YEY";
 		$create_user_review = pg_query($db, "INSERT INTO USRREV 
 											 VALUES 
 											 (" . $_POST['userId'] . ", " . $reviewid . ");");

@@ -31,7 +31,8 @@ if(isset($_POST['userId']) and isset($_POST['movieId']))
       }
       else
       {
-        $response = 'OK';
+          echo 'OK';
+          exit;
       }
    }
    else if($_POST['listType'] === 'watched')
@@ -48,7 +49,8 @@ if(isset($_POST['userId']) and isset($_POST['movieId']))
         }
         else
         {
-          $response = 'OK';
+            echo 'OK';
+           exit;
         }
     }
     else{
@@ -57,8 +59,8 @@ if(isset($_POST['userId']) and isset($_POST['movieId']))
   } 
   else 
   {
-      $response = 'FAILED';
+      echo 'FAILED';
+      exit;
   }
-    echo json_encode($response);
     pg_close($db);
 ?>
