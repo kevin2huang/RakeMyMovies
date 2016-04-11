@@ -88,8 +88,8 @@ define([
 			}).done(function (rep) {
 				var user = new User(rep);
 				self.user(user);
-				if (self.page.text === 'HomePage') {
-					self.page.getChannels(user);
+				if (self.page().text === 'HomePage') {
+					self.page().getChannels(user);
 				}
 			});
 		};

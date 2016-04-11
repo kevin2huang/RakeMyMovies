@@ -11,13 +11,13 @@ define([
 	var Channel = function (options) {
 		self = this;
 
-		self.name = "Some Channel";
+		self.name = ko.observable("Some Channel");
 
 		self.movies = ko.observableArray([]);
 
 		if (!!options && !!options.movies && $.isArray(options.movies)) {
-			for (var i = 0; i < 6 || i < options.movies.length; i++ ){
-				self.movies.push(new Movie(options[i]));
+			for (var i = 0; i < 6 && i < options.movies.length; i++ ){
+				self.movies.push(new Movie(options.movies[i]));
 			}
 
 			if (!!options.name) {self.name(options.name);}
@@ -71,8 +71,8 @@ define([
 			}
 
 			var userId;
-			if (!!self.user && self.user.userId) {
-				userId = self.user.userId;
+			if (!!self.user && self.user.userId()) {
+				userId = self.user.userId();
 			}
 			$.ajax({
 				url: "http://localhost/DatabaseProject/BackEnd/ajax/getChannels.php",
@@ -81,7 +81,9 @@ define([
 					userId: userId
 				}
 			}).done(function (rep) {
+				rep = JSON.parse(rep);
 				if (!!rep && !!rep.channels && $.isArray(rep.channels)) {
+					self.channels([]);
 					for(var i = 0; i < rep.channels.length; i++) {
 						self.channels.push(new Channel(rep.channels[i]))
 					}

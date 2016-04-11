@@ -2,7 +2,7 @@
 	<div class="container-fluid" data-bind="with : page()">
 		<div class="channelList" data-bind="foreach : channels">
 			<div class="channelName row">
-				<span class="col-sm-2 col-sm-offset-1" data-bind="text : name"></span>
+				<h1 class="col-sm-12 col-sm-offset-1" data-bind="text : name"></h1>
 			</div>
 			<div class="manyMovies row" data-bind="foreach : movies">
 				<button class="col-sm-2" data-toggle="modal" data-target="#movieInfoModal" data-bind="click : $parents[1].setModalMovie.bind($data)">

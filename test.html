@@ -24,11 +24,12 @@
         function myFunction() {
             console.log('SENDING...');
             jQuery.ajax({
-                url: "http://localhost/DatabaseProject/BackEnd/ajax/getMovies.php",
+                url: "http://localhost/DatabaseProject/BackEnd/ajax/updateMovie.php",
                 method: "POST",
                 data: {
-                    userId: 10,
-                    listType: 'watched'
+                    movieId: 42,
+                    directors: [{directorid: "34", directorname: "Damien Chazelle"}],//[{directorid: "29", directorname: "Steven Spielberg"}, {directorid: "22", directorname: "Eric Toledano"}],
+                    genres: ["Horror", "Comedy", "Drama"]//["Horror", "Mystery", "Sport"]
                 }
             }).done(function (rep) {
                 console.log('RESPONSE: ');
