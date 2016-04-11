@@ -14,7 +14,10 @@
 			</div>
 			<span class="movieName col-sm-4" data-bind="text : movie.name"></span>
 			<span class="movieName col-sm-2" data-bind="text : timestamp"></span>
-			<span class="movietime col-sm-2" data-bind="text : movie.time"></span>
+			<div class="col-sm-2">
+				<span class="movietime" data-bind="text : movie.time"></span>
+				<span> min</span>
+			</div>
 			<button class="btn" data-bind="click : $component.user().removeWatchLater.bind($data)">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 			</button>
