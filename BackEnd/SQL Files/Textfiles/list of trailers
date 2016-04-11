@@ -1,0 +1,93 @@
+list of trailers
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/6hB3S9bIaco'
+WHERE MOVIE_ID = 1;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/sY1S34973zA'
+WHERE MOVIE_ID = 2;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/8PyZCU2vpi8'
+WHERE MOVIE_ID = 3;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/EXeTwQWrcwY'
+WHERE MOVIE_ID = 4;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/JdRGC-w9syA'
+WHERE MOVIE_ID = 5;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/ewlwcEBTvcg'
+WHERE MOVIE_ID = 6;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/gieIAysQTI0'
+WHERE MOVIE_ID = 7;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/y2rYRu8UW8M'
+WHERE MOVIE_ID = 8;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/WCN5JJY_wiA'
+WHERE MOVIE_ID = 9;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/SUXWAEX2jlg'
+WHERE MOVIE_ID = 10;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/aStYWD25fAQ'
+WHERE MOVIE_ID = 11;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/JNwNXF9Y6kY'
+WHERE MOVIE_ID = 12;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/uPIEn0M8su0'
+WHERE MOVIE_ID = 13;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/66TuSJo4dZM'
+WHERE MOVIE_ID = 14;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/LbfMDwc4azU'
+WHERE MOVIE_ID = 15;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/2WSyJgydTsA'
+WHERE MOVIE_ID = 16;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/qo5jJpHtI1Y'
+WHERE MOVIE_ID = 17;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/m8e-FF8MsqU'
+WHERE MOVIE_ID = 18;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/bBfgNpSQm3I'
+WHERE MOVIE_ID = 19;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/vZ734NWnAHA'
+WHERE MOVIE_ID = 20;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/ioUE_5wpg_E'
+WHERE MOVIE_ID = 21;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/J4YV2_TcCoE&nohtml5=False'
+WHERE MOVIE_ID = 22;
+
+UPDATE MOVIES
+SET TrailerUrl = 'https://www.youtube.com/embed/lQKs169Sl0I&nohtml5=False'
+WHERE MOVIE_ID = 23;

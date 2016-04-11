@@ -1,4 +1,4 @@
-﻿SET search_path = "RakeMyMovie";
+SET search_path = "RakeMyMovie";
 -- 
 -- DROP TABLE ACTOR;
 -- DROP TABLE DIRECTOR;
@@ -147,109 +147,6 @@
 -- DROP CONSTRAINT "dirid",
 -- ADD CONSTRAINT "dirid" FOREIGN KEY (DIR_ID) REFERENCES DIRECTOR(DIR_ID) ON DELETE CASCADE ON UPDATE CASCADE;
 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/6hB3S9bIaco'
--- WHERE MOVIE_ID = 1;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/sY1S34973zA'
--- WHERE MOVIE_ID = 2;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/8PyZCU2vpi8'
--- WHERE MOVIE_ID = 3;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/EXeTwQWrcwY'
--- WHERE MOVIE_ID = 4;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/JdRGC-w9syA'
--- WHERE MOVIE_ID = 5;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/ewlwcEBTvcg'
--- WHERE MOVIE_ID = 6;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/gieIAysQTI0'
--- WHERE MOVIE_ID = 7;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/y2rYRu8UW8M'
--- WHERE MOVIE_ID = 8;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/WCN5JJY_wiA'
--- WHERE MOVIE_ID = 9;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/SUXWAEX2jlg'
--- WHERE MOVIE_ID = 10;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/aStYWD25fAQ'
--- WHERE MOVIE_ID = 11;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/JNwNXF9Y6kY'
--- WHERE MOVIE_ID = 12;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/uPIEn0M8su0'
--- WHERE MOVIE_ID = 13;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/66TuSJo4dZM'
--- WHERE MOVIE_ID = 14;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/LbfMDwc4azU'
--- WHERE MOVIE_ID = 15;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/2WSyJgydTsA'
--- WHERE MOVIE_ID = 16;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/qo5jJpHtI1Y'
--- WHERE MOVIE_ID = 17;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/m8e-FF8MsqU'
--- WHERE MOVIE_ID = 18;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/bBfgNpSQm3I'
--- WHERE MOVIE_ID = 19;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/vZ734NWnAHA'
--- WHERE MOVIE_ID = 20;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/ioUE_5wpg_E'
--- WHERE MOVIE_ID = 21;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/J4YV2_TcCoE&nohtml5=False'
--- WHERE MOVIE_ID = 22;
--- 
--- UPDATE MOVIES
--- SET TrailerUrl = 'https://www.youtube.com/embed/lQKs169Sl0I&nohtml5=False'
--- WHERE MOVIE_ID = 23;
-
--- SELECT * FROM MOVIES;
-
---TESTING
--- find movies with the most reviews
--- SELECT M.MOVIE_ID, COUNT(R.REVIEW_ID)
--- FROM MOVIES M, MOVREV MR, REVIEW R
--- WHERE R.REVIEW_ID = MR.REVIEW_ID AND 
--- 	MR.MOVIE_ID = M.MOVIE_ID
--- GROUP BY M.MOVIE_ID
--- ORDER BY COUNT(R.REVIEW_ID) DESC;
-
 --------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
 
 -- ***************REVIEW*********************************************************************************************
@@ -263,15 +160,6 @@
 -- VALUES
 -- ('Abigael', 'abigael.tremblay12@gmail.com', '1234', '', 'april 8 2016', '', true);
 -- ******************************************************************************************************************
-
--- SELECT * FROM PROFILE;
--- SELECT * FROM RAKEUSER;
--- 
--- DELETE FROM PROFILE
--- WHERE PROFILE_ID = 1;
--- 
--- DELETE FROM RAKEUSER
--- WHERE USER_ID = 14;
 
 -- *****************PROFILE******************************************************************************************
 -- INSERT INTO PROFILE (USER_ID, PROFILE_PROVINCE, PROFILE_CITY, PROFILE_OCCUPATION, PROFILE_COUNTRY, PROFILE_QUOTE)
@@ -301,6 +189,29 @@
 -- INSERT INTO GENRE (GENRE_NAME)
 -- VALUES
 -- ('Action');
+-- ******************************************************************************************************************
+
+-- ***************MOVACT**********************************************************************************************
+INSERT INTO MOVACT
+VALUES
+(1, 3);
+-- ******************************************************************************************************************
+
+-- ***************MOVDIR**********************************************************************************************
+INSERT INTO MOVDIR
+VALUES
+(1, 16)
+-- ******************************************************************************************************************
+
+-- ***************MOVGEN**********************************************************************************************
+INSERT INTO MOVGEN
+VALUES
+(5, 10)
+-- ******************************************************************************************************************
+-- ***************SPONSOR**********************************************************************************************
+INSERT INTO SPONSOR
+VALUES
+(1, 16)
 -- ******************************************************************************************************************
 
 -- **************MOVIE **********************************************************************************************************************************-- 
