@@ -2,7 +2,7 @@
 	<div class="container-fluid" data-bind="foreach : user.reviewList.reviews">
 		<div class="row">
 			<div class="col-sm-6">
-				<h3 data-bind="text : $component.user().username"></h3>
+				<h3 data-bind="text : name"></h3>
 			</div>
 			<div class="col-sm-2">
 				<span data-bind="foreach : new Array(rating())">

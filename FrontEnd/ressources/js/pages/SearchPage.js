@@ -38,6 +38,8 @@ define([
 					movieId: self.modalMovie().movieId()
 				}
 			}).done(function (rep) {
+				rep = JSON.parse(rep);
+				if (!!rep.review) {rep = rep.review;}
 				if (rep === 'EMPTY') {
 					self.modalReview(new Review());
 				} else {
