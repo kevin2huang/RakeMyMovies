@@ -150,20 +150,11 @@
 -- SELECT A.*, D.*, S.*
 -- FROM ACTOR A, DIRECTOR D, STUDIO S
 -- WHERE A.ACTOR_ID = 
-
-SELECT A.*, D.*, S.*
-FROM ACTOR A, DIRECTOR D, STUDIO S, MOVACT MA, MOVDIR MD, SPONSOR SP
-WHERE A.ACTOR_ID = (SELECT A.ACTOR_ID
-			FROM ACTOR A, MOVACT MA
-			WHERE A.ACTOR_ID = MA.ACTOR_ID
-			GROUP BY A.ACTOR_ID
-			ORDER BY COUNT(A.ACTOR_ID) DESC
-			LIMIT 1) AND 
-	MA.ACTOR_ID = A.ACTOR_ID AND 
-	MA.MOVIE_ID = MD.MOVIE_ID AND
-	MD.DIR_ID = D.DIR_ID AND
-	MA.MOVIE_ID = SP.MOVIE_ID AND
-	SP.STUDIO_ID = S.STUDIO_ID;
+-- SELECT DISTINCT R.*
+-- 								FROM REVIEW R, RAKEUSER U, USRREV UR, MOVREV MR
+-- 								WHERE U.USER_ID = 10 AND 
+-- 								U.USER_ID = UR.USER_ID AND
+-- 								UR.REVIEW_ID = R.REVIEW_ID;
 
 --------------INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------------
 
@@ -247,7 +238,18 @@ WHERE A.ACTOR_ID = (SELECT A.ACTOR_ID
 -- ******************************************************************************************************************
 
 -------------END INITIAL TABLE INSERTS--------------------------------------------------------------------------------------------------
-
+-- SELECT * FROM MOVREV;-- 
+-- 
+-- UPDATE REVIEW AS R
+-- SET REVIEW_DESCRIPTION = 'SUCCESadsasaS',
+-- REVIEW_RATING = 5
+-- FROM MOVIES M, MOVREV MR, RAKEUSER U, USRREV UR
+-- WHERE M.MOVIE_ID = 1 AND
+-- MR.MOVIE_ID = M.MOVIE_ID AND
+-- MR.REVIEW_ID = R.REVIEW_ID;
+-- 
+-- SELECT * FROM USRREV;
+-- SELECT * FROM REVIEW;
 
 --------------------QUERIES-------------------------------------------------------------------------------------------------------------
 
