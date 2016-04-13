@@ -2,7 +2,7 @@
    $host        = "host=web0.site.uottawa.ca";
    $port        = "port=15432";
    $dbname      = "dbname=khuan042";
-   $credentials = "user=khuan042 password=Huang756!";
+   $credentials = "user=khuan042 password=password1";
 
    $db = pg_connect( "$host $port $dbname $credentials"  );
 
