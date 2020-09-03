@@ -1,4 +1,4 @@
-# Rake My Movies
+# Rate My Movies
 
 This is the final project for the CSI2132 - Database I class. 
 
